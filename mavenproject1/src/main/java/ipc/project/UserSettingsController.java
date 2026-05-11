@@ -1,0 +1,12 @@
+package ipc.project;
+
+import java.io.IOException;
+import javafx.fxml.FXML;
+
+public class UserSettingsController {
+
+    @FXML
+    private void switchToSecondary() throws IOException {
+        App.setRoot("FXMLDocument");
+    }
+}

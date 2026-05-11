@@ -497,6 +497,16 @@ public class FXMLDocumentController implements Initializable {
         mensaje.setHeaderText("IPC - 2026");
         mensaje.showAndWait(); // Bloquea hasta que el usuario cierra el diálogo
     }
+    
+    @FXML
+    private void cuenta(ActionEvent event)
+    {
+        try{
+            App.setRoot("UserSettings");
+        } catch (IOException e) {
+            System.out.println("thingy");
+        }
+    }
 
     // =========================================================
     //  AÑADIR UN POI (texto) AL MAPA

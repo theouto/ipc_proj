@@ -59,7 +59,7 @@
               <menus>
                 <Menu mnemonicParsing="false" text="Cuenta">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Log In (cambiar a simplemente gestión una vez se tenga una cuenta)" />
+                    <MenuItem mnemonicParsing="false" onAction="#cuenta" text="Log In (cambiar a simplemente gestión una vez se tenga una cuenta)" />
                   </items>
                 </Menu>
               </menus>
