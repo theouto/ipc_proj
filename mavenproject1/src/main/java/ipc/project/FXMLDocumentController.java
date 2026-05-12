@@ -501,7 +501,12 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void cuenta(ActionEvent event) throws IOException
     {
-            App.setRoot("UserSettings");
+        if (!App.loggedIn)
+        {
+            App.loggedIn = true;
+            App.setRoot("UserCreation");
+        }
+        else App.setRoot("UserSettings");
     }
 
     // =========================================================
