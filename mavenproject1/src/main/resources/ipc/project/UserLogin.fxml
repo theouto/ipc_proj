@@ -1,14 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Button?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipc.project.UserLoginController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="293.0" prefWidth="358.0" spacing="10.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipc.project.UserLoginController">
     <children>
-        <Label text="Secondary View" />
-        <Button fx:id="secondaryButton" text="Switch to Primary View" onAction="#switchToPrimary" />
+        <Label text="Inicio de sesión">
+         <font>
+            <Font size="27.0" />
+         </font></Label>
+      <VBox prefHeight="16.0" prefWidth="318.0">
+         <children>
+            <Label text="Usuario">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField promptText="Usuario">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </TextField>
+         </children>
+      </VBox>
+      <VBox prefHeight="16.0" prefWidth="318.0">
+         <children>
+            <Label text="Contraseña">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <PasswordField promptText="Contraseña">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </PasswordField>
+         </children>
+      </VBox>
+      <HBox alignment="TOP_CENTER" prefHeight="0.0" prefWidth="200.0">
+         <children>
+            <Button mnemonicParsing="false" text="Iniciar sesión">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="25.0" prefWidth="357.0" spacing="10.0" style="fx-padding: 10px;">
+         <children>
+            <Label text="¿No tienes una cuenta?" />
+            <Hyperlink onMouseClicked="#gotoRegisterFunction" text="Haz clic aquí para registrarte" />
+         </children>
+      </HBox>
+      <HBox prefHeight="20.0" prefWidth="441.0">
+         <children>
+              <Button fx:id="secondaryButton" alignment="BASELINE_RIGHT" onAction="#switchToSecondary" text="Atrás">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
+            <Region prefHeight="12.0" prefWidth="200.0" />
+         </children>
+      </HBox>
     </children>
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

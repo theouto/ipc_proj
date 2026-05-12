@@ -6,7 +6,12 @@ import javafx.fxml.FXML;
 import upv.ipc.sportlib.*;
 
 public class UserLoginController {
-
+    
+    @FXML
+    private void gotoRegisterFunction() throws IOException {
+        App.setRoot("UserCreation");
+    }
+    
     @FXML
     private void switchToSecondary() throws IOException {
         App.setRoot("FXMLDocument");
