@@ -17,7 +17,7 @@
          <font>
             <Font size="27.0" />
          </font></Label>
-      <VBox prefHeight="16.0" prefWidth="318.0">
+      <VBox maxHeight="90.0" maxWidth="500.0" prefHeight="16.0" prefWidth="318.0">
          <children>
             <Label text="Usuario">
                <font>
@@ -31,7 +31,7 @@
             </TextField>
          </children>
       </VBox>
-      <VBox prefHeight="16.0" prefWidth="318.0">
+      <VBox maxHeight="90.0" maxWidth="500.0" prefHeight="16.0" prefWidth="318.0">
          <children>
             <Label text="Contraseña">
                <font>
@@ -60,7 +60,7 @@
             <Hyperlink onMouseClicked="#gotoRegisterFunction" text="Haz clic aquí para registrarte" />
          </children>
       </HBox>
-      <HBox prefHeight="20.0" prefWidth="441.0">
+      <HBox maxHeight="90.0" maxWidth="500.0" prefHeight="20.0" prefWidth="441.0">
          <children>
               <Button fx:id="secondaryButton" alignment="BASELINE_RIGHT" onAction="#switchToSecondary" text="Atrás">
                <font>

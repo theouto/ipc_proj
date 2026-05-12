@@ -1,18 +1,21 @@
 package ipc.project;
 
 import java.io.IOException;
-import java.time.LocalDate;
+import javafx.scene.control.DatePicker;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
 import upv.ipc.sportlib.*;
 
 public class UserCreationController {
-    
+    /*
     private String name;
     private String email;
     private String password; //YYEEAHHHH, PLAINTEXT STORAGE WOOOO
     private int year, month, day;
+    
+    No se necesita nada de esto, sacamos los valores directamente de lo que ya tenemos
+    */
     
     @FXML
     private TextField Nombre;
@@ -23,6 +26,8 @@ public class UserCreationController {
     @FXML
     private TextField Passworten;
     
+    @FXML
+    private DatePicker Calendar;
     
     @FXML
     private void switchToLogin() throws IOException {
@@ -40,12 +45,14 @@ public class UserCreationController {
         App.sportApp.logout();
     }
     
+    @FXML
     private void createAccount()
     {
-        if (User.checkNickName(name)) return;
-        if (User.checkEmail(email)) return;
-        if (User.checkPassword(password)) return;
-        if (User.isOlderThan(LocalDate.of(year, month, day), 13)) return;
+        if (User.checkNickName(Nombre.getCharacters().toString())) return;
+        if (User.checkEmail(Correo.getCharacters().toString())) return;
+        if (User.checkPassword(Passworten.getCharacters().toString())) return;
+        if (User.isOlderThan(Calendar.getValue(), 13)) return;
         
+        System.out.println(Nombre.getCharacters());
     }
 }
