@@ -504,9 +504,9 @@ public class FXMLDocumentController implements Initializable {
         if (!App.loggedIn)
         {
             App.loggedIn = true;
-            App.setRoot("UserCreation");
+            App.setRoot("UserLogin");
         }
-        else App.setRoot("UserSettings");
+        else App.setRoot("UserLogin");
     }
 
     // =========================================================

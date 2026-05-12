@@ -47,6 +47,5 @@ public class UserCreationController {
         if (User.checkPassword(password)) return;
         if (User.isOlderThan(LocalDate.of(year, month, day), 13)) return;
         
-        //App.sportApp.registerUser("nick", "email", "pass", LocalDate, "avatar/path");
     }
 }
