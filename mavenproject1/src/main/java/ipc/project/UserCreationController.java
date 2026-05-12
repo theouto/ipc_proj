@@ -30,29 +30,50 @@ public class UserCreationController {
     private DatePicker Calendar;
     
     @FXML
-    private void switchToLogin() throws IOException {
-        App.setRoot("UserLogin");
-    }
-  
-    private void login()
-    {
-        if (App.sportApp.login("name", "password")) System.out.println("one thing");
-        else System.out.println("another thing");
+    private void switchToMainScreen() throws IOException {
+        App.setRoot("FXMLDocument");
     }
     
-    private void logout()
-    {
-        App.sportApp.logout();
+    @FXML
+    private void switchToLogin() throws IOException {
+        App.setRoot("UserLogin");
     }
     
     @FXML
     private void createAccount()
     {
-        if (User.checkNickName(Nombre.getCharacters().toString())) return;
-        if (User.checkEmail(Correo.getCharacters().toString())) return;
-        if (User.checkPassword(Passworten.getCharacters().toString())) return;
-        if (User.isOlderThan(Calendar.getValue(), 13)) return;
+        if (User.checkNickName(Nombre.getCharacters().toString()))
+        {
+            System.out.println("invalid nick");
+            return;
+        }
+        
+        if (User.checkEmail(Correo.getCharacters().toString()))
+        {
+            System.out.println("invalid email");
+            System.out.println(Correo.getCharacters());
+            return;
+        }
+        
+        if (User.checkPassword(Passworten.getCharacters().toString()))
+        {
+            System.out.println("invalid password");
+            return;
+        }
+        
+        if (User.isOlderThan(Calendar.getValue(), 12))
+        {
+            System.out.println("invalid age");
+            return;
+        }
         
         System.out.println(Nombre.getCharacters());
+        
+        App.sportApp.registerUser(Nombre.getCharacters().toString(),
+                                  Correo.getCharacters().toString(),
+                                  Passworten.getCharacters().toString(),
+                                  Calendar.getValue(),
+                                  "/resources/logo.png");
+        
     }
 }

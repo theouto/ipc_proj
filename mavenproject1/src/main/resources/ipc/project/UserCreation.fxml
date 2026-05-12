@@ -7,6 +7,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -62,6 +63,16 @@
          <children>
             <Label text="¿Ya tienes una cuenta?" />
             <Hyperlink onAction="#switchToLogin" text="Haz clic aquí" />
+         </children>
+      </HBox>
+      <HBox maxHeight="90.0" maxWidth="500.0" prefHeight="20.0" prefWidth="441.0">
+         <children>
+            <Button fx:id="secondaryButton1" alignment="BASELINE_RIGHT" onAction="#switchToMainScreen" text="Atrás">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
+            <Region prefHeight="12.0" prefWidth="200.0" />
          </children>
       </HBox>
     </children>
