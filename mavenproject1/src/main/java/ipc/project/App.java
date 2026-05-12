@@ -30,7 +30,7 @@ public class App extends Application {
         scene = new Scene(loadFXML("FXMLDocument"), 640, 480);
         
         //arreglar java.sql.SQLException classnotfoundexception
-        sportApp = SportActivityApp.getInstance(); 
+        //sportApp = SportActivityApp.getInstance(); 
         
         stage.getIcons().add(new Image(getClass().getResourceAsStream("/resources/logo.png")));
         stage.setTitle("Demo mapas - IPC");
