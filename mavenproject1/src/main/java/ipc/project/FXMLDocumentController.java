@@ -48,6 +48,7 @@ import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Menu;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
@@ -155,6 +156,14 @@ public class FXMLDocumentController implements Initializable {
     private Label mousePosition;
     @FXML
     private SplitPane splitPane;
+    @FXML
+    private Menu cuentaMenu;
+    @FXML
+    private MenuItem loginMenu;
+    @FXML
+    private MenuItem ajustesMenu;
+    @FXML
+    private MenuItem salirMenu;
  
 
     // =========================================================
@@ -501,6 +510,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void cuenta(ActionEvent event) throws IOException
     {
+  
         if (!App.loggedIn)
         {
             App.loggedIn = true;
@@ -628,6 +638,20 @@ public class FXMLDocumentController implements Initializable {
         circle.setCenterX(x);
         circle.setCenterY(y);
         mapPane.getChildren().add(circle); // Se añade sobre el mapa como cualquier nodo
+    }
+
+   
+    private void login(ActionEvent event) {
+         App.loggedIn = true;
+         App.setRoot("UserCreation");
+    }
+
+    private void ajustes(ActionEvent event) {
+         App.setRoot("UserSettings");
+    }
+
+    @FXML
+    private void salir(ActionEvent event) {
     }
 
 
