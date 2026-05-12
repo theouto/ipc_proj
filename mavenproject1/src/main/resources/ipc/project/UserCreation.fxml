@@ -48,7 +48,7 @@
                <font>
                   <Font size="18.0" />
                </font></Text>
-            <TextField fx:id="Passworten">
+            <TextField fx:id="Passworten" promptText="contraseña">
                <font>
                   <Font size="16.0" />
                </font></TextField>
@@ -72,7 +72,7 @@
                   <Font size="17.0" />
                </font>
             </Button>
-            <Region prefHeight="12.0" prefWidth="200.0" />
+            <Region prefHeight="32.0" prefWidth="200.0" />
          </children>
       </HBox>
     </children>

@@ -2,10 +2,18 @@ package ipc.project;
 
 import java.io.IOException;
 import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
+
 
 import upv.ipc.sportlib.*;
 
 public class UserLoginController {
+    
+    @FXML
+    private TextField Usuario;
+    
+    @FXML
+    private TextField Password;
     
     @FXML
     private void gotoRegisterFunction() throws IOException {
@@ -17,19 +25,16 @@ public class UserLoginController {
         App.setRoot("FXMLDocument");
     }
   
+    @FXML
     private void login()
     {
-        if (App.sportApp.login("name", "password")) System.out.println("one thing");
+        if (App.sportApp.login(Usuario.getCharacters().toString(), Password.getCharacters().toString())) System.out.println("one thing");
         else System.out.println("another thing");
     }
     
+    @FXML
     private void logout()
     {
         App.sportApp.logout();
-    }
-    
-    private void createAccount()
-    {
-        //App.sportApp.registerUser("nick", "email", "pass", LocalDate, "avatar/path");
     }
 }

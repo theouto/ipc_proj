@@ -66,3 +66,31 @@ S17.642,20.762,13.558,20.762z";
 .map-pin .arrow-button .arrow {
     -fx-padding: 0;
 }
+
+TextField{
+  -fx-background-color: #4B4B4B;
+  -fx-text-fill: lightgray;
+
+}
+
+Button{
+  -fx-background-color: #4B4B4B;
+  -fx-text-fill: white;
+}
+
+VBox{
+  -fx-background-color: #2B2B2B;
+  -fx-text-fill: white;
+}
+
+DatePicker{
+  -fx-background-color: #4B4B4B;
+  -fx-text-fill: white;
+}
+
+Label{
+  -fx-text-fill: white;
+}
+
+Text{
+  -fx-text-fill: white;
