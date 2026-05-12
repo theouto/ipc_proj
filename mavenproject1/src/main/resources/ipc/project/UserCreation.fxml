@@ -22,7 +22,7 @@
                <font>
                   <Font size="18.0" />
                </font></Text>
-            <TextField fx:id="Nombre" promptText="Don_juan7">
+            <TextField fx:id="Nombre" promptText="tu_nick">
                <font>
                   <Font size="16.0" />
                </font></TextField>
@@ -34,7 +34,7 @@
                <font>
                   <Font size="18.0" />
                </font></Text>
-            <TextField fx:id="Correo" promptText="example@upv.edu.es">
+            <TextField fx:id="Correo" promptText="nombre@upv.edu.es">
                <font>
                   <Font size="16.0" />
                </font></TextField>
@@ -52,14 +52,14 @@
                </font></TextField>
          </children>
       </VBox>
-        <Button fx:id="secondaryButton" onAction="#switchToLogin" prefHeight="35.0" prefWidth="143.0" text="Crear cuenta">
+        <Button fx:id="secondaryButton" onAction="#switchToLogin" prefHeight="35.0" prefWidth="165.0" text="Crear cuenta">
          <font>
             <Font size="17.0" />
          </font></Button>
       <HBox alignment="CENTER" prefHeight="25.0" prefWidth="357.0" spacing="10.0" style="fx-padding: 10px;">
          <children>
             <Label text="¿Ya tienes una cuenta?" />
-            <Hyperlink onAction="#switchToLogin" onMouseClicked="#gotoRegisterFunction" text="Haz clic aquí" />
+            <Hyperlink onMouseClicked="#switchToLogin" text="Haz clic aquí" />
          </children>
       </HBox>
     </children>
