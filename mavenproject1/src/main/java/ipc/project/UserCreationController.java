@@ -31,10 +31,10 @@ public class UserCreationController {
     
     private void createAccount()
     {
-        if (User.checkNickName(name)) return;
+        /*if (User.checkNickName(name)) return;
         if (User.checkEmail(email)) return;
         if (User.checkPassword(password)) return;
-        if (User.isOlderThan(DoB, 13)) return;
+        if (User.isOlderThan(DoB, 13)) return;*/
         
         //App.sportApp.registerUser("nick", "email", "pass", LocalDate, "avatar/path");
     }
