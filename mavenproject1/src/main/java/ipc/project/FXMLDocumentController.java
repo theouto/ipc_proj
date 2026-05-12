@@ -641,12 +641,12 @@ public class FXMLDocumentController implements Initializable {
     }
 
    
-    private void login(ActionEvent event) {
+    private void login(ActionEvent event) throws IOException {
          App.loggedIn = true;
          App.setRoot("UserCreation");
     }
 
-    private void ajustes(ActionEvent event) {
+    private void ajustes(ActionEvent event) throws IOException {
          App.setRoot("UserSettings");
     }
 
