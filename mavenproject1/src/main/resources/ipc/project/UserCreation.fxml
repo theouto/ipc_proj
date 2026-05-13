@@ -5,6 +5,7 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
@@ -50,10 +51,11 @@
                <font>
                   <Font size="18.0" />
                </font></Text>
-            <TextField fx:id="Passworten" promptText="contraseña">
+            <PasswordField fx:id="Passworten" prefHeight="40.0" prefWidth="400.0" promptText="contraseña">
                <font>
                   <Font size="16.0" />
-               </font></TextField>
+               </font>
+            </PasswordField>
             <Label fx:id="pERR" opacity="0.0" prefHeight="18.0" prefWidth="128.0" text="Contraseña invalida" textFill="RED" />
          </children>
       </VBox>

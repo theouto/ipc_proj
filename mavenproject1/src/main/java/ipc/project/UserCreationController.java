@@ -4,6 +4,7 @@ import java.io.IOException;
 import javafx.scene.control.DatePicker;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.Label;
 
 import upv.ipc.sportlib.*;
@@ -25,7 +26,7 @@ public class UserCreationController {
     private TextField Correo;
     
     @FXML
-    private TextField Passworten;
+    private PasswordField Passworten;
     
     @FXML
     private DatePicker Calendar;
