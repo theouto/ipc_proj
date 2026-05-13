@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox alignment="CENTER" prefHeight="325.0" prefWidth="327.0" spacing="20.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipc.project.UserCreationController">
+<VBox alignment="CENTER" prefHeight="325.0" prefWidth="327.0" spacing="10.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipc.project.UserCreationController">
     <children>
         <Label text="Registro">
          <font>
@@ -28,6 +28,7 @@
                <font>
                   <Font size="16.0" />
                </font></TextField>
+            <Label fx:id="nERR" opacity="0.0" prefHeight="18.0" prefWidth="128.0" text="Nombre invalido" textFill="RED" />
          </children>
       </VBox>
       <VBox maxHeight="90.0" maxWidth="500.0" prefHeight="0.0" prefWidth="202.0">
@@ -40,6 +41,7 @@
                <font>
                   <Font size="16.0" />
                </font></TextField>
+            <Label fx:id="cERR" opacity="0.0" prefHeight="18.0" prefWidth="128.0" text="Correo invalido" textFill="RED" />
          </children>
       </VBox>
       <VBox maxHeight="90.0" maxWidth="500.0" prefHeight="30.0" prefWidth="202.0">
@@ -52,9 +54,15 @@
                <font>
                   <Font size="16.0" />
                </font></TextField>
+            <Label fx:id="pERR" opacity="0.0" prefHeight="18.0" prefWidth="128.0" text="Contraseña invalida" textFill="RED" />
          </children>
       </VBox>
-      <DatePicker fx:id="Calendar" prefHeight="26.0" prefWidth="319.0" />
+      <VBox maxHeight="90.0" maxWidth="500.0" prefHeight="30.0" prefWidth="202.0">
+         <children>
+            <DatePicker fx:id="Calendar" prefHeight="26.0" prefWidth="500.0" />
+            <Label fx:id="fERR" opacity="0.0" prefHeight="18.0" prefWidth="128.0" text="Fecha invalida" textFill="RED" />
+         </children>
+      </VBox>
         <Button fx:id="secondaryButton" onAction="#createAccount" prefHeight="35.0" prefWidth="143.0" text="Crear cuenta">
          <font>
             <Font size="17.0" />
