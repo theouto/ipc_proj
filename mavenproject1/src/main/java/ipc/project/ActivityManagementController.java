@@ -2,15 +2,34 @@ package ipc.project;
 
 import java.io.IOException;
 import java.io.File;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.stage.FileChooser;
+import javafx.scene.control.Label;
 
 import upv.ipc.sportlib.*;
 
 public class ActivityManagementController {
+    
+    @FXML
+    private Label filePath;
 
     @FXML
     private void switchToSecondary() throws IOException {
         App.setRoot("FXMLDocument");
+    }
+    
+    @FXML
+    private void fotoPerfil(ActionEvent event) throws IOException {
+        FileChooser fc = new FileChooser();
+        fc.setInitialDirectory(new File(".")); // Empezamos en el directorio del proyecto
+
+        File imgFile = fc.showOpenDialog(filePath.getScene().getWindow());
+
+        if (imgFile != null) {
+            System.out.println("Mapa seleccionado: " + imgFile.getCanonicalPath());
+            filePath.setText(imgFile.getCanonicalPath());
+        }
     }
     
     @FXML
