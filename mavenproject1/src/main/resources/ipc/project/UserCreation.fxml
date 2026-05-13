@@ -65,6 +65,12 @@
             <Label fx:id="fERR" opacity="0.0" prefHeight="18.0" prefWidth="128.0" text="Fecha invalida" textFill="RED" />
          </children>
       </VBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Label fx:id="filePath" contentDisplay="RIGHT" prefHeight="26.0" prefWidth="141.0" text="logo.png" />
+            <Button mnemonicParsing="false" onAction="#fotoPerfil" text="Foto de perfil" />
+         </children>
+      </HBox>
         <Button fx:id="secondaryButton" onAction="#createAccount" prefHeight="35.0" prefWidth="143.0" text="Crear cuenta">
          <font>
             <Font size="17.0" />

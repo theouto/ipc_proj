@@ -1,11 +1,14 @@
 package ipc.project;
 
+import java.io.File;
 import java.io.IOException;
+import javafx.event.ActionEvent;
 import javafx.scene.control.DatePicker;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.Label;
+import javafx.stage.FileChooser;
 
 import upv.ipc.sportlib.*;
 
@@ -24,6 +27,9 @@ public class UserCreationController {
 
     @FXML
     private TextField Correo;
+    
+    @FXML
+    private Label filePath;
     
     @FXML
     private PasswordField Passworten;
@@ -51,6 +57,19 @@ public class UserCreationController {
     @FXML
     private void switchToLogin() throws IOException {
         App.setRoot("UserLogin");
+    }
+    
+    @FXML
+    private void fotoPerfil(ActionEvent event) throws IOException {
+        FileChooser fc = new FileChooser();
+        fc.setInitialDirectory(new File(".")); // Empezamos en el directorio del proyecto
+
+        File imgFile = fc.showOpenDialog(Nombre.getScene().getWindow());
+
+        if (imgFile != null) {
+            System.out.println("Mapa seleccionado: " + imgFile.getCanonicalPath());
+            filePath.setText(imgFile.getCanonicalPath());
+        }
     }
     
     @FXML
@@ -96,7 +115,7 @@ public class UserCreationController {
                                   Correo.getCharacters().toString(),
                                   Passworten.getCharacters().toString(),
                                   Calendar.getValue(),
-                                  "logo.png"))
+                                  filePath.getText()))
         {
             System.out.println("Unable to register user!");
         } else { 
