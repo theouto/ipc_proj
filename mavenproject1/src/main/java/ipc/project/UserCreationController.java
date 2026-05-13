@@ -40,28 +40,28 @@ public class UserCreationController {
     }
     
     @FXML
-    private void createAccount()
+    private void createAccount() throws IOException
     {
-        if (User.checkNickName(Nombre.getCharacters().toString()))
+        if (!User.checkNickName(Nombre.getCharacters().toString()))
         {
             System.out.println("invalid nick");
             return;
         }
         
-        if (User.checkEmail(Correo.getCharacters().toString()))
+        if (!User.checkEmail(Correo.getCharacters().toString()))
         {
             System.out.println("invalid email");
             System.out.println(Correo.getCharacters());
             return;
         }
         
-        if (User.checkPassword(Passworten.getCharacters().toString()))
+        if (!User.checkPassword(Passworten.getCharacters().toString()))
         {
             System.out.println("invalid password");
             return;
         }
         
-        if (User.isOlderThan(Calendar.getValue(), 12))
+        if (!User.isOlderThan(Calendar.getValue(), 12))
         {
             System.out.println("invalid age");
             return;
@@ -69,11 +69,20 @@ public class UserCreationController {
         
         System.out.println(Nombre.getCharacters());
         
-        App.sportApp.registerUser(Nombre.getCharacters().toString(),
+        if (!App.sportApp.registerUser(Nombre.getCharacters().toString(),
                                   Correo.getCharacters().toString(),
                                   Passworten.getCharacters().toString(),
                                   Calendar.getValue(),
-                                  "/resources/logo.png");
+                                  "logo.png"))
+        {
+            System.out.println("Unable to register user!");
+        } else { 
+            System.out.println("Sucessfully registered user");
+            App.sportApp.login(Nombre.getCharacters().toString(),
+                               Passworten.getCharacters().toString());
+            App.loggedIn = true;
+            App.setRoot("FXMLDocument");
+        }
         
     }
 }

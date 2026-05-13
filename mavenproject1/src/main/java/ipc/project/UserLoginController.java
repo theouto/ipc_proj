@@ -28,7 +28,12 @@ public class UserLoginController {
     @FXML
     private void login()
     {
-        if (App.sportApp.login(Usuario.getCharacters().toString(), Password.getCharacters().toString())) System.out.println("one thing");
+        if (App.sportApp.login(Usuario.getCharacters().toString(), Password.getCharacters().toString()))
+        {
+            App.loggedIn = true;
+            try { App.setRoot("FXMLDocument");
+            } catch (IOException e) {System.out.println(e);}
+        }
         else System.out.println("another thing");
     }
     
