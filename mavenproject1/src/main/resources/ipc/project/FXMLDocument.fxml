@@ -65,6 +65,7 @@
               </menus>
             </MenuBar>
             <Button mnemonicParsing="false" onAction="#cambiarMapa" text="Cambiar mapa" />
+            <Button mnemonicParsing="false" onAction="#importarActividad" text="Importar Actividad" />
             <Region HBox.hgrow="ALWAYS" />
             <Label text="Zoom" />
             <Button mnemonicParsing="false" onAction="#zoomOut" text="-" />

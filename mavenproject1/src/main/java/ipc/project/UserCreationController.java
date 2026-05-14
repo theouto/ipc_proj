@@ -122,6 +122,7 @@ public class UserCreationController {
             System.out.println("Sucessfully registered user");
             App.sportApp.login(Nombre.getCharacters().toString(),
                                Passworten.getCharacters().toString());
+            //App.sportApp.
             App.loggedIn = true;
             App.setRoot("FXMLDocument");
         }

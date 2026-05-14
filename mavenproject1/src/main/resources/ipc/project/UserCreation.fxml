@@ -61,7 +61,12 @@
       </VBox>
       <VBox maxHeight="90.0" maxWidth="500.0" prefHeight="30.0" prefWidth="202.0">
          <children>
-            <DatePicker fx:id="Calendar" prefHeight="26.0" prefWidth="500.0" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha de nacimiento">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <DatePicker fx:id="Calendar" prefHeight="26.0" prefWidth="500.0" promptText="Seleccionar..." />
             <Label fx:id="fERR" opacity="0.0" prefHeight="18.0" prefWidth="128.0" text="Fecha invalida" textFill="RED" />
          </children>
       </VBox>

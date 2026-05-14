@@ -455,6 +455,12 @@ public class FXMLDocumentController implements Initializable {
         // El fichero se busca relativo al directorio de trabajo del proyecto.
         buildMap(new File("maps/upv.jpg"));
     }
+    
+    @FXML
+    private void importarActividad(ActionEvent event) throws IOException
+    {
+        App.setRoot("ActivityManagement");
+    }
 
     // =========================================================
     //  INDICADOR DE POSICIÓN DEL RATÓN

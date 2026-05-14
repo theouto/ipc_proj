@@ -1,14 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Button?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipc.project.ActivityManagementController">
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipc.project.ActivityManagementController">
    <children>
-      <Label text="Settings" />
-      <Button fx:id="primaryButton" text="Switch to Secondary View" onAction="#switchToSecondary"/>
+      <Label text="Importar actividad" />
+      <VBox prefHeight="6.0" prefWidth="200.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <TextField fx:id="ActivityName" promptText="Nombre" />
+         </children>
+      </VBox>
+      <HBox alignment="CENTER" prefHeight="0.0" prefWidth="200.0">
+         <children>
+            <Label fx:id="filePath" contentDisplay="RIGHT" prefHeight="26.0" prefWidth="141.0" text="Seleccionar..." />
+            <Button mnemonicParsing="false" onAction="#gpxImport" prefHeight="26.0" prefWidth="73.0" text="Archivo" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="0.0" prefWidth="200.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#back" text="Volver" />
+            <HBox prefHeight="26.0" prefWidth="40.0" />
+            <Button fx:id="primaryButton" onAction="#ImportActivity" text="Importar" />
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </HBox>
    </children>
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
