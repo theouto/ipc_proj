@@ -2,48 +2,37 @@ package ipc.project;
 
 import java.io.IOException;
 import java.io.File;
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.stage.FileChooser;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.AnchorPane;
 
 import upv.ipc.sportlib.*;
 
 public class ActivityManagementController {
     
     @FXML
-    private Label filePath;
+    private AnchorPane activityPane;
     
-    @FXML
-    private TextField ActivityName;
-    
-    private String truFile;
-    
-    @FXML
-    private void gpxImport(ActionEvent event) throws IOException {
-        FileChooser fc = new FileChooser();
-        fc.setInitialDirectory(new File(".")); // Empezamos en el directorio del proyecto
-
-        File imgFile = fc.showOpenDialog(filePath.getScene().getWindow());
-
-        if (imgFile != null) {
-            System.out.println("Mapa seleccionado: " + imgFile.getCanonicalPath());
-            filePath.setText(imgFile.getCanonicalPath());
-            truFile = imgFile.getCanonicalPath();
-        }
-    }
-    
-    @FXML
-    private void ImportActivity(ActionEvent event) throws IOException 
+    //Se asume que si el usuario está aquí, es porque está loggeado
+    public void initialize(URL url, ResourceBundle rb) 
     {
-        Activity activity = App.sportApp.importActivity(new File(truFile));
-        if (!ActivityName.getCharacters().toString().isEmpty())
-        {
-            App.sportApp.renameActivity(activity, ActivityName.getCharacters().toString());
-        }
-        back();
+            App.activities = App.sportApp.getUserActivities();
+            for (int i = 0; i < App.activities.size(); i++)
+            {
+                Button activity = new Button(App.activities.get(i).getName());
+                activityPane.getChildren().add(activity);
+            }
     }
+    
+    @FXML
+    public void ImportActivity(ActionEvent event) throws IOException {App.setRoot("ActivityCreation");}
     
     @FXML
     private void back() throws IOException {App.setRoot("FXMLDocument");}

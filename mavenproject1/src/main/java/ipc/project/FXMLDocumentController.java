@@ -628,6 +628,7 @@ public class FXMLDocumentController implements Initializable {
         // FIX 3: showOpenDialog() devuelve null si el usuario cancela la selección
         if (imgFile != null) {
             System.out.println("Mapa seleccionado: " + imgFile.getCanonicalPath());
+            App.mapPath = imgFile.getCanonicalPath();
             buildMap(imgFile); // Reconstruimos la vista con la nueva imagen
             map_listview.getItems().clear(); // Borramos los datos del mapa anterior
         }
@@ -679,12 +680,16 @@ public class FXMLDocumentController implements Initializable {
     
     private void saveOldXY(double oldex, double oldey) {oldX = oldex; oldY = oldey; lineProgress = true;}
 
+    @FXML
+    private void logout(ActionEvent event) {App.sportApp.logout();}
    
+    @FXML        
     private void login(ActionEvent event) throws IOException {
          App.loggedIn = true;
          App.setRoot("UserCreation");
     }
 
+    @FXML
     private void ajustes(ActionEvent event) throws IOException {
          App.setRoot("UserSettings");
     }
