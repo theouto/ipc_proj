@@ -19,11 +19,6 @@ public class ActivityManagementController {
     private TextField ActivityName;
     
     private String truFile;
-
-    @FXML
-    private void switchToSecondary() throws IOException {
-        App.setRoot("FXMLDocument");
-    }
     
     @FXML
     private void gpxImport(ActionEvent event) throws IOException {

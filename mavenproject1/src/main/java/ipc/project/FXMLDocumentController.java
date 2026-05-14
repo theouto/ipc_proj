@@ -62,6 +62,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
@@ -164,6 +165,9 @@ public class FXMLDocumentController implements Initializable {
     private MenuItem ajustesMenu;
     @FXML
     private MenuItem salirMenu;
+    
+    private double oldX, oldY; //Serán usados para dibujar las líneas
+    private boolean lineProgress = false; //será usado para comprobar el progreso de una línea
  
 
     // =========================================================
@@ -385,6 +389,9 @@ public class FXMLDocumentController implements Initializable {
         final double clickY = y;
         mapContextMenu.getItems().get(0).setOnAction(e -> addPoi(clickX, clickY));
         mapContextMenu.getItems().get(1).setOnAction(e -> addCircle(clickX, clickY));
+        mapContextMenu.getItems().get(2).setOnAction(e -> addPoint(clickX, clickY));
+        if (lineProgress) mapContextMenu.getItems().get(3).setOnAction(e -> addLine(clickX, clickY));
+        else mapContextMenu.getItems().get(3).setOnAction(e -> saveOldXY(clickX, clickY));
 
         // Mostramos el menú en coordenadas de pantalla
         mapContextMenu.show(
@@ -427,9 +434,11 @@ public class FXMLDocumentController implements Initializable {
 
         // Los items se crean aquí sin acción; las acciones se asignan
         // en onMapRightClick() con las coordenadas correctas de cada clic.
-        MenuItem miText   = new MenuItem("📝 Añadir texto");
+        MenuItem miText   = new MenuItem("📝Añadir texto");
         MenuItem miCircle = new MenuItem("⭕ Añadir círculo");
-        mapContextMenu = new ContextMenu(miText, miCircle);
+        MenuItem miPoint = new MenuItem("Añadir punto");
+        MenuItem miLine = new MenuItem("Añadir inicio de línea");
+        mapContextMenu = new ContextMenu(miText, miCircle, miPoint, miLine);
 
                //  setCellFactory() define cómo se renderiza cada celda
         //  de forma independiente al modelo Poi.
@@ -453,7 +462,7 @@ public class FXMLDocumentController implements Initializable {
 
         // ── Carga del mapa inicial ─────────────────────────────────────
         // El fichero se busca relativo al directorio de trabajo del proyecto.
-        buildMap(new File("maps/upv.jpg"));
+        buildMap(new File(App.mapPath));
     }
     
     @FXML
@@ -538,6 +547,7 @@ public class FXMLDocumentController implements Initializable {
      */
     private void addPoi(double x, double y) {
 
+        lineProgress = false;
         // ── Construcción del diálogo personalizado ────────────────────
         Dialog<Poi> poiDialog = new Dialog<>();
         poiDialog.setTitle("Nuevo POI");
@@ -643,8 +653,31 @@ public class FXMLDocumentController implements Initializable {
         Circle circle = new Circle(10, Color.RED); // radio = 10 px, color = rojo
         circle.setCenterX(x);
         circle.setCenterY(y);
+        lineProgress = false;
         mapPane.getChildren().add(circle); // Se añade sobre el mapa como cualquier nodo
     }
+    
+    private void addPoint(double x, double y)
+    {
+        Circle point = new Circle(1, Color.BLACK);
+        point.setCenterX(x);
+        point.setCenterY(y);
+        lineProgress = false;
+        mapPane.getChildren().add(point);
+    }
+    
+    private void addLine(double nuX, double nuY)
+    {
+        Line lined = new Line();
+        lined.setStartX(oldX);
+        lined.setStartY(oldY);
+        lined.setEndX(nuX);
+        lined.setEndY(nuY);
+        lineProgress = false;
+        mapPane.getChildren().add(lined);
+    }
+    
+    private void saveOldXY(double oldex, double oldey) {oldX = oldex; oldY = oldey; lineProgress = true;}
 
    
     private void login(ActionEvent event) throws IOException {

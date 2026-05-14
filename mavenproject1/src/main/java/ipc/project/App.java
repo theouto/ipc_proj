@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.util.List;
 
 import upv.ipc.sportlib.*;
 
@@ -21,15 +22,12 @@ public class App extends Application {
     private static Scene scene;
     
     protected static SportActivityApp sportApp;
-    protected static User currentUser;
-    
-    
+    protected static List<Activity> activities;
+    protected static String mapPath = "maps/upv.jpg";
 
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("FXMLDocument"), 640, 480);
-        
-        //arreglar java.sql.SQLException classnotfoundexception
         sportApp = SportActivityApp.getInstance(); 
         
         stage.getIcons().add(new Image(getClass().getResourceAsStream("/resources/logo.png")));
