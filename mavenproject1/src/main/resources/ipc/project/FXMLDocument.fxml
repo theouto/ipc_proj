@@ -6,7 +6,6 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.SplitPane?>
@@ -48,20 +47,7 @@
          <children>
             <MenuBar>
               <menus>
-                <Menu mnemonicParsing="false" text="Ayuda">
-                  <items>
-                    <MenuItem mnemonicParsing="false" onAction="#about" text="Acerca de" />
-                  </items>
-                </Menu>
-              </menus>
-            </MenuBar>
-            <MenuBar>
-              <menus>
-                <Menu mnemonicParsing="false" text="Cuenta">
-                  <items>
-                    <MenuItem mnemonicParsing="false" onAction="#cuenta" text="Log In (cambiar a simplemente gestión una vez se tenga una cuenta)" />
-                  </items>
-                </Menu>
+                <Menu fx:id="cuenta" mnemonicParsing="false" text="Cuenta" />
               </menus>
             </MenuBar>
             <Button mnemonicParsing="false" onAction="#cambiarMapa" text="Cambiar mapa" />

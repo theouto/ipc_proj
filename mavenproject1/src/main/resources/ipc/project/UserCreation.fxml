@@ -80,6 +80,11 @@
          <font>
             <Font size="17.0" />
          </font></Button>
+      <Label fx:id="wERR" opacity="0.0" prefHeight="18.0" prefWidth="132.0" text="Esta cuenta ya existe" textFill="RED">
+         <VBox.margin>
+            <Insets bottom="-10.0" top="-10.0" />
+         </VBox.margin>
+      </Label>
       <HBox alignment="CENTER" prefHeight="25.0" prefWidth="357.0" spacing="10.0" style="fx-padding: 10px;">
          <children>
             <Label text="¿Ya tienes una cuenta?" />

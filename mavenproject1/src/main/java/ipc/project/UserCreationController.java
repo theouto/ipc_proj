@@ -50,6 +50,9 @@ public class UserCreationController {
     private Label fERR;
     
     @FXML
+    private Label wERR;
+    
+    @FXML
     private void switchToMainScreen() throws IOException {
         App.setRoot("FXMLDocument");
     }
@@ -79,6 +82,7 @@ public class UserCreationController {
         cERR.setOpacity(0);
         pERR.setOpacity(0);
         fERR.setOpacity(0);
+        wERR.setOpacity(0);
         
         if (!User.checkNickName(Nombre.getCharacters().toString()))
         {
@@ -117,6 +121,7 @@ public class UserCreationController {
                                   Calendar.getValue(),
                                   filePath.getText()))
         {
+            wERR.setOpacity(1);
             System.out.println("Unable to register user!");
         } else { 
             System.out.println("Sucessfully registered user");
