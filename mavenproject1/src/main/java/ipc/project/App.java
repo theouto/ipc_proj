@@ -18,7 +18,6 @@ public class App extends Application {
     
     protected static boolean loggedIn = false; //Si está loggeado, en vez de mandar al usuario a crear una cuenta,
                                                //se manda a los ajustes de la cuenta. También cambiará otras cosas
-    
     private static Scene scene;
     
     protected static SportActivityApp sportApp;

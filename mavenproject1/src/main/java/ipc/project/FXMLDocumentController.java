@@ -43,6 +43,7 @@ import javafx.scene.Group;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
@@ -69,6 +70,9 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import javafx.scene.shape.Polyline;
+
+import upv.ipc.sportlib.*;
 
 /**
  * Controlador principal de la aplicación de mapa con POIs.
@@ -168,6 +172,10 @@ public class FXMLDocumentController implements Initializable {
     private MenuItem salirMenu;
     @FXML
     private MenuItem loginOrSettings;
+    @FXML
+    private VBox mapActivities;
+    
+    private MapProjection proj;
     
     private double oldX, oldY; //Serán usados para dibujar las líneas
     private boolean lineProgress = false; //será usado para comprobar el progreso de una línea
@@ -451,6 +459,15 @@ public class FXMLDocumentController implements Initializable {
             MenuItem BYEEE = new MenuItem("Salir");
             BYEEE.setOnAction(e -> logout());
             cuenta.getItems().add(BYEEE);
+            
+           App.activities = App.sportApp.getUserActivities();
+           for (int i = 0; i < App.activities.size(); i++)
+           {
+               Button activity = new Button(App.activities.get(i).getName());
+               final int index = i;
+               activity.setOnAction(e -> setAction(index));
+               mapActivities.getChildren().add(activity);
+           } 
         }
         else 
         {
@@ -714,5 +731,28 @@ public class FXMLDocumentController implements Initializable {
     }
 
 
-
+    @FXML
+    private void back() throws IOException {App.setRoot("FXMLDocument");}
+    
+    private void setAction(int i)
+    {
+        MapRegion mapR = App.activities.get(i).getSuggestedMap();
+        App.mapPath = mapR.getImagePath();
+        
+        Image throwaway = new Image((new File(App.mapPath)).toURI().toString());
+        proj = new MapProjection(mapR, throwaway.getWidth(), throwaway.getHeight());
+        buildMap(new File(App.mapPath)); // Reconstruimos la vista con la nueva imagen
+        map_listview.getItems().clear(); // Borramos los datos del mapa anterior
+        loadPath(App.activities.get(i));
+    }
+    
+    private void loadPath(Activity activity)
+    {
+        Polyline route = new Polyline();
+        for (TrackPoint tp : activity.getTrackPoints()) {
+            Point2D p = proj.project(tp);
+            route.getPoints().addAll(p.getX(), p.getY());
+        }
+        mapPane.getChildren().add(route);
+    }
 }
