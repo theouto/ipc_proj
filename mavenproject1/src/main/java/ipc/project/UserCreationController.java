@@ -22,6 +22,8 @@ public class UserCreationController {
     No se necesita nada de esto, sacamos los valores directamente de lo que ya tenemos
     */
     
+    private boolean pass = true;
+    
     @FXML
     private TextField Nombre;
 
@@ -83,12 +85,13 @@ public class UserCreationController {
         pERR.setOpacity(0);
         fERR.setOpacity(0);
         wERR.setOpacity(0);
+        pass = true;
         
         if (!User.checkNickName(Nombre.getCharacters().toString()))
         {
             System.out.println("invalid nick");
             nERR.setOpacity(1);
-            return;
+            pass = false;
         }
         
         if (!User.checkEmail(Correo.getCharacters().toString()))
@@ -96,24 +99,24 @@ public class UserCreationController {
             System.out.println("invalid email");
             System.out.println(Correo.getCharacters());
             cERR.setOpacity(1);
-            return;
+            pass = false;
         }
         
         if (!User.checkPassword(Passworten.getCharacters().toString()))
         {
             System.out.println("invalid password");
             pERR.setOpacity(1);
-            return;
+            pass = false;
         }
         
         if (!User.isOlderThan(Calendar.getValue(), 12))
         {
             System.out.println("invalid age");
             fERR.setOpacity(1);
-            return;
+            pass = false;
         }
         
-        System.out.println(Nombre.getCharacters());
+        if (!pass) {return;}
         
         if (!App.sportApp.registerUser(Nombre.getCharacters().toString(),
                                   Correo.getCharacters().toString(),
