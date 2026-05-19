@@ -733,7 +733,7 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
-    private void salir(ActionEvent event) {
+    private void salir(ActionEvent event) throws IOException {
          App.loggedIn = false;
          App.setRoot("UserCreation");
     }
