@@ -24,9 +24,12 @@ public class UserLoginController {
         App.setRoot("UserCreation");
     }
     
+    //Esta función ahora es inutil, por lo que la voy a hacer una herramienta para acelerar el debugging
     @FXML
     private void switchToSecondary() throws IOException {
-        App.setRoot("FXMLDocument");
+        Usuario.setText("aaaaaaa");
+        Password.setText("aaaAAA!!!111");
+        login();
     }
   
     @FXML
