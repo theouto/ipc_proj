@@ -169,6 +169,8 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private MenuItem ajustesMenu;
     @FXML
+    private MenuItem historialMenu;
+    @FXML
     private MenuItem salirMenu;
     @FXML
     private MenuItem loginOrSettings;
@@ -451,12 +453,12 @@ public class FXMLDocumentController implements Initializable {
         MenuItem miLine = new MenuItem("Añadir inicio de línea");
         mapContextMenu = new ContextMenu(miText, miCircle, miPoint, miLine);
         
-        MenuItem login = new MenuItem("Ajustes de Usuario");
-        login.setOnAction(e -> ajustes());
-        cuenta.getItems().add(login);
-        MenuItem BYEEE = new MenuItem("Salir");
-        BYEEE.setOnAction(e -> logout());
-        cuenta.getItems().add(BYEEE);
+       // MenuItem login = new MenuItem("Ajustes de Usuario");
+       // login.setOnAction(e -> ajustes());
+       // cuenta.getItems().add(login);
+       // MenuItem BYEEE = new MenuItem("Salir");
+       // BYEEE.setOnAction(e -> logout());
+       // cuenta.getItems().add(BYEEE);
             
         App.activities = App.sportApp.getUserActivities();
         for (int i = 0; i < App.activities.size(); i++)
@@ -707,12 +709,20 @@ public class FXMLDocumentController implements Initializable {
          App.setRoot("UserCreation");
     }
 
-    private void ajustes() {
-         try {App.setRoot("UserSettings");} catch (IOException e) {System.out.println("huh (ajustes())");}
+    @FXML
+    private void ajustes(ActionEvent event) throws IOException {
+         App.setRoot("UserSettings");
+    } 
+
+    @FXML
+    private void historial(ActionEvent event) throws IOException {
+         App.setRoot("Historial");
     }
 
     @FXML
     private void salir(ActionEvent event) {
+         App.loggedIn = false;
+         App.setRoot("UserCreation");
     }
 
 
