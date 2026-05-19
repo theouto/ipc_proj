@@ -26,6 +26,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        
         scene = new Scene(loadFXML("UserLogin"), 640, 480);
         sportApp = SportActivityApp.getInstance(); 
         

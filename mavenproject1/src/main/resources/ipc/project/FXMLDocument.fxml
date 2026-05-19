@@ -6,6 +6,7 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.SplitPane?>
@@ -17,7 +18,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipc.project.FXMLDocumentController">
+<BorderPane xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipc.project.FXMLDocumentController">
    <center>
       <VBox prefHeight="556.0" prefWidth="853.0" stylesheets="@../resources/estilos.css">
          <children>
@@ -57,7 +58,12 @@
          <children>
             <MenuBar>
               <menus>
-                <Menu fx:id="cuenta" mnemonicParsing="false" text="Cuenta" />
+                <Menu fx:id="cuenta" mnemonicParsing="false" text="Cuenta">
+                     <items>
+                        <MenuItem fx:id="ajustesMenu" mnemonicParsing="false" onAction="#ajustes" text="Ajustes" />
+                        <MenuItem fx:id="historialMenu" mnemonicParsing="false" onAction="#historial" text="Historial de sesiones" />
+                        <MenuItem fx:id="salirMenu" mnemonicParsing="false" onAction="#salir" text="Salir" />
+                     </items></Menu>
               </menus>
             </MenuBar>
             <Button mnemonicParsing="false" onAction="#cambiarMapa" text="Cambiar mapa" />
