@@ -21,23 +21,23 @@
    <center>
       <VBox prefHeight="556.0" prefWidth="853.0" stylesheets="@../resources/estilos.css">
          <children>
-            <SplitPane fx:id="splitPane" dividerPositions="0.19699727024567792" VBox.vgrow="ALWAYS">
+            <SplitPane fx:id="splitPane" dividerPositions="0.19699727024567792, 0.5" style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
                <items>
-                  <VBox prefHeight="200.0" prefWidth="100.0">
+                  <VBox maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefHeight="554.0" prefWidth="327.0">
                      <children>
                         <ListView fx:id="map_listview" onMouseClicked="#listClicked" prefHeight="278.0" prefWidth="165.0" />
-                        <VBox fx:id="mapActivities" prefHeight="283.0" prefWidth="165.0" />
+                        <ListView fx:id="mapActivities" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" onMouseClicked="#setAction" prefHeight="278.0" prefWidth="165.0" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: black;">
+                     <children>
+                        <Label fx:id="stats" text="Label" />
                      </children>
                   </VBox>
                   <ScrollPane fx:id="map_scrollpane" hbarPolicy="ALWAYS" onMouseMoved="#showPosition" pannable="true" prefHeight="398.0" prefWidth="358.0" vbarPolicy="ALWAYS">
                      <content>
                         <Pane>
                            <children>
-                              <Label layoutX="10.0" layoutY="10.0" text="Distancia:">
-                                 <padding>
-                                    <Insets left="20.0" top="20.0" />
-                                 </padding>
-                              </Label>
                               <ImageView pickOnBounds="true">
                                  <image>
                                     <Image url="@../resources/upv.jpg" />

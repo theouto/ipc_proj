@@ -173,7 +173,9 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private MenuItem loginOrSettings;
     @FXML
-    private VBox mapActivities;
+    private ListView<Activity> mapActivities;
+    @FXML
+    private Label stats;
     
     private MapProjection proj;
     
@@ -459,13 +461,24 @@ public class FXMLDocumentController implements Initializable {
         cuenta.getItems().add(BYEEE);
             
         App.activities = App.sportApp.getUserActivities();
-        for (int i = 0; i < App.activities.size(); i++)
-        {
-            Button activity = new Button(App.activities.get(i).getName());
-            final int index = i;
-            activity.setOnAction(e -> setAction(index));
-            mapActivities.getChildren().add(activity);
-        } 
+        mapActivities.setCellFactory(e -> new ListCell<Activity>()
+                {
+                    @Override
+                    protected void updateItem(Activity active, boolean empty)
+                    {
+                        super.updateItem(active, empty);
+                        if (active == null || empty) 
+                        {
+                            setText(null);
+                            setGraphic(null);
+                        } else {
+                            setText(active.getName());  
+                        }
+                    }
+                   
+                });
+        
+        for (int i = 0; i < App.activities.size(); i++) {mapActivities.getItems().add(App.activities.get(i));} 
 
                //  setCellFactory() define cómo se renderiza cada celda
         //  de forma independiente al modelo Poi.
@@ -719,8 +732,13 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void back() throws IOException {App.setRoot("FXMLDocument");}
     
-    private void setAction(int i)
+    @FXML
+    private void setAction()
     {
+        int i = mapActivities.getSelectionModel().getSelectedIndex();
+        
+        if (i == -1) return;
+        
         MapRegion mapR = App.activities.get(i).getSuggestedMap();
         App.mapPath = mapR.getImagePath();
         
@@ -729,6 +747,14 @@ public class FXMLDocumentController implements Initializable {
         buildMap(new File(App.mapPath)); // Reconstruimos la vista con la nueva imagen
         map_listview.getItems().clear(); // Borramos los datos del mapa anterior
         loadPath(App.activities.get(i));
+        
+        stats.setText("Distancia: " + App.activities.get(i).getTotalDistance() +
+                      "\nDesnivel acumulado (-): " + App.activities.get(i).getElevationLoss() + 
+                      "\nDesnivel acumulado (+): " + App.activities.get(i).getElevationGain() + 
+                      "\nDuración: " + App.activities.get(i).getDuration().toHours() + 
+                      "h\nVelocidad media: " + App.activities.get(i).getAverageSpeed() + 
+                      "km/h\nRitmo medio: " + App.activities.get(i).getAveragePace() + 
+                      "m/km");
     }
     
     private void loadPath(Activity activity)
