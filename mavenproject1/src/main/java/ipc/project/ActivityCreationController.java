@@ -46,5 +46,5 @@ public class ActivityCreationController {
     }
     
     @FXML
-    private void back() throws IOException {App.setRoot("ActivityManagement");}
+    private void back() throws IOException {App.setRoot("FXMLDocument");}
 }
