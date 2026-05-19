@@ -451,30 +451,21 @@ public class FXMLDocumentController implements Initializable {
         MenuItem miLine = new MenuItem("Añadir inicio de línea");
         mapContextMenu = new ContextMenu(miText, miCircle, miPoint, miLine);
         
-        if (App.loggedIn)
-        {
-            MenuItem login = new MenuItem("Ajustes de Usuario");
-            login.setOnAction(e -> ajustes());
-            cuenta.getItems().add(login);
-            MenuItem BYEEE = new MenuItem("Salir");
-            BYEEE.setOnAction(e -> logout());
-            cuenta.getItems().add(BYEEE);
+        MenuItem login = new MenuItem("Ajustes de Usuario");
+        login.setOnAction(e -> ajustes());
+        cuenta.getItems().add(login);
+        MenuItem BYEEE = new MenuItem("Salir");
+        BYEEE.setOnAction(e -> logout());
+        cuenta.getItems().add(BYEEE);
             
-           App.activities = App.sportApp.getUserActivities();
-           for (int i = 0; i < App.activities.size(); i++)
-           {
-               Button activity = new Button(App.activities.get(i).getName());
-               final int index = i;
-               activity.setOnAction(e -> setAction(index));
-               mapActivities.getChildren().add(activity);
-           } 
-        }
-        else 
+        App.activities = App.sportApp.getUserActivities();
+        for (int i = 0; i < App.activities.size(); i++)
         {
-            MenuItem login = new MenuItem("Login");
-            login.setOnAction(e -> logggg());
-            cuenta.getItems().add(login);
-        }
+            Button activity = new Button(App.activities.get(i).getName());
+            final int index = i;
+            activity.setOnAction(e -> setAction(index));
+            mapActivities.getChildren().add(activity);
+        } 
 
                //  setCellFactory() define cómo se renderiza cada celda
         //  de forma independiente al modelo Poi.
@@ -706,20 +697,14 @@ public class FXMLDocumentController implements Initializable {
 
     private void logout() 
     {
-        App.loggedIn = false;
         App.sportApp.logout();
-        try {App.setRoot("FXMLDocument");}  catch (IOException e) {System.out.println("Error logging out!");}
+        try {App.setRoot("UserLogin");}  catch (IOException e) {System.out.println("Error logging out!");}
     }
    
     @FXML        
     private void login(ActionEvent event) throws IOException {
          App.loggedIn = true;
          App.setRoot("UserCreation");
-    }
-    
-    private void logggg()
-    {
-        try {App.setRoot("UserLogin");} catch (IOException e) {System.out.println("what (logggg)");}
     }
 
     private void ajustes() {
