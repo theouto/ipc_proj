@@ -729,13 +729,13 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void historial(ActionEvent event) throws IOException {
-         App.setRoot("Historial");
+         App.setRoot("SessionHistory");
     }
 
-    @FXML
+    @FXML   
     private void salir(ActionEvent event) throws IOException {
          App.loggedIn = false;
-         App.setRoot("UserCreation");
+         logout();
     }
 
 

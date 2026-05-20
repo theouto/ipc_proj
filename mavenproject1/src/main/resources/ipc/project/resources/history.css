@@ -1,0 +1,108 @@
+
+.list-view .scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-width: 8px;                    
+    -fx-padding: 0;
+}
+
+.list-view .scroll-bar:vertical .track {
+    -fx-background-color: #1A1A1A; 
+    -fx-background-radius: 4px;
+}
+
+.list-view .scroll-bar:vertical .thumb {
+    -fx-background-color: #333333;     
+    -fx-background-radius: 4px;
+}
+
+.list-view .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: #292929;
+}
+
+/* .list-view .scroll-bar:vertical .increment-button, */
+/* .list-view .scroll-bar:vertical .decrement-button { */
+/*     -fx-background-color: transparent; */
+/*     -fx-padding: 0; */
+/* } */
+/* .list-view .scroll-bar:vertical .increment-arrow, */
+/* .list-view .scroll-bar:vertical .decrement-arrow { */
+/*     -fx-shape: " "; */
+/*     -fx-padding: 0; */
+/* } */
+
+
+.main-background {
+    -fx-background-color: #121212;
+    -fx-padding: 30;
+}
+
+.title-label {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #FFFFFF;
+}
+
+.summary-card {
+    -fx-background-color: #1A1A1A;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-border-color: #2C2C2C;
+    -fx-border-width: 1;
+    -fx-padding: 15;
+}
+
+.text-green-massive {
+    -fx-text-fill: #00E676;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+.list-view {
+    -fx-background-color: #121212; /*gris carbono*/
+    -fx-background-insets: 0;
+    -fx-padding: 10;
+}
+
+/*para padding*/
+.list-cell {
+    -fx-background-color: transparent;
+    -fx-padding: 6 0 6 0;
+}
+
+/*superficie gris*/
+.card-session{
+    -fx-background-color: #1E1E1E;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-border-color: #2C2C2C;
+    -fx-border-width: 1;
+    -fx-padding: 15;
+}
+
+.card-session:hover {
+    -fx-background-color: #252525;
+    -fx-border-color: #00E676; /*borde verde*/
+    -fx-cursor: hand;
+}
+
+.list-cell:filled:selected .card-session{
+    -fx-background-color: #1F2E26; /*fondo verde oscuro*/
+    -fx-border-color: #39FF14;     /*borde verde neon brillante*/
+    -fx-border-width: 1.5;
+}
+
+/*estilos de texto*/
+.text-primary {
+    -fx-fill: #FFFFFF;
+    -fx-text-fill: #FFFFFF;
+}
+
+.text-secondary {
+    -fx-fill: #9E9E9E;
+    -fx-text-fill: #9E9E9E;
+}
+
+.text-green-highlight{
+    -fx-fill: #00E676;
+    -fx-text-fill: #00E676;
+}
