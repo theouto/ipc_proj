@@ -9,7 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.Label;
 import javafx.stage.FileChooser;
-
+    
 import upv.ipc.sportlib.*;
 
 public class UserCreationController {
@@ -25,19 +25,19 @@ public class UserCreationController {
     private boolean pass = true;
     
     @FXML
-    private TextField Nombre;
+    protected TextField Nombre;
 
     @FXML
-    private TextField Correo;
+    protected TextField Correo;
     
     @FXML
     private Label filePath;
     
     @FXML
-    private PasswordField Passworten;
+    protected PasswordField Passworten;
     
     @FXML
-    private DatePicker Calendar;
+    protected DatePicker Calendar;
     
     @FXML
     private Label nERR;

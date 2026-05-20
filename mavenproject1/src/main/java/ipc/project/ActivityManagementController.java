@@ -26,7 +26,7 @@ public class ActivityManagementController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        if (App.sportApp.getCurrentUser() != null)
+            if (App.sportApp.getCurrentUser() != null)
         {
            App.activities = App.sportApp.getUserActivities();
             for (int i = 0; i < App.activities.size(); i++)

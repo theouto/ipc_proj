@@ -31,7 +31,8 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="Nombre2" disable="true" editable="false" prefHeight="32.0" prefWidth="148.0">
+                        <Label fx:id="Nombre2" text="Label" />
+                        <TextField disable="true" editable="false" onAction="#nombreText" prefHeight="32.0" prefWidth="148.0">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -72,16 +73,17 @@
                   <Insets bottom="40.0" />
                </HBox.margin>
             </HBox>
-            <VBox prefHeight="200.0" prefWidth="100.0">
+            <VBox prefHeight="108.0" prefWidth="364.0">
                <children>
                   <Label text="Correo">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
+                  <Label fx:id="Correo2" text="Label" />
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <TextField fx:id="Correo2" disable="true" editable="false" prefHeight="32.0" prefWidth="223.0">
+                        <TextField disable="true" editable="false" onAction="#correoText" prefHeight="32.0" prefWidth="223.0">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
@@ -108,9 +110,10 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
+                  <Label fx:id="Passworten2" text="Label" />
+                  <HBox prefHeight="10.0" prefWidth="364.0">
                      <children>
-                        <TextField fx:id="Passworten2" disable="true" editable="false" prefHeight="26.0" prefWidth="125.0">
+                        <TextField disable="true" editable="false" onAction="#contraseñaText" prefHeight="26.0" prefWidth="125.0">
                            <HBox.margin>
                               <Insets bottom="30.0" />
                            </HBox.margin>
@@ -132,7 +135,7 @@
                         </Button>
                      </children>
                      <VBox.margin>
-                        <Insets bottom="20.0" />
+                        <Insets />
                      </VBox.margin>
                   </HBox>
                </children>
@@ -144,10 +147,14 @@
                <font>
                   <Font size="18.0" />
                </font>
+               <VBox.margin>
+                  <Insets top="40.0" />
+               </VBox.margin>
             </Label>
+            <Label fx:id="Calendar2" text="Label" />
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <DatePicker fx:id="Calendar2" disable="true" prefHeight="26.0" prefWidth="103.0">
+                  <DatePicker disable="true" onAction="#dateText" prefHeight="26.0" prefWidth="103.0">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
