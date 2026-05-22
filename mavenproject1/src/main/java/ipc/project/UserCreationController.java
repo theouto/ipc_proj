@@ -9,14 +9,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.Label;
 import javafx.stage.FileChooser;
-<<<<<<< HEAD
-    
-=======
 import javafx.scene.shape.Circle;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 
->>>>>>> 4e0ea95 (fix register)
 import upv.ipc.sportlib.*;
 
 public class UserCreationController {
@@ -30,33 +26,19 @@ public class UserCreationController {
     */
         
     @FXML
-<<<<<<< HEAD
-    protected TextField Nombre;
-
-    @FXML
-    protected TextField Correo;
-=======
     private TextField nameTextField;
 
     @FXML
     private TextField mailTextField;
->>>>>>> 4e0ea95 (fix register)
     
     @FXML
     private Label profilePicturePath;
     
     @FXML
-<<<<<<< HEAD
-    protected PasswordField Passworten;
-    
-    @FXML
-    protected DatePicker Calendar;
-=======
     private PasswordField passTextField;
     
     @FXML
     private DatePicker birthdayPicker;
->>>>>>> 4e0ea95 (fix register)
     
     @FXML
     private Label nERR;
