@@ -1,0 +1,15 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : May 20, 2026, 2:21:47 PM
+    Author     : danimania
+*/
+
+.circleStroke:hover {
+    -fx-stroke-width: 5px;
+    -fx-stroke: green;
+    -fx-cursor: hand;
+};
+

@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipc.project.FXMLDocumentController">
+<BorderPane xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipc.project.FXMLDocumentController">
    <center>
       <VBox prefHeight="556.0" prefWidth="853.0" stylesheets="@../resources/estilos.css">
          <children>
@@ -27,12 +27,12 @@
                   <VBox maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefHeight="554.0" prefWidth="327.0">
                      <children>
                         <ListView fx:id="map_listview" onMouseClicked="#listClicked" prefHeight="278.0" prefWidth="165.0" />
-                        <ListView fx:id="mapActivities" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" onMouseClicked="#setAction" prefHeight="278.0" prefWidth="165.0" />
+                        <ListView fx:id="mapActivities" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" onMouseClicked="#setAction" prefHeight="278.0" prefWidth="165.0" VBox.vgrow="ALWAYS" />
                      </children>
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: black;">
                      <children>
-                        <Label fx:id="stats" text="Label" />
+                        <Label fx:id="stats" />
                      </children>
                   </VBox>
                   <ScrollPane fx:id="map_scrollpane" hbarPolicy="ALWAYS" onMouseMoved="#showPosition" pannable="true" prefHeight="398.0" prefWidth="358.0" vbarPolicy="ALWAYS">
@@ -53,7 +53,17 @@
          </children>
       </VBox>
    </center>
-   <top>
+   <bottom>
+      <HBox alignment="CENTER_RIGHT" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="mousePosition" minHeight="-Infinity" minWidth="-Infinity" text="SceneX:     SceneY:     " wrapText="true" HBox.hgrow="ALWAYS" />
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
+         </BorderPane.margin>
+      </HBox>
+   </bottom>
+   <right>
       <HBox alignment="CENTER_RIGHT" fillHeight="false" spacing="5.0" BorderPane.alignment="CENTER">
          <children>
             <MenuBar>
@@ -78,15 +88,29 @@
             <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
          </BorderPane.margin>
       </HBox>
+   </right>
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="Cuenta">
+            <items>
+              <MenuItem fx:id="loginButton" mnemonicParsing="false" onAction="#loginAction" text="Iniciar sesión" />
+                  <MenuItem fx:id="registerButton" mnemonicParsing="false" onAction="#registerAction" text="Registrarse" />
+                  <MenuItem fx:id="editAccountButton" mnemonicParsing="false" text="Editar cuenta" visible="false" />
+                  <MenuItem fx:id="logoutButton" mnemonicParsing="false" text="Cerrar sesión" visible="false" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Mapa">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Actividades">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
    </top>
-   <bottom>
-      <HBox alignment="CENTER_RIGHT" BorderPane.alignment="CENTER">
-         <children>
-            <Label fx:id="mousePosition" minHeight="-Infinity" minWidth="-Infinity" text="SceneX:     SceneY:     " wrapText="true" HBox.hgrow="ALWAYS" />
-         </children>
-         <BorderPane.margin>
-            <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
-         </BorderPane.margin>
-      </HBox>
-   </bottom>
 </BorderPane>

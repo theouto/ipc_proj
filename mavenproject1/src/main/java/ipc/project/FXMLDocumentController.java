@@ -156,24 +156,23 @@ public class FXMLDocumentController implements Initializable {
     // FIX 5 — Eliminadas las variables sin uso:
     //   · 'mousePosistion' (errata + duplicado de mousePosition)
     //   · 'pin_info'       (inyectada pero nunca actualizada)
+    
+    
+    @FXML
+    private MenuItem loginButton;
+    
+    @FXML
+    private MenuItem registerButton;
+    
+    @FXML
+    private MenuItem editAccountButton;
+    
+    @FXML
+    private MenuItem logoutButton;
 
     /** Etiqueta en la barra de estado que muestra las coordenadas del ratón. */
     @FXML
     private Label mousePosition;
-    @FXML
-    private SplitPane splitPane;
-    @FXML
-    private Menu cuenta;
-    @FXML
-    private MenuItem loginMenu;
-    @FXML
-    private MenuItem ajustesMenu;
-    @FXML
-    private MenuItem historialMenu;
-    @FXML
-    private MenuItem salirMenu;
-    @FXML
-    private MenuItem loginOrSettings;
     @FXML
     private ListView<Activity> mapActivities;
     @FXML
@@ -435,6 +434,13 @@ public class FXMLDocumentController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        if (App.loggedIn) {
+            loginButton.setVisible(false);
+            registerButton.setVisible(false);
+            editAccountButton.setVisible(true);
+            logoutButton.setVisible(true);
+        }
 
         // ── Configuración del slider de zoom ──────────────────────────
         zoom_slider.setMin(0.5);   // zoom mínimo: 50 %
@@ -708,16 +714,27 @@ public class FXMLDocumentController implements Initializable {
         mapPane.getChildren().add(lined);
     }
     
-    private void saveOldXY(double oldex, double oldey) {oldX = oldex; oldY = oldey; lineProgress = true;}
+    private void saveOldXY(double oldex, double oldey) {
+        oldX = oldex; oldY = oldey; lineProgress = true;
+    }
 
-    private void logout() 
-    {
+    private void logout() {
         App.sportApp.logout();
-        try {App.setRoot("UserLogin");}  catch (IOException e) {System.out.println("Error logging out!");}
+        try {
+            App.setRoot("UserLogin");
+        }  catch (IOException e) {
+            System.out.println("Error logging out!");
+        }
     }
    
     @FXML        
-    private void login(ActionEvent event) throws IOException {
+    private void loginAction(ActionEvent event) throws IOException {
+         App.loggedIn = true;
+         App.setRoot("UserLogin");
+    }
+    
+    @FXML        
+    private void registerAction(ActionEvent event) throws IOException {
          App.loggedIn = true;
          App.setRoot("UserCreation");
     }

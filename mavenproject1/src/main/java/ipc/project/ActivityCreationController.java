@@ -37,9 +37,14 @@ public class ActivityCreationController {
     @FXML
     private void ImportActivity(ActionEvent event) throws IOException 
     {
+        if (truFile == null) {
+            System.out.println("Error: No file selected yet!");
+            return;
+        }
+        
         Activity activity = App.sportApp.importActivity(new File(truFile));
-        if (!ActivityName.getCharacters().toString().isEmpty())
-        {
+        
+        if (!ActivityName.getCharacters().toString().isEmpty()) {
             App.sportApp.renameActivity(activity, ActivityName.getCharacters().toString());
         }
         back();
