@@ -4,6 +4,7 @@
  */
 package ipc.project;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLOutput;
 import java.util.*;
@@ -14,6 +15,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Label;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.scene.control.Button;
 import upv.ipc.sportlib.*;
 
 /**
@@ -35,6 +38,16 @@ public class SessionHistoryController implements Initializable {
 
   @FXML
   private Label lblTotalAnnotations;
+  
+  @FXML
+  private Button btnBack;
+  
+  
+    @FXML
+    private void goBack() throws IOException {
+        App.setRoot("FXMLDocument");
+    }
+  
 
   @Override
   public void initialize(URL url, ResourceBundle rb) {

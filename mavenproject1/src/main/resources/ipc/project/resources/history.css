@@ -1,3 +1,29 @@
+.btn-back {
+    -fx-background-color: #1A1A1A;    
+    -fx-background-radius: 50%;      
+    -fx-border-radius: 50%;
+    -fx-border-color: #2C2C2C;      
+    -fx-border-width: 1px;
+    -fx-min-width: 40px;           
+    -fx-min-height: 40px;
+    -fx-max-width: 40px;
+    -fx-max-height: 40px;
+    -fx-padding: 0;
+    /* -fx-transition: all 0.2s ease-in-out; */
+}
+
+.btn-back:hover {
+    -fx-background-color: #252525;
+    -fx-border-color: #00E676;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 230, 118, 0.3), 10, 0, 0, 0);
+}
+
+.btn-back:pressed {
+    -fx-background-color: #121212;
+    -fx-scale-x: 0.95;
+    -fx-scale-y: 0.95;
+}
+
 
 .list-view .scroll-bar:vertical {
     -fx-background-color: transparent;
@@ -18,17 +44,6 @@
 .list-view .scroll-bar:vertical .thumb:hover {
     -fx-background-color: #292929;
 }
-
-/* .list-view .scroll-bar:vertical .increment-button, */
-/* .list-view .scroll-bar:vertical .decrement-button { */
-/*     -fx-background-color: transparent; */
-/*     -fx-padding: 0; */
-/* } */
-/* .list-view .scroll-bar:vertical .increment-arrow, */
-/* .list-view .scroll-bar:vertical .decrement-arrow { */
-/*     -fx-shape: " "; */
-/*     -fx-padding: 0; */
-/* } */
 
 
 .main-background {
