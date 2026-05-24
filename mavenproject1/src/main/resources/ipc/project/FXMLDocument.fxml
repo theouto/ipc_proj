@@ -78,11 +78,6 @@
             </MenuBar>
             <Button mnemonicParsing="false" onAction="#cambiarMapa" text="Cambiar mapa" />
             <Button mnemonicParsing="false" onAction="#importarActividad" text="Actividades" />
-            <Region HBox.hgrow="ALWAYS" />
-            <Label text="Zoom" />
-            <Button mnemonicParsing="false" onAction="#zoomOut" text="-" />
-            <Slider fx:id="zoom_slider" HBox.hgrow="SOMETIMES" />
-            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#zoomIn" text="+" />
          </children>
          <BorderPane.margin>
             <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
@@ -90,27 +85,46 @@
       </HBox>
    </right>
    <top>
-      <MenuBar BorderPane.alignment="CENTER">
-        <menus>
-          <Menu mnemonicParsing="false" text="Cuenta">
-            <items>
-              <MenuItem fx:id="loginButton" mnemonicParsing="false" onAction="#loginAction" text="Iniciar sesión" />
-                  <MenuItem fx:id="registerButton" mnemonicParsing="false" onAction="#registerAction" text="Registrarse" />
-                  <MenuItem fx:id="editAccountButton" mnemonicParsing="false" text="Editar cuenta" visible="false" />
-                  <MenuItem fx:id="logoutButton" mnemonicParsing="false" text="Cerrar sesión" visible="false" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Mapa">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Actividades">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
+      <HBox alignment="CENTER" prefHeight="21.0" prefWidth="1401.0" BorderPane.alignment="CENTER">
+         <children>
+            <MenuBar>
+              <menus>
+                <Menu mnemonicParsing="false" text="Cuenta">
+                  <items>
+                    <MenuItem fx:id="loginButton" mnemonicParsing="false" onAction="#loginAction" text="Iniciar sesión" />
+                        <MenuItem fx:id="registerButton" mnemonicParsing="false" onAction="#registerAction" text="Registrarse" />
+                        <MenuItem fx:id="editAccountButton" mnemonicParsing="false" onAction="#ajustes" text="Editar cuenta" visible="false" />
+                        <MenuItem fx:id="historialSesiones" mnemonicParsing="false" onAction="#historial" text="Historial de sesiones" visible="false" />
+                        <MenuItem fx:id="logoutButton" mnemonicParsing="false" onAction="#salir" text="Cerrar sesión" visible="false" />
+                  </items>
+                </Menu>
+                <Menu fx:id="menuMAP" mnemonicParsing="false" text="Mapa" visible="false">
+                  <items>
+                    <MenuItem fx:id="cambiarMapa" mnemonicParsing="false" text="Agregar al sistema" />
+                  </items>
+                </Menu>
+                <Menu fx:id="menuACT" mnemonicParsing="false" text="Actividades" visible="false">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Estadísticas" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+            <Region prefHeight="27.0" prefWidth="804.0" HBox.hgrow="ALWAYS" />
+            <Label text="Zoom">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin></Label>
+            <Button mnemonicParsing="false" onAction="#zoomOut" text="-">
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin></Button>
+            <Slider fx:id="zoom_slider" HBox.hgrow="SOMETIMES" />
+            <Button mnemonicParsing="false" onAction="#zoomIn" text="+">
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin></Button>
+         </children>
+      </HBox>
    </top>
 </BorderPane>

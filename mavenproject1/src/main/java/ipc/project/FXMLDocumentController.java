@@ -157,6 +157,11 @@ public class FXMLDocumentController implements Initializable {
     //   · 'mousePosistion' (errata + duplicado de mousePosition)
     //   · 'pin_info'       (inyectada pero nunca actualizada)
     
+    @FXML
+    private Menu menuACT;
+    
+    @FXML
+    private Menu menuMAP;
     
     @FXML
     private MenuItem loginButton;
@@ -169,6 +174,9 @@ public class FXMLDocumentController implements Initializable {
     
     @FXML
     private MenuItem logoutButton;
+    
+    @FXML
+    private MenuItem historialSesiones;
 
     /** Etiqueta en la barra de estado que muestra las coordenadas del ratón. */
     @FXML
@@ -440,6 +448,9 @@ public class FXMLDocumentController implements Initializable {
             registerButton.setVisible(false);
             editAccountButton.setVisible(true);
             logoutButton.setVisible(true);
+            historialSesiones.setVisible(true);
+            menuACT.setVisible(true);
+            menuMAP.setVisible(true);
         }
 
         // ── Configuración del slider de zoom ──────────────────────────
@@ -663,10 +674,14 @@ public class FXMLDocumentController implements Initializable {
 
         // FIX 3: showOpenDialog() devuelve null si el usuario cancela la selección
         if (imgFile != null) {
+            /*
             System.out.println("Mapa seleccionado: " + imgFile.getCanonicalPath());
             App.mapPath = imgFile.getCanonicalPath();
             buildMap(imgFile); // Reconstruimos la vista con la nueva imagen
             map_listview.getItems().clear(); // Borramos los datos del mapa anterior
+            */
+            
+            
         }
     }
 
@@ -718,6 +733,7 @@ public class FXMLDocumentController implements Initializable {
         oldX = oldex; oldY = oldey; lineProgress = true;
     }
 
+    @FXML
     private void logout() {
         App.sportApp.logout();
         try {
