@@ -63,27 +63,6 @@
          </BorderPane.margin>
       </HBox>
    </bottom>
-   <right>
-      <HBox alignment="CENTER_RIGHT" fillHeight="false" spacing="5.0" BorderPane.alignment="CENTER">
-         <children>
-            <MenuBar>
-              <menus>
-                <Menu fx:id="cuenta" mnemonicParsing="false" text="Cuenta">
-                     <items>
-                        <MenuItem fx:id="ajustesMenu" mnemonicParsing="false" onAction="#ajustes" text="Ajustes" />
-                        <MenuItem fx:id="historialMenu" mnemonicParsing="false" onAction="#historial" text="Historial de sesiones" />
-                        <MenuItem fx:id="salirMenu" mnemonicParsing="false" onAction="#salir" text="Salir" />
-                     </items></Menu>
-              </menus>
-            </MenuBar>
-            <Button mnemonicParsing="false" onAction="#cambiarMapa" text="Cambiar mapa" />
-            <Button mnemonicParsing="false" onAction="#importarActividad" text="Actividades" />
-         </children>
-         <BorderPane.margin>
-            <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
-         </BorderPane.margin>
-      </HBox>
-   </right>
    <top>
       <HBox alignment="CENTER" prefHeight="21.0" prefWidth="1401.0" BorderPane.alignment="CENTER">
          <children>
@@ -100,17 +79,18 @@
                 </Menu>
                 <Menu fx:id="menuMAP" mnemonicParsing="false" text="Mapa" visible="false">
                   <items>
-                    <MenuItem fx:id="cambiarMapa" mnemonicParsing="false" text="Agregar al sistema" />
+                    <MenuItem mnemonicParsing="false" onAction="#cambiarMapa" text="Agregar al sistema" />
                   </items>
                 </Menu>
                 <Menu fx:id="menuACT" mnemonicParsing="false" text="Actividades" visible="false">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Estadísticas" />
+                    <MenuItem mnemonicParsing="false" onAction="#stats" text="Estadísticas" />
+                        <MenuItem mnemonicParsing="false" onAction="#importarActividad" text="Añadir" />
                   </items>
                 </Menu>
               </menus>
             </MenuBar>
-            <Region prefHeight="27.0" prefWidth="804.0" HBox.hgrow="ALWAYS" />
+            <Region prefHeight="27.0" prefWidth="296.0" HBox.hgrow="ALWAYS" />
             <Label text="Zoom">
                <HBox.margin>
                   <Insets right="10.0" />

@@ -749,6 +749,12 @@ public class FXMLDocumentController implements Initializable {
          App.setRoot("UserLogin");
     }
     
+    @FXML
+    private void stats() throws IOException
+    {
+        App.setRoot("ActivityManagement");
+    }
+    
     @FXML        
     private void registerAction(ActionEvent event) throws IOException {
          App.loggedIn = true;
