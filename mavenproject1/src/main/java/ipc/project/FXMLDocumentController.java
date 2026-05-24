@@ -65,6 +65,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
@@ -901,11 +902,50 @@ public class FXMLDocumentController implements Initializable {
     
     private void loadPath(Activity activity)
     {
-        Polyline route = new Polyline();
-        for (TrackPoint tp : activity.getTrackPoints()) {
-            Point2D p = proj.project(tp);
-            route.getPoints().addAll(p.getX(), p.getY());
+        //Polyline route = new Polyline();
+        //TrackPoint holdover;
+        List<TrackPoint> pointed = activity.getTrackPoints();
+        
+        for (int i = 0; i < pointed.size(); i++) 
+        {
+            if (i == pointed.size() - 1) 
+            {
+                Circle point = new Circle(10, Color.GREEN);
+                point.setCenterX(proj.project(pointed.get(i)).getX());
+                point.setCenterY(proj.project(pointed.get(i)).getY());
+                mapPane.getChildren().add(point);
+                break;
+            }
+            
+            TrackPoint pT = pointed.get(i);
+            TrackPoint qT = pointed.get(i + 1);
+            
+            Point2D p = proj.project(pT);
+            Point2D q = proj.project(qT);
+            
+            Line lined = new Line();
+            lined.setStartX(p.getX());
+            lined.setStartY(p.getY());
+            lined.setEndX(q.getX());
+            lined.setEndY(q.getY());
+            lined.setStrokeWidth(4);
+            
+            double speeding = pT.speedTo(qT);
+            
+            if (speeding < 35) {lined.setStroke(Paint.valueOf("#FF0000"));}
+            else if (speeding >= 35 && speeding < 40) {lined.setStroke(Paint.valueOf("#FFFF00"));}
+            else {lined.setStroke(Paint.valueOf("#00FF00"));}            
+            //lineProgress = false;
+            mapPane.getChildren().add(lined);
+            
+            //route.getPoints().addAll(p.getX(), p.getY());
+            //holdover = tp;
         }
-        mapPane.getChildren().add(route);
+        
+        Circle point = new Circle(10, Color.BLUE);
+        point.setCenterX(proj.project(pointed.get(0)).getX());
+        point.setCenterY(proj.project(pointed.get(0)).getY());
+        mapPane.getChildren().add(point);
+        //mapPane.getChildren().add(route);
     }
 }
