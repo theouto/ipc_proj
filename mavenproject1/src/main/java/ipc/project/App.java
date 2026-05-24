@@ -33,7 +33,7 @@ public class App extends Application {
         scene = new Scene(loadFXML("FXMLDocument"), 640, 480);
 
         stage.getIcons().add(new Image(getClass().getResourceAsStream("/resources/logo.png")));
-        stage.setTitle("Demo mapas - IPC");
+        stage.setTitle("Running la Safor");
         stage.setScene(scene);
         stage.show();
     }

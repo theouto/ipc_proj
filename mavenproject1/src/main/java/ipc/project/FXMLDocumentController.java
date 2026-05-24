@@ -667,22 +667,26 @@ public class FXMLDocumentController implements Initializable {
      */
     @FXML
     private void cambiarMapa(ActionEvent event) throws IOException {
-        FileChooser fc = new FileChooser();
+        
+        App.setRoot("MapAddition");
+        
+        /*FileChooser fc = new FileChooser();
         fc.setInitialDirectory(new File(".")); // Empezamos en el directorio del proyecto
 
         File imgFile = fc.showOpenDialog(zoom_slider.getScene().getWindow());
 
         // FIX 3: showOpenDialog() devuelve null si el usuario cancela la selección
         if (imgFile != null) {
-            /*
+            
             System.out.println("Mapa seleccionado: " + imgFile.getCanonicalPath());
             App.mapPath = imgFile.getCanonicalPath();
             buildMap(imgFile); // Reconstruimos la vista con la nueva imagen
             map_listview.getItems().clear(); // Borramos los datos del mapa anterior
-            */
+            
             
             
         }
+        */
     }
 
     // =========================================================

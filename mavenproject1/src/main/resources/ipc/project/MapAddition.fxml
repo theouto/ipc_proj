@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" spacing="25.0" styleClass="main-background" stylesheets="@resources/history.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipc.project.MapAdditionController">
+  <children>
+
+    <Label styleClass="title-label" text="Historial de Sesiones" />
+      <HBox alignment="CENTER" prefHeight="48.0" prefWidth="740.0">
+         <children>
+            <Label prefHeight="40.0" prefWidth="159.0" style="-fx-font-weight: bold; -fx-font-size: 24px;" styleClass="text-primary" text="Nombre: " />
+            <TextField fx:id="Named" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="35.0" prefWidth="740.0">
+         <children>
+            <Label fx:id="filePathing" style="-fx-font-size: 12px; -fx-font-weight: bold;" styleClass="text-secondary" text="filePath">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </Label>
+            <Button mnemonicParsing="false" onAction="#elegir" text="Archivos..." />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <VBox>
+               <children>
+                  <Label styleClass="title-label" text="Longitud" />
+      
+              <VBox alignment="CENTER" styleClass="summary-card">
+                <children>
+                  <Label style="-fx-font-size: 12px; -fx-font-weight: bold;" styleClass="text-secondary" text="Mínima" />
+                        <TextField fx:id="minLong" />
+                </children>
+              </VBox>
+      
+              <VBox alignment="CENTER" styleClass="summary-card">
+                <children>
+                  <Label style="-fx-font-size: 12px; -fx-font-weight: bold;" styleClass="text-secondary" text="Máxima" />
+                        <TextField fx:id="maxLong" />
+                </children>
+              </VBox>
+               </children>
+               <HBox.margin>
+                  <Insets right="50.0" />
+               </HBox.margin>
+            </VBox>
+            <VBox>
+               <children>
+                  <Label styleClass="title-label" text="Latitud" />
+                  <VBox alignment="CENTER" styleClass="summary-card">
+                     <children>
+                        <Label style="-fx-font-size: 12px; -fx-font-weight: bold;" styleClass="text-secondary" text="Mínima" />
+                        <TextField fx:id="minLat" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" styleClass="summary-card">
+                     <children>
+                        <Label style="-fx-font-size: 12px; -fx-font-weight: bold;" styleClass="text-secondary" text="Máxima" />
+                        <TextField fx:id="maxLat" />
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="29.0" prefWidth="740.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#back" text="Volver">
+               <HBox.margin>
+                  <Insets right="30.0" />
+               </HBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#addMap" text="Añadir" />
+         </children>
+      </HBox>
+
+  </children>
+</VBox>
