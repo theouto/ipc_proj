@@ -808,6 +808,44 @@ public class FXMLDocumentController implements Initializable {
                       "h\nVelocidad media: " + App.activities.get(i).getAverageSpeed() + 
                       "km/h\nRitmo medio: " + App.activities.get(i).getAveragePace() + 
                       "m/km");
+        
+        Point2D itemSelected = proj.project(App.activities.get(i).getStartPoint());
+
+        // ── Dimensiones del mapa con el zoom actual aplicado ──────────
+        double mapWidth  = mapPane.getWidth()  * zoomGroup.getScaleX();
+        double mapHeight = mapPane.getHeight() * zoomGroup.getScaleY();
+
+        // ── Posición del POI escalada ──────────────────────────────────
+        // getPosition() devuelve las coordenadas en el sistema local del
+        // mapPane (sin zoom). Las multiplicamos por el factor de escala
+        // para obtener la posición real en pantalla.
+        double poiX = itemSelected.getX() * zoomGroup.getScaleX();
+        double poiY = itemSelected.getY() * zoomGroup.getScaleY();
+
+        // ── Tamaño visible del ScrollPane (viewport) ───────────────────
+        double viewW = map_scrollpane.getViewportBounds().getWidth();
+        double viewH = map_scrollpane.getViewportBounds().getHeight();
+
+        // ── Cálculo del scroll normalizado [0, 1] ─────────────────────
+        // Restamos la mitad del viewport para que el POI quede centrado
+        // y no en la esquina superior-izquierda del área visible.
+        double scrollH = (poiX - viewW / 2) / (mapWidth  - viewW);
+        double scrollV = (poiY - viewH / 2) / (mapHeight - viewH);
+
+        // Garantizamos que el valor esté dentro del rango válido [0, 1]
+        scrollH = Math.max(0, Math.min(1, scrollH));
+        scrollV = Math.max(0, Math.min(1, scrollV));
+
+        // ── Animación suave con Timeline ──────────────────────────────
+        // Timeline interpola los valores de las propiedades a lo largo
+        // del tiempo. KeyValue define qué propiedad animar y hasta qué
+        // valor; KeyFrame define en qué instante se alcanza ese valor.
+        final Timeline timeline = new Timeline();
+        final KeyValue kv1 = new KeyValue(map_scrollpane.hvalueProperty(), scrollH);
+        final KeyValue kv2 = new KeyValue(map_scrollpane.vvalueProperty(), scrollV);
+        final KeyFrame kf  = new KeyFrame(Duration.millis(500), kv1, kv2);
+        timeline.getKeyFrames().add(kf);
+        timeline.play(); // Inicia la animación (no bloquea el hilo de la UI)
     }
     
     private void loadPath(Activity activity)
