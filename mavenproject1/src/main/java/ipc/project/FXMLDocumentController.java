@@ -31,6 +31,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -187,6 +188,9 @@ public class FXMLDocumentController implements Initializable {
     private Label stats;
     
     private MapProjection proj;
+    
+    @FXML
+    private int activityIndex = -1;
     
     private double oldX, oldY; //Serán usados para dibujar las líneas
     private boolean lineProgress = false; //será usado para comprobar el progreso de una línea
@@ -647,6 +651,17 @@ public class FXMLDocumentController implements Initializable {
             text.setX(x);
             text.setY(y);
             mapPane.getChildren().add(text);
+            
+            GeoPoint oldGeo = proj.unproject(poi.getPosition().getX(), poi.getPosition().getY());
+        
+            Annotation anno = new Annotation(
+            AnnotationType.TEXT,
+            text.toString(),
+            "#FFFFFF",
+            2.0,
+            List.of(oldGeo));
+                
+            App.sportApp.addAnnotation(App.sportApp.getUserActivities().get(activityIndex), anno);
         }
     }
 
@@ -711,6 +726,17 @@ public class FXMLDocumentController implements Initializable {
         circle.setCenterY(y);
         lineProgress = false;
         mapPane.getChildren().add(circle); // Se añade sobre el mapa como cualquier nodo
+        
+        GeoPoint oldGeo = proj.unproject(x, y);
+        
+        Annotation anno = new Annotation(
+        AnnotationType.CIRCLE,
+        "placeholder",
+        "#FFFFFF",
+        2.0,
+        List.of(oldGeo));
+                
+        App.sportApp.addAnnotation(App.sportApp.getUserActivities().get(activityIndex), anno);
     }
     
     private void addPoint(double x, double y)
@@ -720,6 +746,17 @@ public class FXMLDocumentController implements Initializable {
         point.setCenterY(y);
         lineProgress = false;
         mapPane.getChildren().add(point);
+        
+        GeoPoint oldGeo = proj.unproject(x, y);
+        
+        Annotation anno = new Annotation(
+        AnnotationType.POINT,
+        "placeholder",
+        "#FFFFFF",
+        2.0,
+        List.of(oldGeo));
+                
+        App.sportApp.addAnnotation(App.sportApp.getUserActivities().get(activityIndex), anno);
     }
     
     private void addLine(double nuX, double nuY)
@@ -731,6 +768,18 @@ public class FXMLDocumentController implements Initializable {
         lined.setEndY(nuY);
         lineProgress = false;
         mapPane.getChildren().add(lined);
+        
+        GeoPoint oldGeo = proj.unproject(oldX, oldY);
+        GeoPoint nuGeo = proj.unproject(nuX, nuY);
+        
+        Annotation anno = new Annotation(
+        AnnotationType.LINE,
+        "placeholder",
+        "#FFFFFF",
+        2.0,
+        List.of(oldGeo, nuGeo));
+                
+        App.sportApp.addAnnotation(App.sportApp.getUserActivities().get(activityIndex), anno);
     }
     
     private void saveOldXY(double oldex, double oldey) {
@@ -789,6 +838,8 @@ public class FXMLDocumentController implements Initializable {
     private void setAction()
     {
         int i = mapActivities.getSelectionModel().getSelectedIndex();
+        
+        activityIndex = i;
         
         if (i == -1) return;
         

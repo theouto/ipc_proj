@@ -10,7 +10,7 @@
 <VBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" spacing="25.0" styleClass="main-background" stylesheets="@resources/history.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipc.project.MapAdditionController">
   <children>
 
-    <Label styleClass="title-label" text="Historial de Sesiones" />
+    <Label styleClass="title-label" text="Añadir mapa al sistema" />
       <HBox alignment="CENTER" prefHeight="48.0" prefWidth="740.0">
          <children>
             <Label prefHeight="40.0" prefWidth="159.0" style="-fx-font-weight: bold; -fx-font-size: 24px;" styleClass="text-primary" text="Nombre: " />

@@ -18,21 +18,32 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipc.project.FXMLDocumentController">
+<BorderPane prefHeight="613.0" prefWidth="830.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipc.project.FXMLDocumentController">
    <center>
-      <VBox prefHeight="556.0" prefWidth="853.0" stylesheets="@../resources/estilos.css">
+      <VBox prefHeight="556.0" prefWidth="853.0">
          <children>
-            <SplitPane fx:id="splitPane" dividerPositions="0.19699727024567792, 0.5" style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
+            <SplitPane fx:id="splitPane" dividerPositions="0.19699727024567792" VBox.vgrow="ALWAYS">
                <items>
                   <VBox maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefHeight="554.0" prefWidth="327.0">
                      <children>
-                        <ListView fx:id="map_listview" onMouseClicked="#listClicked" prefHeight="278.0" prefWidth="165.0" />
-                        <ListView fx:id="mapActivities" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" onMouseClicked="#setAction" prefHeight="278.0" prefWidth="165.0" VBox.vgrow="ALWAYS" />
-                     </children>
-                  </VBox>
-                  <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: black;">
-                     <children>
-                        <Label fx:id="stats" />
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Label text="Estadísticas" />
+                              <Label fx:id="stats" />
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Label text="Puntos de interés" />
+                              <ListView fx:id="map_listview" onMouseClicked="#listClicked" prefHeight="278.0" prefWidth="165.0" />
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Label text="Actividades" />
+                              <ListView fx:id="mapActivities" onMouseClicked="#setAction" prefHeight="278.0" prefWidth="165.0" VBox.vgrow="ALWAYS" />
+                           </children>
+                        </VBox>
                      </children>
                   </VBox>
                   <ScrollPane fx:id="map_scrollpane" hbarPolicy="ALWAYS" onMouseMoved="#showPosition" pannable="true" prefHeight="398.0" prefWidth="358.0" vbarPolicy="ALWAYS">
@@ -64,7 +75,7 @@
       </HBox>
    </bottom>
    <top>
-      <HBox alignment="CENTER" prefHeight="21.0" prefWidth="1401.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER_LEFT" prefHeight="21.0" prefWidth="1401.0" BorderPane.alignment="CENTER">
          <children>
             <MenuBar>
               <menus>
@@ -90,20 +101,27 @@
                 </Menu>
               </menus>
             </MenuBar>
-            <Region prefHeight="27.0" prefWidth="296.0" HBox.hgrow="ALWAYS" />
-            <Label text="Zoom">
-               <HBox.margin>
-                  <Insets right="10.0" />
-               </HBox.margin></Label>
-            <Button mnemonicParsing="false" onAction="#zoomOut" text="-">
-               <HBox.margin>
-                  <Insets right="5.0" />
-               </HBox.margin></Button>
-            <Slider fx:id="zoom_slider" HBox.hgrow="SOMETIMES" />
-            <Button mnemonicParsing="false" onAction="#zoomIn" text="+">
-               <HBox.margin>
-                  <Insets right="20.0" />
-               </HBox.margin></Button>
+            <Region prefHeight="27.0" prefWidth="209.0" />
+            <HBox alignment="CENTER_RIGHT" prefHeight="27.0" prefWidth="298.0">
+               <children>
+                  <Label text="Zoom">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Button mnemonicParsing="false" onAction="#zoomOut" text="-">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Slider fx:id="zoom_slider" HBox.hgrow="SOMETIMES" />
+                  <Button mnemonicParsing="false" onAction="#zoomIn" text="+">
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
          </children>
       </HBox>
    </top>
