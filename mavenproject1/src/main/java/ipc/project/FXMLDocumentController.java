@@ -31,6 +31,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
+import javafx.scene.chart.AreaChart;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.animation.KeyFrame;
@@ -73,6 +74,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.scene.shape.Polyline;
+import javafx.scene.chart.XYChart;
 
 import upv.ipc.sportlib.*;
 
@@ -117,6 +119,9 @@ public class FXMLDocumentController implements Initializable {
      * la imagen cargada.
      */
     private Pane mapPane;
+    
+    @FXML
+    private AreaChart<Number, Number> desnivelChart;
 
     
     /** Menú contextual reutilizable para el clic derecho sobre el mapa. */
@@ -852,6 +857,7 @@ public class FXMLDocumentController implements Initializable {
         buildMap(new File(App.mapPath)); // Reconstruimos la vista con la nueva imagen
         map_listview.getItems().clear(); // Borramos los datos del mapa anterior
         loadPath(App.activities.get(i));
+        //loadDesnivel(App.activities.get(i));
         
         stats.setText("Distancia: " + App.activities.get(i).getTotalDistance() +
                       "\nDesnivel acumulado (-): " + App.activities.get(i).getElevationLoss() + 
@@ -904,7 +910,13 @@ public class FXMLDocumentController implements Initializable {
     {
         //Polyline route = new Polyline();
         //TrackPoint holdover;
+        
+        desnivelChart.getData().clear();
         List<TrackPoint> pointed = activity.getTrackPoints();
+        double dist = 0.0;
+        
+        XYChart.Series<Number, Number> diff = new XYChart.Series<>();
+        XYChart.Data<Number, Number> dato = new XYChart.Data<>(0.0, pointed.get(0).getElevation());
         
         for (int i = 0; i < pointed.size(); i++) 
         {
@@ -920,6 +932,8 @@ public class FXMLDocumentController implements Initializable {
             TrackPoint pT = pointed.get(i);
             TrackPoint qT = pointed.get(i + 1);
             
+            dist += GeoUtils.distance(pT, qT) / 1000.0;
+            
             Point2D p = proj.project(pT);
             Point2D q = proj.project(qT);
             
@@ -934,18 +948,22 @@ public class FXMLDocumentController implements Initializable {
             
             if (speeding < 35) {lined.setStroke(Paint.valueOf("#FF0000"));}
             else if (speeding >= 35 && speeding < 40) {lined.setStroke(Paint.valueOf("#FFFF00"));}
-            else {lined.setStroke(Paint.valueOf("#00FF00"));}            
-            //lineProgress = false;
+            else {lined.setStroke(Paint.valueOf("#00FF00"));}
             mapPane.getChildren().add(lined);
             
-            //route.getPoints().addAll(p.getX(), p.getY());
-            //holdover = tp;
+            dato = new XYChart.Data<>(dist, qT.getElevation());
+            diff.getData().add(dato);
         }
         
         Circle point = new Circle(10, Color.BLUE);
         point.setCenterX(proj.project(pointed.get(0)).getX());
         point.setCenterY(proj.project(pointed.get(0)).getY());
         mapPane.getChildren().add(point);
-        //mapPane.getChildren().add(route);
+        desnivelChart.getData().add(diff);
+    }
+    
+    private void loadDesnivel(Activity activity)
+    {
+        
     }
 }
