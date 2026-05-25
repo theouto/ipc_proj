@@ -37,14 +37,14 @@ public class UserLoginController {
     {
          if (!User.checkNickName(Usuario.getCharacters().toString()))
         {
-            System.out.println("Incorrect nick");
+            System.out.println("Incorrect nickname or password"); //Es el mismo texto por razones de seguridad
             nERR.setOpacity(1);
             return;
         }
          
         if (!User.checkPassword(Password.getCharacters().toString()))
         {
-            System.out.println("Incorrect password");
+            System.out.println("Incorrect nickname or password"); //Es el mismo texto por razones de seguridad
             nERR.setOpacity(1);
             return;
         }
@@ -53,7 +53,7 @@ public class UserLoginController {
         {
             App.loggedIn = true;
             try { App.setRoot("FXMLDocument");
-            } catch (IOException e) {System.out.println(e);}
+            } catch (IOException e) {System.out.println("Something went wrong! " + e);}
         }
         else System.out.println("another thing");
     }

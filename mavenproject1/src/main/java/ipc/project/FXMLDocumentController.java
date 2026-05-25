@@ -497,6 +497,7 @@ public class FXMLDocumentController implements Initializable {
        // cuenta.getItems().add(BYEEE);
        
         mystery = new Circle(10, Color.BLACK);
+        mystery.setVisible(false);
             
         App.activities = App.sportApp.getUserActivities();
         mapActivities.setCellFactory(e -> new ListCell<Activity>()
@@ -515,6 +516,8 @@ public class FXMLDocumentController implements Initializable {
                     }
                    
                 });
+        
+        System.out.println("sanity check");
         
         for (int i = 0; i < App.activities.size(); i++) {mapActivities.getItems().add(App.activities.get(i));} 
 
@@ -538,9 +541,14 @@ public class FXMLDocumentController implements Initializable {
             }
         });
 
+        System.out.println("sanity check 2");
+        
         // ── Carga del mapa inicial ─────────────────────────────────────
         // El fichero se busca relativo al directorio de trabajo del proyecto.
         buildMap(new File(App.mapPath));
+        
+        System.out.println("sanity check 3");
+        
         mapPane.getChildren().add(mystery);
     }
     
@@ -680,6 +688,12 @@ public class FXMLDocumentController implements Initializable {
             App.sportApp.addAnnotation(App.sportApp.getUserActivities().get(activityIndex), anno);
         }
     }
+    
+    private void fillPoi(String namer, double x, double y)
+    {
+        Poi poiii = new Poi(namer, x, y);
+        map_listview.getItems().add(poiii);
+    }
 
     // =========================================================
     //  CAMBIAR EL MAPA (selector de fichero)
@@ -720,6 +734,41 @@ public class FXMLDocumentController implements Initializable {
         */
     }
 
+    private void annotationFill(List<Annotation> anno)
+    {
+        Point2D punto;
+        
+        for (Annotation ann : anno)
+        {
+            switch (ann.getType())
+            {
+                case LINE:
+                    punto = proj.project(ann.getGeoPoints().get(0));
+                    Point2D puntos = proj.project(ann.getGeoPoints().get(1));
+                    drawLine(punto.getX(), punto.getY(), puntos.getX(), puntos.getY());
+                    //fillPoi("Linea", punto.getX(), punto.getY());
+                    break;
+                    
+                case CIRCLE:
+                    punto = proj.project(ann.getGeoPoints().get(0));
+                    drawCircle(punto.getX(), punto.getY());
+                    //fillPoi("Circulo", punto.getX(), punto.getY());
+                    break;
+                    
+                case POINT:
+                    punto = proj.project(ann.getGeoPoints().get(0));
+                    drawPoint(punto.getX(), punto.getY());
+                    //fillPoi("Punto", punto.getX(), punto.getY());
+                    break;
+                    
+                case TEXT:
+                    
+                    break;
+            }
+        }
+        
+    }
+    
     // =========================================================
     //  AÑADIR UN CÍRCULO AL MAPA
     // =========================================================
@@ -737,12 +786,9 @@ public class FXMLDocumentController implements Initializable {
      * @param y coordenada Y en el sistema local del mapPane
      */
     private void addCircle(double x, double y) {
-        Circle circle = new Circle(10, Color.RED); // radio = 10 px, color = rojo
-        circle.setCenterX(x);
-        circle.setCenterY(y);
-        lineProgress = false;
-        mapPane.getChildren().add(circle); // Se añade sobre el mapa como cualquier nodo
-        
+       
+        drawCircle(x, y);
+        if (!App.loggedIn) return;
         GeoPoint oldGeo = proj.unproject(x, y);
         
         Annotation anno = new Annotation(
@@ -755,14 +801,20 @@ public class FXMLDocumentController implements Initializable {
         App.sportApp.addAnnotation(App.sportApp.getUserActivities().get(activityIndex), anno);
     }
     
+    private void drawCircle(double x, double y)
+    {
+        Circle circle = new Circle(10, Color.RED); // radio = 10 px, color = rojo
+        circle.setCenterX(x);
+        circle.setCenterY(y);
+        lineProgress = false;
+        fillPoi("Circle", x, y);
+        mapPane.getChildren().add(circle); // Se añade sobre el mapa como cualquier nodo
+    }
+    
     private void addPoint(double x, double y)
     {
-        Circle point = new Circle(1, Color.BLACK);
-        point.setCenterX(x);
-        point.setCenterY(y);
-        lineProgress = false;
-        mapPane.getChildren().add(point);
-        
+        drawPoint(x, y);
+        if (!App.loggedIn) return;
         GeoPoint oldGeo = proj.unproject(x, y);
         
         Annotation anno = new Annotation(
@@ -771,19 +823,23 @@ public class FXMLDocumentController implements Initializable {
         "#FFFFFF",
         2.0,
         List.of(oldGeo));
-                
         App.sportApp.addAnnotation(App.sportApp.getUserActivities().get(activityIndex), anno);
+    }
+    
+    private void drawPoint(double x, double y)
+    {
+        Circle point = new Circle(1, Color.BLACK);
+        point.setCenterX(x);
+        point.setCenterY(y);
+        lineProgress = false;
+        mapPane.getChildren().add(point);
+        fillPoi("Punto", x, y);
     }
     
     private void addLine(double nuX, double nuY)
     {
-        Line lined = new Line();
-        lined.setStartX(oldX);
-        lined.setStartY(oldY);
-        lined.setEndX(nuX);
-        lined.setEndY(nuY);
-        lineProgress = false;
-        mapPane.getChildren().add(lined);
+        drawLine(oldX, oldY, nuX, nuY);
+        if (!App.loggedIn) return;
         
         GeoPoint oldGeo = proj.unproject(oldX, oldY);
         GeoPoint nuGeo = proj.unproject(nuX, nuY);
@@ -794,8 +850,20 @@ public class FXMLDocumentController implements Initializable {
         "#FFFFFF",
         2.0,
         List.of(oldGeo, nuGeo));
-                
+        
         App.sportApp.addAnnotation(App.sportApp.getUserActivities().get(activityIndex), anno);
+    }
+    
+    private void drawLine(double oldyX, double oldyY, double nuX, double nuY)
+    {
+        Line lined = new Line();
+        lined.setStartX(oldyX);
+        lined.setStartY(oldyY);
+        lined.setEndX(nuX);
+        lined.setEndY(nuY);
+        lineProgress = false;
+        mapPane.getChildren().add(lined);
+        fillPoi("Linea", oldyX, oldyY);
     }
     
     private void saveOldXY(double oldex, double oldey) {
@@ -814,7 +882,6 @@ public class FXMLDocumentController implements Initializable {
    
     @FXML        
     private void loginAction(ActionEvent event) throws IOException {
-         App.loggedIn = true;
          App.setRoot("UserLogin");
     }
     
@@ -826,7 +893,6 @@ public class FXMLDocumentController implements Initializable {
     
     @FXML        
     private void registerAction(ActionEvent event) throws IOException {
-         App.loggedIn = true;
          App.setRoot("UserCreation");
     }
 
@@ -859,6 +925,7 @@ public class FXMLDocumentController implements Initializable {
         
         if (i == -1) return;
         
+        mystery.setVisible(true);
         MapRegion mapR = App.activities.get(i).getSuggestedMap();
         App.mapPath = mapR.getImagePath();
         
@@ -867,7 +934,7 @@ public class FXMLDocumentController implements Initializable {
         buildMap(new File(App.mapPath)); // Reconstruimos la vista con la nueva imagen
         map_listview.getItems().clear(); // Borramos los datos del mapa anterior
         loadPath(App.activities.get(i));
-        //loadDesnivel(App.activities.get(i));
+        annotationFill(App.activities.get(i).getAnnotations());
         
         stats.setText("Distancia: " + App.activities.get(i).getTotalDistance() +
                       "\nDesnivel acumulado (-): " + App.activities.get(i).getElevationLoss() + 
