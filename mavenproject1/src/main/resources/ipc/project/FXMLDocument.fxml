@@ -44,7 +44,7 @@
                     <MenuItem mnemonicParsing="false" text="Añadir mapa al sistema" />
                   </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Actividades">
+                <Menu mnemonicParsing="false" text="Info adicional">
                   <items>
                     <MenuItem mnemonicParsing="false" onAction="#about" text="Acerca de..." />
                   </items>
