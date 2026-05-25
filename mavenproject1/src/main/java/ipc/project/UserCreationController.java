@@ -58,6 +58,8 @@ public class UserCreationController {
     @FXML
     private Circle circleAvatar;
     
+    private String pfpP;
+    
     @FXML
     private void switchToMainScreen() throws IOException {
         App.setRoot("FXMLDocument");
@@ -81,6 +83,7 @@ public class UserCreationController {
 
         if (imgFile != null) {
             Image img = new Image(imgFile.toURI().toString());
+            pfpP = imgFile.getCanonicalPath();
 
             circleAvatar.setFill(new ImagePattern(img));
         }
@@ -196,7 +199,7 @@ public class UserCreationController {
             return;
         }
         
-        if (!App.sportApp.registerUser(username, mail, pass, birthdayPicker.getValue(), profilePicturePath.getText())) {
+        if (!App.sportApp.registerUser(username, mail, pass, birthdayPicker.getValue(), pfpP)) {
             wERR.setText("No se ha podido registrar el usuario");
             wERR.setOpacity(1);
         } else { 

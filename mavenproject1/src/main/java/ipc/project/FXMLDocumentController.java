@@ -465,9 +465,9 @@ public class FXMLDocumentController implements Initializable {
             registerButton.setVisible(false);
             editAccountButton.setVisible(true);
             logoutButton.setVisible(true);
-            historialSesiones.setVisible(true);
-            menuACT.setVisible(true);
-            menuMAP.setVisible(true);
+            //historialSesiones.setVisible(true);
+            //menuACT.setVisible(true);
+            //menuMAP.setVisible(true);
         }
 
         // ── Configuración del slider de zoom ──────────────────────────
@@ -746,23 +746,24 @@ public class FXMLDocumentController implements Initializable {
                     punto = proj.project(ann.getGeoPoints().get(0));
                     Point2D puntos = proj.project(ann.getGeoPoints().get(1));
                     drawLine(punto.getX(), punto.getY(), puntos.getX(), puntos.getY());
-                    //fillPoi("Linea", punto.getX(), punto.getY());
                     break;
                     
                 case CIRCLE:
                     punto = proj.project(ann.getGeoPoints().get(0));
                     drawCircle(punto.getX(), punto.getY());
-                    //fillPoi("Circulo", punto.getX(), punto.getY());
                     break;
                     
                 case POINT:
                     punto = proj.project(ann.getGeoPoints().get(0));
                     drawPoint(punto.getX(), punto.getY());
-                    //fillPoi("Punto", punto.getX(), punto.getY());
                     break;
                     
                 case TEXT:
-                    
+                    punto = proj.project(ann.getGeoPoints().get(0));
+                    Text text = new Text(ann.getText());
+                    text.setX(punto.getX());
+                    text.setY(punto.getY());
+                    fillPoi(ann.getText(), punto.getX(), punto.getY());
                     break;
             }
         }
@@ -790,13 +791,14 @@ public class FXMLDocumentController implements Initializable {
         drawCircle(x, y);
         if (!App.loggedIn) return;
         GeoPoint oldGeo = proj.unproject(x, y);
+        GeoPoint nuGeo = proj.unproject(x + 10, y + 10);
         
         Annotation anno = new Annotation(
         AnnotationType.CIRCLE,
         "placeholder",
         "#FFFFFF",
         2.0,
-        List.of(oldGeo));
+        List.of(oldGeo, nuGeo));
                 
         App.sportApp.addAnnotation(App.sportApp.getUserActivities().get(activityIndex), anno);
     }
