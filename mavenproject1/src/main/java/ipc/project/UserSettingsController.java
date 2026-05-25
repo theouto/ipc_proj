@@ -64,14 +64,16 @@ public class UserSettingsController implements Initializable {
       txtEmail.setText(currentUser.getEmail());
       dpBirthDate.setValue(currentUser.getBirthDate());
       selectedAvatarPath = currentUser.getAvatarPath();
+        System.out.println("\n\nAVATAR INIT\n\n");
+        System.out.println(selectedAvatarPath);
     }
     loadAvatarImage();
   }
 
   private void loadAvatarImage() {
     System.out.println("\n\nLOAD IMAGE\n\n");
-    if (currentUser != null && currentUser.getAvatar() != null) {
-      imgAvatar.setFill(new ImagePattern(currentUser.getAvatar()));
+    if (currentUser != null && selectedAvatarPath != null) {
+      imgAvatar.setFill(new ImagePattern(new Image(selectedAvatarPath)));
     } else {
       imgAvatar.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("resources/user.png"))));
     }
@@ -98,7 +100,11 @@ public class UserSettingsController implements Initializable {
     File imgFile = fc.showOpenDialog(txtNickname.getScene().getWindow());
 
     if (imgFile != null) {
-      Image img = new Image(imgFile.toURI().toString());
+        selectedAvatarPath = imgFile.toURI().toString();
+        System.out.println("\n\nAVATAR CHANGE\n\n");
+        System.out.println(selectedAvatarPath);
+        
+      Image img = new Image(selectedAvatarPath);
 
       imgAvatar.setFill(new ImagePattern(img));
     }
@@ -116,8 +122,9 @@ public class UserSettingsController implements Initializable {
       lblStatus.getStyleClass().add("text-error");
       return;
     }
-
-    if (password.length() < 8) {
+    
+    if (password.length() > 0) {
+        if (password.length() < 8) {
       lblStatus.setText("La contraseña es demasiado corta");
       lblStatus.getStyleClass().add("text-error");
       return;
@@ -183,6 +190,8 @@ public class UserSettingsController implements Initializable {
       lblStatus.getStyleClass().add("text-error");
       return;
     }
+    }
+    
 
     if (!User.isOlderThan(dpBirthDate.getValue(), 12)) {
       lblStatus.setText("La edad mínima es de 12 años");

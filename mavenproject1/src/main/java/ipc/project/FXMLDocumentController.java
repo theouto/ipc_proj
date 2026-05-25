@@ -141,7 +141,7 @@ public class FXMLDocumentController implements Initializable {
 
     /** Lista lateral que muestra todos los POIs añadidos al mapa. */
     @FXML
-    private ListView<Poi> map_listview;
+    private ListView<Poi> mapPOI;
 
     /** ScrollPane que envuelve el mapa y permite desplazarlo. */
     @FXML
@@ -186,9 +186,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private MenuItem logoutButton;
     
-    @FXML
-    private MenuItem historialSesiones;
-
+   
     /** Etiqueta en la barra de estado que muestra las coordenadas del ratón. */
     @FXML
     private Label mousePosition;
@@ -290,7 +288,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     void listClicked(MouseEvent event) {
         // Obtenemos el POI seleccionado; si no hay ninguno, salimos
-        Poi itemSelected = map_listview.getSelectionModel().getSelectedItem();
+        Poi itemSelected = mapPOI.getSelectionModel().getSelectedItem();
         if (itemSelected == null) return;
 
         // ── Dimensiones del mapa con el zoom actual aplicado ──────────
@@ -524,7 +522,7 @@ public class FXMLDocumentController implements Initializable {
                //  setCellFactory() define cómo se renderiza cada celda
         //  de forma independiente al modelo Poi.
         //  Aquí mostramos "CÓDIGO – Nombre" en cada fila.
-        map_listview.setCellFactory(listView -> new ListCell<Poi>() {
+        mapPOI.setCellFactory(listView -> new ListCell<Poi>() {
             @Override
             protected void updateItem(Poi poi, boolean empty) {
                 // Siempre llamar a super primero (requerido por JavaFX)
@@ -667,7 +665,7 @@ public class FXMLDocumentController implements Initializable {
             poi.setPosition(new Point2D(x, y));
 
             // Añadimos el POI al ListView (la CellFactory mostrará nombre y código)
-            map_listview.getItems().add(poi);
+            mapPOI.getItems().add(poi);
 
             // FIX 1: usamos (x, y) tanto para el modelo como para el Text,
             // garantizando que la etiqueta aparezca exactamente donde se hizo clic.
@@ -934,7 +932,7 @@ public class FXMLDocumentController implements Initializable {
         Image throwaway = new Image((new File(App.mapPath)).toURI().toString());
         proj = new MapProjection(mapR, throwaway.getWidth(), throwaway.getHeight());
         buildMap(new File(App.mapPath)); // Reconstruimos la vista con la nueva imagen
-        map_listview.getItems().clear(); // Borramos los datos del mapa anterior
+        mapPOI.getItems().clear(); // Borramos los datos del mapa anterior
         loadPath(App.activities.get(i));
         annotationFill(App.activities.get(i).getAnnotations());
         
