@@ -38,6 +38,9 @@ public class UserCreationController {
     private PasswordField passTextField;
     
     @FXML
+    private PasswordField confirmPassTextField;
+    
+    @FXML
     private DatePicker birthdayPicker;
     
     @FXML
@@ -48,6 +51,9 @@ public class UserCreationController {
          
     @FXML
     private Label pERR;
+    
+    @FXML
+    private Label cpERR;
            
     @FXML        
     private Label fERR;
@@ -92,12 +98,19 @@ public class UserCreationController {
         nERR.setOpacity(0);
         cERR.setOpacity(0);
         pERR.setOpacity(0);
+        cpERR.setOpacity(0);
         fERR.setOpacity(0);
         wERR.setOpacity(0);
 
         System.out.println(nameTextField.getText());
         
         String username = nameTextField.getText();
+        if (username.isEmpty()) {
+            nERR.setText("Debes introducir un nombre de usuario");
+            nERR.setOpacity(1);
+            return;
+        }
+        
         if (username.length() < 6) {
             nERR.setText("El nombre es demasiado corto");
             nERR.setOpacity(1);
@@ -118,6 +131,12 @@ public class UserCreationController {
         
         String mail = mailTextField.getText();
         
+        if (mail.isEmpty()) {
+            cERR.setText("Debes introducir un correo electrónico");
+            cERR.setOpacity(1);
+            return;
+        }
+        
         if (!User.checkEmail(mail)) {
             cERR.setText("El correo es inválido");
             cERR.setOpacity(1);
@@ -125,6 +144,12 @@ public class UserCreationController {
         }
         
         String pass = passTextField.getText();
+        
+        if (pass.isEmpty()) {
+            pERR.setText("Debes introducir una contraseña");
+            pERR.setOpacity(1);
+            return;
+        }
         
         if (pass.length() < 8) {
             pERR.setText("La contraseña es demasiado corta");
@@ -188,6 +213,24 @@ public class UserCreationController {
         if (!User.checkPassword(pass)) {
             pERR.setText("La contraseña es inválida");
             pERR.setOpacity(1);
+            return;
+        }
+        
+        String confirmPass = confirmPassTextField.getText();
+        if (confirmPass.isEmpty()) {
+            cpERR.setText("Debes confirmar tu contraseña");
+            cpERR.setOpacity(1);
+            return;
+        }
+        if (!confirmPass.equals(pass)) {
+            cpERR.setText("Las contraseñas no coinciden");
+            cpERR.setOpacity(1);
+            return;
+        }
+        
+        if (birthdayPicker.getValue() == null) {
+            fERR.setText("Debes introducir tu fecha de nacimiento");
+            fERR.setOpacity(1);
             return;
         }
         

@@ -7,133 +7,103 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<VBox alignment="CENTER" prefHeight="325.0" prefWidth="327.0" spacing="10.0" stylesheets="@resources/estilosRegister.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipc.project.UserCreationController">
+<VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="800.0" spacing="20.0" styleClass="main-background" stylesheets="@resources/estilosRegister.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipc.project.UserCreationController">
     <children>
-        <Label text="Registro">
-         <font>
-            <Font size="27.0" />
-         </font>
-         <VBox.margin>
-            <Insets bottom="10.0" top="10.0" />
-         </VBox.margin></Label>
-      <Circle fx:id="circleAvatar" fill="DODGERBLUE" onMouseClicked="#fotoPerfil" radius="52.0" stroke="BLACK" strokeType="INSIDE" styleClass="circleStroke">
-         <VBox.margin>
-            <Insets bottom="10.0" />
-         </VBox.margin></Circle>
-      <VBox maxHeight="90.0" maxWidth="500.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="0.0" prefWidth="202.0">
-         <children>
-            <Text nodeOrientation="LEFT_TO_RIGHT" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre de usuario">
-               <font>
-                  <Font size="18.0" />
-               </font></Text>
-            <TextField fx:id="nameTextField" prefHeight="40.0" prefWidth="400.0" promptText="jpgarcia">
-               <font>
-                  <Font size="16.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="5.0" />
-               </VBox.margin></TextField>
-            <Label fx:id="nERR" opacity="0.0" prefHeight="18.0" prefWidth="303.0" text="Nombre invalido" textFill="RED">
-               <font>
-                  <Font size="12.0" />
-               </font></Label>
-         </children>
-      </VBox>
-      <VBox maxHeight="90.0" maxWidth="500.0" prefHeight="0.0" prefWidth="202.0">
-         <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Correo electrónico">
-               <font>
-                  <Font size="18.0" />
-               </font></Text>
-            <TextField fx:id="mailTextField" promptText="jgarcia@gmail.com">
-               <font>
-                  <Font size="16.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="5.0" />
-               </VBox.margin></TextField>
-            <Label fx:id="cERR" opacity="0.0" prefHeight="18.0" prefWidth="307.0" text="Correo invalido" textFill="RED">
-               <font>
-                  <Font size="12.0" />
-               </font></Label>
-         </children>
-      </VBox>
-      <VBox maxHeight="90.0" maxWidth="500.0" prefHeight="30.0" prefWidth="202.0">
-         <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Contraseña">
-               <font>
-                  <Font size="18.0" />
-               </font></Text>
-            <PasswordField fx:id="passTextField" prefHeight="40.0" prefWidth="400.0" promptText="●●●●●●●●●●">
-               <font>
-                  <Font size="16.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="5.0" />
-               </VBox.margin>
-            </PasswordField>
-            <Label fx:id="pERR" opacity="0.0" prefHeight="18.0" prefWidth="432.0" text="Contraseña invalida" textFill="RED">
-               <font>
-                  <Font size="12.0" />
-               </font></Label>
-         </children>
-      </VBox>
-      <VBox maxHeight="98.0" maxWidth="500.0" prefHeight="30.0" prefWidth="287.0">
-         <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha de nacimiento">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Text>
-            <DatePicker fx:id="birthdayPicker" prefHeight="26.0" prefWidth="287.0" promptText="Seleccionar...">
-               <VBox.margin>
-                  <Insets top="5.0" />
-               </VBox.margin></DatePicker>
-            <Label fx:id="fERR" opacity="0.0" prefHeight="18.0" prefWidth="128.0" text="Fecha invalida" textFill="RED">
-               <font>
-                  <Font size="12.0" />
-               </font></Label>
-         </children>
-      </VBox>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-         <children>
-              <Button fx:id="registerButton" onAction="#createAccount" prefHeight="35.0" prefWidth="143.0" text="Crear cuenta" HBox.hgrow="ALWAYS">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Button>
-         </children>
-      </HBox>
-      <Label fx:id="wERR" opacity="0.0" prefHeight="18.0" prefWidth="132.0" text="Esta cuenta ya existe" textFill="RED">
-         <VBox.margin>
-            <Insets bottom="-10.0" top="-10.0" />
-         </VBox.margin>
-      </Label>
-      <HBox alignment="CENTER" prefHeight="25.0" prefWidth="357.0" spacing="10.0" style="fx-padding: 10px;">
-         <children>
-            <Label text="¿Ya tienes una cuenta?" />
-            <Hyperlink onAction="#switchToLogin" text="Haz clic aquí" />
-         </children>
-      </HBox>
-      <HBox maxHeight="90.0" maxWidth="500.0" prefHeight="20.0" prefWidth="441.0">
-         <children>
-            <Button fx:id="backButton" alignment="BASELINE_RIGHT" onAction="#switchToMainScreen" text="Atrás">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Button>
-            <Region prefHeight="32.0" prefWidth="200.0" />
-         </children>
-      </HBox>
+        
+        <HBox alignment="CENTER_LEFT" maxWidth="500.0" spacing="15.0">
+            <children>
+                <Button fx:id="backButton" mnemonicParsing="false" onAction="#switchToMainScreen" styleClass="btn-back">
+                    <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@resources/back.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Label styleClass="title-label" text="Registro" />
+            </children>
+            <VBox.margin>
+                <Insets bottom="10.0" />
+            </VBox.margin>
+        </HBox>
+
+        <StackPane onMouseClicked="#fotoPerfil" styleClass="avatar-frame">
+            <children>
+                <Circle fx:id="circleAvatar" fill="#2c2c2c" radius="52.0" />
+            </children>
+        </StackPane>
+
+        <VBox maxWidth="500.0" spacing="15.0" styleClass="form-container">
+            <children>
+                
+                <VBox spacing="5.0">
+                    <children>
+                        <Label styleClass="field-label" text="NOMBRE DE USUARIO" />
+                        <TextField fx:id="nameTextField" promptText="jpgarcia" styleClass="input-field" />
+                        <Label fx:id="nERR" opacity="0.0" styleClass="text-error" text="Nombre inválido" />
+                    </children>
+                </VBox>
+
+                <VBox spacing="5.0">
+                    <children>
+                        <Label styleClass="field-label" text="CORREO ELECTRÓNICO" />
+                        <TextField fx:id="mailTextField" promptText="jgarcia@gmail.com" styleClass="input-field" />
+                        <Label fx:id="cERR" opacity="0.0" styleClass="text-error" text="Correo inválido" />
+                    </children>
+                </VBox>
+
+                <VBox spacing="5.0">
+                    <children>
+                        <Label styleClass="field-label" text="CONTRASEÑA" />
+                        <PasswordField fx:id="passTextField" promptText="●●●●●●●●●●" styleClass="input-field" />
+                        <Label fx:id="pERR" opacity="0.0" styleClass="text-error" text="Contraseña inválida" />
+                    </children>
+                </VBox>
+            <VBox layoutX="36.0" layoutY="238.0" spacing="5.0">
+               <children>
+                  <Label styleClass="field-label" text="CONFIRMAR CONTRASEÑA" />
+                  <PasswordField fx:id="confirmPassTextField" promptText="●●●●●●●●●●" styleClass="input-field" />
+                  <Label fx:id="cpERR" opacity="0.0" styleClass="text-error" text="Contraseña inválida" />
+               </children>
+            </VBox>
+
+                <VBox spacing="5.0">
+                    <children>
+                        <Label styleClass="field-label" text="FECHA DE NACIMIENTO" />
+                        <DatePicker fx:id="birthdayPicker" maxWidth="Infinity" promptText="Seleccionar..." styleClass="custom-datepicker" />
+                        <Label fx:id="fERR" opacity="0.0" styleClass="text-error" text="Fecha inválida" />
+                    </children>
+                </VBox>
+            </children>
+        </VBox>
+
+        <VBox alignment="CENTER" spacing="5.0">
+            <children>
+                <Label fx:id="wERR" opacity="0.0" styleClass="text-error" text="Esta cuenta ya existe" />
+                <Button fx:id="registerButton" onAction="#createAccount" styleClass="btn-primary" text="Crear cuenta" />
+            </children>
+            <VBox.margin>
+                <Insets top="10.0" />
+            </VBox.margin>
+        </VBox>
+
+        <HBox alignment="CENTER" spacing="5.0">
+            <children>
+                <Label styleClass="text-secondary" text="¿Ya tienes una cuenta?" />
+                <Hyperlink onAction="#switchToLogin" styleClass="link" text="Haz clic aquí" />
+            </children>
+        </HBox>
+
     </children>
     <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+        <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
     </padding>
 </VBox>
