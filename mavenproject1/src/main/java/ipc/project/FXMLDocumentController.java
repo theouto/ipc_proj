@@ -501,9 +501,11 @@ public class FXMLDocumentController implements Initializable {
             editAccountButton.setVisible(true);
             logoutButton.setVisible(true);
             userGreeting.setText("Hola, " + App.sportApp.getCurrentUser().getNickName());
+            /*
             App.activities = App.sportApp.getUserActivities();
             mapActivities.getItems().clear();
             mapActivities.getItems().addAll(App.activities);
+            */
         } else {
             userGreeting.setText("Hola, invitado");
             editAccountButton.setVisible(false);
@@ -1087,6 +1089,16 @@ public class FXMLDocumentController implements Initializable {
         App.sportApp.removeAnnotation(App.sportApp.getUserActivities().get(activityIndex).getAnnotations().get(marked));
         mapPOI.getItems().remove(marked);
         indexList.remove(marked);
+    }
+    
+    @FXML
+    private void removeAct()
+    {
+        int reuse = mapActivities.getSelectionModel().getSelectedIndex();
+        if (reuse == -1) return;
+            
+        App.sportApp.removeActivity(App.sportApp.getUserActivities().get(reuse));
+        try {App.setRoot("FXMLDocument");} catch (IOException e) {System.out.println("Bizzarre!");}
     }
 
   @FXML

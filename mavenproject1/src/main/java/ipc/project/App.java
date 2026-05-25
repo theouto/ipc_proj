@@ -31,7 +31,7 @@ public class App extends Application {
         scene = new Scene(loadFXML("FXMLDocument"), 640, 480);
         //scene.getStylesheets().add(getClass().getResource("history.css").toExternalForm());
 
-        stage.getIcons().add(new Image(getClass().getResourceAsStream("/resources/logo.png")));
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("resources/logo.png")));
         stage.setTitle("Running la Safor");
         stage.setScene(scene);
         stage.show();

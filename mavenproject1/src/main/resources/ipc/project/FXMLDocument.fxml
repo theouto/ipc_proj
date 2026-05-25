@@ -57,6 +57,7 @@
                 
                 <Button mnemonicParsing="false" onAction="#stats" styleClass="btn-secondary" text="Acumulado Mensual" />
                 <Button mnemonicParsing="false" onAction="#removeAnno" styleClass="btn-secondary" text="Eliminar Anotación" />
+                  <Button mnemonicParsing="false" onAction="#removeAct" styleClass="btn-secondary" text="Eliminar Actividad" />
                 <Pane HBox.hgrow="ALWAYS" />
                 <Label fx:id="userGreeting" text="Hola, Invitado">
                    <font>
