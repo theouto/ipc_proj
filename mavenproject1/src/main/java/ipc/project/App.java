@@ -26,11 +26,10 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        // 1. Initialize the singleton first so it's ready
         sportApp = SportActivityApp.getInstance(); 
 
-        // 2. Now load the FXML safely
         scene = new Scene(loadFXML("FXMLDocument"), 640, 480);
+        //scene.getStylesheets().add(getClass().getResource("history.css").toExternalForm());
 
         stage.getIcons().add(new Image(getClass().getResourceAsStream("/resources/logo.png")));
         stage.setTitle("Running la Safor");
