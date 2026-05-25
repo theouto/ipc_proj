@@ -199,6 +199,8 @@ public class FXMLDocumentController implements Initializable {
     private ListView<Activity> mapActivities;
     @FXML
     private Label stats;
+    @FXML
+    private Label greeting;
     
     private MapProjection proj;
     
@@ -462,15 +464,19 @@ public class FXMLDocumentController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
         if (App.loggedIn) {
             loginButton.setVisible(false);
             registerButton.setVisible(false);
             editAccountButton.setVisible(true);
             logoutButton.setVisible(true);
+            greeting.setText("Hola, " + App.sportApp.getCurrentUser().getNickName());
             //historialSesiones.setVisible(true);
             //menuACT.setVisible(true);
             //menuMAP.setVisible(true);
+        } else {
+            greeting.setText("Hola, invitado");
+            editAccountButton.setVisible(false);
+            logoutButton.setVisible(false);
         }
 
         // ── Configuración del slider de zoom ──────────────────────────
@@ -607,8 +613,10 @@ public class FXMLDocumentController implements Initializable {
             new Image(getClass().getResourceAsStream("/resources/logo.png"))
         );
 
-        mensaje.setTitle("Acerca de");
-        mensaje.setHeaderText("IPC - 2026");
+        mensaje.setTitle("Integrantes (nombre - github): ");
+        mensaje.setHeaderText("Tomas Otero Matteri - theouto\nHéctor Sisternes Gómez - overhxz\n"
+                            + "Daniel Villena Lillo - danimania-dev\nBohdan Zakharov - Buhsan");
+        
         mensaje.showAndWait(); // Bloquea hasta que el usuario cierra el diálogo
     }
 
@@ -1023,11 +1031,11 @@ public class FXMLDocumentController implements Initializable {
         indexList.remove(marked);
     }
 
-    /*@FXML   
+    @FXML   
     private void salir(ActionEvent event) throws IOException {
          App.loggedIn = false;
          logout();
-    }*/
+    }
 
 
     @FXML

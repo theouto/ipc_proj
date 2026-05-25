@@ -27,9 +27,10 @@ public class UserLoginController {
     //Esta función ahora es inutil, por lo que la voy a hacer una herramienta para acelerar el debugging
     @FXML
     private void switchToSecondary() throws IOException {
-        Usuario.setText("aaaaaaa");
-        Password.setText("aaaAAA!!!111");
-        login();
+        //Usuario.setText("aaaaaaa");
+        //Password.setText("aaaAAA!!!111");
+        //login();
+        App.setRoot("FXMLDocument"); //para que siga sirviendo la vista de guest
     }
   
     @FXML
