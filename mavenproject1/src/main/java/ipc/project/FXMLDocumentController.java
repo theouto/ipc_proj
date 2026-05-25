@@ -831,20 +831,20 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
-    private void ajustes(ActionEvent event) throws IOException {
+    private void gotoSettings(ActionEvent event) throws IOException {
          App.setRoot("UserSettings");
     } 
 
     @FXML
-    private void historial(ActionEvent event) throws IOException {
+    private void gotoHistory(ActionEvent event) throws IOException {
          App.setRoot("SessionHistory");
     }
 
-    @FXML   
+    /*@FXML   
     private void salir(ActionEvent event) throws IOException {
          App.loggedIn = false;
          logout();
-    }
+    }*/
 
 
     @FXML

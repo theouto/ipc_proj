@@ -129,10 +129,42 @@
                         <MenuItem mnemonicParsing="false" onAction="#importarActividad" text="Añadir" />
                   </items>
                 </Menu>
+
+                <Menu fx:id="accounts" mnemonicParsing="false" text="Cuenta">
+                     <items>
+                        <MenuItem fx:id="settingsButtons" mnemonicParsing="false" onAction="#gotoSettings" text="Ajustes" />
+                        <MenuItem fx:id="historiyMenu" mnemonicParsing="false" text="Historial de sesiones" />
+                        <MenuItem fx:id="exitMenu" mnemonicParsing="false" text="Salir" />
+                     </items></Menu>
               </menus>
             </MenuBar>
             <Region prefHeight="27.0" prefWidth="209.0" />
          </children>
       </HBox>
+   </right>
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="Cuenta">
+            <items>
+              <MenuItem fx:id="loginButton" mnemonicParsing="false" onAction="#loginAction" text="Iniciar sesión" />
+                  <MenuItem fx:id="registerButton" mnemonicParsing="false" onAction="#registerAction" text="Registrarse" />
+                  <MenuItem fx:id="editAccountButton" mnemonicParsing="false" onAction="#gotoSettings" text="Editar cuenta" />
+                  <MenuItem fx:id="logoutButton" mnemonicParsing="false" text="Cerrar sesión" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Mapa">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Actividades">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+>>>>>>> 468802e (User settings frame)
    </top>
 </BorderPane>
