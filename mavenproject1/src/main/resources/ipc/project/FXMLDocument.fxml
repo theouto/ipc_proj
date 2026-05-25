@@ -60,7 +60,6 @@
                   <Pane prefHeight="31.0" prefWidth="9.0" />
 
                   <Pane prefHeight="31.0" prefWidth="9.0" />
-                <Button mnemonicParsing="false" styleClass="btn-secondary" text="Añadir Anotación" />
                 <Button mnemonicParsing="false" onAction="#removeAnno" styleClass="btn-secondary" text="Eliminar Anotación" />
                 <Pane HBox.hgrow="ALWAYS" />
                 <Label fx:id="userGreeting" text="Hola, Invitado">
