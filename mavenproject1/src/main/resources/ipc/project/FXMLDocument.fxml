@@ -151,7 +151,7 @@
                         </Label>
                         <ListView fx:id="mapActivities" onMouseClicked="#setAction" VBox.vgrow="ALWAYS" />
                         
-                        <Label text="Puntos de Interés">
+                        <Label text="Anotaciones">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>

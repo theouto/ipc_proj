@@ -434,8 +434,14 @@ public class FXMLDocumentController implements Initializable {
         mapContextMenu.getItems().get(0).setOnAction(e -> addPoi(clickX, clickY));
         mapContextMenu.getItems().get(1).setOnAction(e -> addCircle(clickX, clickY));
         mapContextMenu.getItems().get(2).setOnAction(e -> addPoint(clickX, clickY));
-        if (lineProgress) mapContextMenu.getItems().get(3).setOnAction(e -> addLine(clickX, clickY));
-        else mapContextMenu.getItems().get(3).setOnAction(e -> saveOldXY(clickX, clickY));
+        if (lineProgress)
+        {
+            mapContextMenu.getItems().get(3).setOnAction(e -> addLine(clickX, clickY));
+            mapContextMenu.getItems().get(3).setText("Añadir línea");
+        } else {
+            mapContextMenu.getItems().get(3).setOnAction(e -> saveOldXY(clickX, clickY));
+            mapContextMenu.getItems().get(3).setText("Inicio de línea");
+        }
 
         // Mostramos el menú en coordenadas de pantalla
         mapContextMenu.show(
@@ -470,9 +476,6 @@ public class FXMLDocumentController implements Initializable {
             editAccountButton.setVisible(true);
             logoutButton.setVisible(true);
             greeting.setText("Hola, " + App.sportApp.getCurrentUser().getNickName());
-            //historialSesiones.setVisible(true);
-            //menuACT.setVisible(true);
-            //menuMAP.setVisible(true);
         } else {
             greeting.setText("Hola, invitado");
             editAccountButton.setVisible(false);
@@ -492,8 +495,8 @@ public class FXMLDocumentController implements Initializable {
 
         // Los items se crean aquí sin acción; las acciones se asignan
         // en onMapRightClick() con las coordenadas correctas de cada clic.
-        MenuItem miText   = new MenuItem("📝Añadir texto");
-        MenuItem miCircle = new MenuItem("⭕ Añadir círculo");
+        MenuItem miText = new MenuItem("📝Añadir texto");
+        MenuItem miCircle = new MenuItem("Añadir círculo");
         MenuItem miPoint = new MenuItem("Añadir punto");
         MenuItem miLine = new MenuItem("Añadir inicio de línea");
         mapContextMenu = new ContextMenu(miText, miCircle, miPoint, miLine);
@@ -703,8 +706,8 @@ public class FXMLDocumentController implements Initializable {
     private Color colorPlease()
     {
         Dialog<Color> poiDialog = new Dialog<>();
-        poiDialog.setTitle("Nuevo POI");
-        poiDialog.setHeaderText("Introduce el color del POI");
+        poiDialog.setTitle("Nueva anotación");
+        poiDialog.setHeaderText("Introduce el color de la anotación");
 
         // Personalizamos el icono de la ventana del diálogo
         Stage dialogStage = (Stage) poiDialog.getDialogPane().getScene().getWindow();
@@ -742,8 +745,8 @@ public class FXMLDocumentController implements Initializable {
     private String namePlease()
     {
         Dialog<String> poiDialog = new Dialog<>();
-        poiDialog.setTitle("Nuevo POI");
-        poiDialog.setHeaderText("Introduce un nuevo POI");
+        poiDialog.setTitle("Nueva anotación");
+        poiDialog.setHeaderText("Introduce el nombre de la anotación");
 
         // Personalizamos el icono de la ventana del diálogo
         Stage dialogStage = (Stage) poiDialog.getDialogPane().getScene().getWindow();
