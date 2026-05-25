@@ -75,6 +75,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.scene.shape.Polyline;
 import javafx.scene.chart.XYChart;
+import javafx.scene.chart.NumberAxis;
 
 import upv.ipc.sportlib.*;
 
@@ -154,6 +155,9 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Slider zoom_slider;
 
+    @FXML 
+    private NumberAxis desnivelDiff;
+    
     /**
      * Botón de pin visible sobre el mapa.
      * Se desplaza hasta la posición del POI seleccionado en la lista.
@@ -197,6 +201,9 @@ public class FXMLDocumentController implements Initializable {
     
     @FXML
     private int activityIndex = -1;
+    
+    @FXML
+    private Circle mystery;
     
     private double oldX, oldY; //Serán usados para dibujar las líneas
     private boolean lineProgress = false; //será usado para comprobar el progreso de una línea
@@ -488,6 +495,8 @@ public class FXMLDocumentController implements Initializable {
        // MenuItem BYEEE = new MenuItem("Salir");
        // BYEEE.setOnAction(e -> logout());
        // cuenta.getItems().add(BYEEE);
+       
+        mystery = new Circle(10, Color.BLACK);
             
         App.activities = App.sportApp.getUserActivities();
         mapActivities.setCellFactory(e -> new ListCell<Activity>()
@@ -532,6 +541,7 @@ public class FXMLDocumentController implements Initializable {
         // ── Carga del mapa inicial ─────────────────────────────────────
         // El fichero se busca relativo al directorio de trabajo del proyecto.
         buildMap(new File(App.mapPath));
+        mapPane.getChildren().add(mystery);
     }
     
     @FXML
@@ -907,12 +917,10 @@ public class FXMLDocumentController implements Initializable {
     }
     
     private void loadPath(Activity activity)
-    {
-        //Polyline route = new Polyline();
-        //TrackPoint holdover;
-        
+    {   
         desnivelChart.getData().clear();
         List<TrackPoint> pointed = activity.getTrackPoints();
+        
         double dist = 0.0;
         
         XYChart.Series<Number, Number> diff = new XYChart.Series<>();
@@ -960,10 +968,40 @@ public class FXMLDocumentController implements Initializable {
         point.setCenterY(proj.project(pointed.get(0)).getY());
         mapPane.getChildren().add(point);
         desnivelChart.getData().add(diff);
+        //mystery = new Circle(10, Color.BLACK);
     }
     
-    private void loadDesnivel(Activity activity)
+    @FXML
+    private void graphCheck(MouseEvent e)
     {
+        mapPane.getChildren().remove(mystery);
         
+        int closestIndex;
+        if (activityIndex == -1) return;
+        
+        List<TrackPoint> pointed = App.sportApp.getUserActivities().get(activityIndex).getTrackPoints();
+        
+        Number thingy = desnivelDiff.getValueForDisplay(desnivelDiff.sceneToLocal(e.getSceneX(), e.getSceneY()).getX());
+        
+        closestIndex = (int) (thingy.doubleValue()/(App.sportApp.getUserActivities().get(activityIndex).getTotalDistance()/1000) * pointed.size());
+        
+        TrackPoint pT = pointed.get(closestIndex);
+        
+        mystery.setCenterX(proj.project(pT).getX());
+        mystery.setCenterY(proj.project(pT).getY());
+        mapPane.getChildren().add(mystery);
+        
+    }
+    
+    @FXML
+    private void graphIn()
+    {
+        //mystery.setVisible(true);
+    }
+    
+    @FXML
+    private void graphOut()
+    {
+        //mystery.setVisible(false);
     }
 }

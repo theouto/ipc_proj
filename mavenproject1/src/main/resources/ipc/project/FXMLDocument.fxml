@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.AreaChart?>
-<?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -62,12 +61,12 @@
                         </Pane>
                      </content>
                   </ScrollPane>
-                  <AreaChart fx:id="desnivelChart" prefHeight="545.0" prefWidth="329.0">
+                  <AreaChart fx:id="desnivelChart" onMouseEntered="#graphIn" onMouseExited="#graphOut" onMouseMoved="#graphCheck" prefHeight="545.0" prefWidth="329.0" title="Altitud (m) durante el recorrido">
                     <xAxis>
-                      <NumberAxis fx:id="desnivelDiff" side="BOTTOM" />
+                      <NumberAxis fx:id="desnivelDiff" label="Distancia total (km)" side="BOTTOM" />
                     </xAxis>
                     <yAxis>
-                      <NumberAxis side="LEFT" />
+                      <NumberAxis label="Altitud (m)" side="LEFT" />
                     </yAxis>
                   </AreaChart>
                </items>
