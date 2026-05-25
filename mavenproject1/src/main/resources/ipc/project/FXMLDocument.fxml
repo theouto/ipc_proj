@@ -55,6 +55,7 @@
               <items>
                 <Button mnemonicParsing="false" onAction="#importarActividad" style="-fx-background-color: #00E676; -fx-text-fill: #000000;" styleClass="btn-secondary" text="Importar GPX" />
                   <Button mnemonicParsing="false" onAction="#removeAct" styleClass="btn-secondary" text="Eliminar Actividad" />
+                  <Button mnemonicParsing="false" onAction="#stats" styleClass="btn-secondary" text="Acumulado de Actividades" />
                   <Pane prefHeight="31.0" prefWidth="9.0" />
                 <Button mnemonicParsing="false" onAction="#removeAnno" styleClass="btn-secondary" text="Eliminar Anotación" />
                 <Pane HBox.hgrow="ALWAYS" />
