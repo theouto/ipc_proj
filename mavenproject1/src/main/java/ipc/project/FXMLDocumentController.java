@@ -938,6 +938,7 @@ public class FXMLDocumentController implements Initializable {
         loadPath(App.activities.get(i));
         annotationFill(App.activities.get(i).getAnnotations());
         
+        /*
         stats.setText("Distancia: " + App.activities.get(i).getTotalDistance() +
                       "\nDesnivel acumulado (-): " + App.activities.get(i).getElevationLoss() + 
                       "\nDesnivel acumulado (+): " + App.activities.get(i).getElevationGain() + 
@@ -945,6 +946,7 @@ public class FXMLDocumentController implements Initializable {
                       "h\nVelocidad media: " + App.activities.get(i).getAverageSpeed() + 
                       "km/h\nRitmo medio: " + App.activities.get(i).getAveragePace() + 
                       "m/km");
+        */
         
         Point2D itemSelected = proj.project(App.activities.get(i).getStartPoint());
 
@@ -1053,6 +1055,8 @@ public class FXMLDocumentController implements Initializable {
         Number thingy = desnivelDiff.getValueForDisplay(desnivelDiff.sceneToLocal(e.getSceneX(), e.getSceneY()).getX());
         
         closestIndex = (int) (thingy.doubleValue()/(App.sportApp.getUserActivities().get(activityIndex).getTotalDistance()/1000) * pointed.size());
+        
+        if (closestIndex >= pointed.size() || closestIndex < 0) return;
         
         TrackPoint pT = pointed.get(closestIndex);
         
