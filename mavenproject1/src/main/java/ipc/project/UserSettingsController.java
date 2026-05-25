@@ -72,7 +72,7 @@ public class UserSettingsController implements Initializable {
 
   private void loadAvatarImage() {
     System.out.println("\n\nLOAD IMAGE\n\n");
-    if (currentUser != null && selectedAvatarPath != null) {
+    if (currentUser != null && selectedAvatarPath != null && selectedAvatarPath.length() > 0) {
       imgAvatar.setFill(new ImagePattern(new Image(selectedAvatarPath)));
     } else {
       imgAvatar.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("resources/user.png"))));
