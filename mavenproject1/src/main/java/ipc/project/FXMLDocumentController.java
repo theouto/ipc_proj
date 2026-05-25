@@ -678,7 +678,7 @@ public class FXMLDocumentController implements Initializable {
         
             Annotation anno = new Annotation(
             AnnotationType.TEXT,
-            text.toString(),
+            text.getText(),
             "#FFFFFF",
             2.0,
             List.of(oldGeo));
@@ -690,7 +690,7 @@ public class FXMLDocumentController implements Initializable {
     private void fillPoi(String namer, double x, double y)
     {
         Poi poiii = new Poi(namer, x, y);
-        map_listview.getItems().add(poiii);
+        mapPOI.getItems().add(poiii);
     }
 
     // =========================================================
@@ -761,6 +761,7 @@ public class FXMLDocumentController implements Initializable {
                     Text text = new Text(ann.getText());
                     text.setX(punto.getX());
                     text.setY(punto.getY());
+                    mapPane.getChildren().add(text);
                     fillPoi(ann.getText(), punto.getX(), punto.getY());
                     break;
             }
