@@ -65,7 +65,7 @@ public class UserSettingsController implements Initializable {
       dpBirthDate.setValue(currentUser.getBirthDate());
       selectedAvatarPath = currentUser.getAvatarPath();
         System.out.println("\n\nAVATAR INIT\n\n");
-        System.out.println(selectedAvatarPath);
+        System.out.println("test: " + selectedAvatarPath);
     }
     loadAvatarImage();
   }
@@ -123,8 +123,11 @@ public class UserSettingsController implements Initializable {
       return;
     }
     
-    if (password.length() > 0) {
-        if (password.length() < 8) {
+    if (password.length() == 0) {
+        password = App.sportApp.getCurrentUser().getPassword();
+    }
+    
+    if (password.length() < 8) {
       lblStatus.setText("La contraseña es demasiado corta");
       lblStatus.getStyleClass().add("text-error");
       return;
@@ -189,7 +192,6 @@ public class UserSettingsController implements Initializable {
       lblStatus.setText("La contraseña es inválida");
       lblStatus.getStyleClass().add("text-error");
       return;
-    }
     }
     
 

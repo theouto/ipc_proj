@@ -27,7 +27,6 @@
  */
 package ipc.project;
 
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -161,44 +160,42 @@ public class FXMLDocumentController implements Initializable {
   @FXML
   private NumberAxis desnivelDiff;
 
-    // FIX 5 — Eliminadas las variables sin uso:
-    //   · 'mousePosistion' (errata + duplicado de mousePosition)
-    //   · 'pin_info'       (inyectada pero nunca actualizada)
- 
-    
-    @FXML
-    private MenuItem loginButton;
-    
-    @FXML
-    private MenuItem registerButton;
-    
-    @FXML
-    private MenuItem editAccountButton;
-    
-    @FXML
-    private MenuItem logoutButton;
-    
-    private Vector<Integer> indexList;
-    
-   
-    /** Etiqueta en la barra de estado que muestra las coordenadas del ratón. */
-    @FXML
-    private Label mousePosition;
-    @FXML
-    private ListView<Activity> mapActivities;
-    @FXML
-    private Label stats;
-    
-    private MapProjection proj;
-    
-    @FXML
-    private int activityIndex = -1;
-    
-    @FXML
-    private Circle mystery;
-    
-    private double oldX, oldY; //Serán usados para dibujar las líneas
-    private boolean lineProgress = false; //será usado para comprobar el progreso de una línea
+  // FIX 5 — Eliminadas las variables sin uso:
+  // · 'mousePosistion' (errata + duplicado de mousePosition)
+  // · 'pin_info' (inyectada pero nunca actualizada)
+
+  @FXML
+  private MenuItem loginButton;
+
+  @FXML
+  private MenuItem registerButton;
+
+  @FXML
+  private MenuItem editAccountButton;
+
+  @FXML
+  private MenuItem logoutButton;
+
+  private Vector<Integer> indexList;
+
+  /** Etiqueta en la barra de estado que muestra las coordenadas del ratón. */
+  @FXML
+  private Label mousePosition;
+  @FXML
+  private ListView<Activity> mapActivities;
+  @FXML
+  private Label stats;
+
+  private MapProjection proj;
+
+  @FXML
+  private int activityIndex = -1;
+
+  @FXML
+  private Circle mystery;
+
+  private double oldX, oldY; // Serán usados para dibujar las líneas
+  private boolean lineProgress = false; // será usado para comprobar el progreso de una línea
 
   // FIX 5 — Eliminadas las variables sin uso:
   // · 'mousePosistion' (errata + duplicado de mousePosition)
@@ -236,7 +233,6 @@ public class FXMLDocumentController implements Initializable {
 
   @FXML
   private Label userGreeting;
-
 
   // =========================================================
   // MANEJADORES DE ZOOM
@@ -439,41 +435,39 @@ public class FXMLDocumentController implements Initializable {
   // =========================================================
 
   /**
-     * Muestra el menú contextual reutilizable en la posición del clic.
-     *
-     * Las acciones de los MenuItem se actualizan con las coordenadas
-     * del clic actual antes de mostrar el menú.
-     *
-     * @param x coordenada X del clic en el sistema local del mapPane
-     * @param y coordenada Y del clic en el sistema local del mapPane
-     */
-    private void onMapRightClick(double x, double y) {
-        // FIX 6: cerramos el menú si ya estaba visible (evita instancias flotantes)
-        mapContextMenu.hide();
+   * Muestra el menú contextual reutilizable en la posición del clic.
+   *
+   * Las acciones de los MenuItem se actualizan con las coordenadas
+   * del clic actual antes de mostrar el menú.
+   *
+   * @param x coordenada X del clic en el sistema local del mapPane
+   * @param y coordenada Y del clic en el sistema local del mapPane
+   */
+  private void onMapRightClick(double x, double y) {
+    // FIX 6: cerramos el menú si ya estaba visible (evita instancias flotantes)
+    mapContextMenu.hide();
 
-        // Actualizamos las acciones de los items con las coordenadas actuales.
-        // Usamos variables final para que el lambda pueda capturarlas.
-        final double clickX = x;
-        final double clickY = y;
-        mapContextMenu.getItems().get(0).setOnAction(e -> addPoi(clickX, clickY));
-        mapContextMenu.getItems().get(1).setOnAction(e -> addCircle(clickX, clickY));
-        mapContextMenu.getItems().get(2).setOnAction(e -> addPoint(clickX, clickY));
-        if (lineProgress)
-        {
-            mapContextMenu.getItems().get(3).setOnAction(e -> addLine(clickX, clickY));
-            mapContextMenu.getItems().get(3).setText("Añadir línea");
-        } else {
-            mapContextMenu.getItems().get(3).setOnAction(e -> saveOldXY(clickX, clickY));
-            mapContextMenu.getItems().get(3).setText("Inicio de línea");
-        }
-
-        // Mostramos el menú en coordenadas de pantalla
-        mapContextMenu.show(
-            mapPane.getScene().getWindow(),
-            mapPane.localToScreen(x, y).getX(),
-            mapPane.localToScreen(x, y).getY()
-        );
+    // Actualizamos las acciones de los items con las coordenadas actuales.
+    // Usamos variables final para que el lambda pueda capturarlas.
+    final double clickX = x;
+    final double clickY = y;
+    mapContextMenu.getItems().get(0).setOnAction(e -> addPoi(clickX, clickY));
+    mapContextMenu.getItems().get(1).setOnAction(e -> addCircle(clickX, clickY));
+    mapContextMenu.getItems().get(2).setOnAction(e -> addPoint(clickX, clickY));
+    if (lineProgress) {
+      mapContextMenu.getItems().get(3).setOnAction(e -> addLine(clickX, clickY));
+      mapContextMenu.getItems().get(3).setText("Añadir línea");
+    } else {
+      mapContextMenu.getItems().get(3).setOnAction(e -> saveOldXY(clickX, clickY));
+      mapContextMenu.getItems().get(3).setText("Inicio de línea");
     }
+
+    // Mostramos el menú en coordenadas de pantalla
+    mapContextMenu.show(
+        mapPane.getScene().getWindow(),
+        mapPane.localToScreen(x, y).getX(),
+        mapPane.localToScreen(x, y).getY());
+  }
 
   // =========================================================
   // INICIALIZACIÓN DEL CONTROLADOR
@@ -494,22 +488,22 @@ public class FXMLDocumentController implements Initializable {
    */
   @Override
   public void initialize(URL url, ResourceBundle rb) {
- 
+
     if (App.loggedIn) {
-            loginButton.setVisible(false);
-            registerButton.setVisible(false);
-            editAccountButton.setVisible(true);
-            logoutButton.setVisible(true);
-            userGreeting.setText("Hola, " + App.sportApp.getCurrentUser().getNickName());
-            /*
-            App.activities = App.sportApp.getUserActivities();
-            mapActivities.getItems().clear();
-            mapActivities.getItems().addAll(App.activities);
-            */
-        } else {
-            userGreeting.setText("Hola, invitado");
-            editAccountButton.setVisible(false);
-            logoutButton.setVisible(false);
+      loginButton.setVisible(false);
+      registerButton.setVisible(false);
+      editAccountButton.setVisible(true);
+      logoutButton.setVisible(true);
+      userGreeting.setText("Hola, " + App.sportApp.getCurrentUser().getNickName());
+      /*
+       * App.activities = App.sportApp.getUserActivities();
+       * mapActivities.getItems().clear();
+       * mapActivities.getItems().addAll(App.activities);
+       */
+    } else {
+      userGreeting.setText("Hola, invitado");
+      editAccountButton.setVisible(false);
+      logoutButton.setVisible(false);
     }
 
     // ── Configuración del slider de zoom ──────────────────────────
@@ -702,9 +696,9 @@ public class FXMLDocumentController implements Initializable {
         new Image(getClass().getResourceAsStream("/resources/logo.png")));
 
     mensaje.setTitle("Integrantes (nombre - github): ");
-        mensaje.setHeaderText("Tomas Otero Matteri - theouto\nHéctor Sisternes Gómez - overhxz\n"
-                            + "Daniel Villena Lillo - danimania-dev\nBohdan Zakharov - Buhsan");
-            mensaje.showAndWait(); // Bloquea hasta que el usuario cierra el diálogo
+    mensaje.setHeaderText("Tomas Otero Matteri - theouto\nHéctor Sisternes Gómez - overhxz\n"
+        + "Daniel Villena Lillo - danimania-dev\nBohdan Zakharov - Buhsan");
+    mensaje.showAndWait(); // Bloquea hasta que el usuario cierra el diálogo
   }
 
   // =========================================================
@@ -731,343 +725,334 @@ public class FXMLDocumentController implements Initializable {
     dialogStage.getIcons().add(
         new Image(getClass().getResourceAsStream("/resources/logo.png")));
 
+    // Botones del diálogo: Aceptar y Cancelar
+    ButtonType okButton = new ButtonType("Aceptar", ButtonBar.ButtonData.OK_DONE);
+    poiDialog.getDialogPane().getButtonTypes().addAll(okButton, ButtonType.CANCEL);
 
-        // Botones del diálogo: Aceptar y Cancelar
-        ButtonType okButton = new ButtonType("Aceptar", ButtonBar.ButtonData.OK_DONE);
-        poiDialog.getDialogPane().getButtonTypes().addAll(okButton, ButtonType.CANCEL);
+    // Campo de texto para el nombre del POI
+    TextField nameField = new TextField();
+    nameField.setPromptText("Nombre del POI");
 
-        // Campo de texto para el nombre del POI
-        TextField nameField = new TextField();
-        nameField.setPromptText("Nombre del POI");
+    // Layout del contenido del diálogo (VBox con espaciado de 10 px)
+    VBox vbox = new VBox(10, new Label("Nombre:"), nameField);
+    poiDialog.getDialogPane().setContent(vbox);
 
-        // Layout del contenido del diálogo (VBox con espaciado de 10 px)
-        VBox vbox = new VBox(10, new Label("Nombre:"), nameField);
-        poiDialog.getDialogPane().setContent(vbox);
+    // ResultConverter: transforma la selección del botón en un objeto Poi.
+    // FIX 1: ya no usamos coordenadas provisionales (0,0); pasamos (x,y)
+    // directamente al constructor para que el modelo sea coherente desde el inicio.
+    poiDialog.setResultConverter(dialogButton -> {
+      if (dialogButton == okButton) {
+        return new Poi(nameField.getText().trim(), x, y);
+      }
+      return null;
+    });
 
-        // ResultConverter: transforma la selección del botón en un objeto Poi.
-        // FIX 1: ya no usamos coordenadas provisionales (0,0); pasamos (x,y)
-        // directamente al constructor para que el modelo sea coherente desde el inicio.
-        poiDialog.setResultConverter(dialogButton -> {
-            if (dialogButton == okButton) {
-                return new Poi(nameField.getText().trim(), x, y);
-            }
-            return null;
-        });
+    // Mostramos el diálogo y esperamos la respuesta del usuario
+    Optional<Poi> result = poiDialog.showAndWait();
 
-        // Mostramos el diálogo y esperamos la respuesta del usuario
-        Optional<Poi> result = poiDialog.showAndWait();
+    if (result.isPresent()) {
+      Poi poi = result.get();
 
-        if (result.isPresent()) {
-            Poi poi = result.get();
+      // FIX 1: confirmamos la posición como Point2D para compatibilidad
+      // con getPosition(), usando las mismas coordenadas (x, y).
+      poi.setPosition(new Point2D(x, y));
 
-            // FIX 1: confirmamos la posición como Point2D para compatibilidad
-            // con getPosition(), usando las mismas coordenadas (x, y).
-            poi.setPosition(new Point2D(x, y));
+      // Añadimos el POI al ListView (la CellFactory mostrará nombre y código)
+      mapPOI.getItems().add(poi);
 
-            // Añadimos el POI al ListView (la CellFactory mostrará nombre y código)
-            mapPOI.getItems().add(poi);
+      // FIX 1: usamos (x, y) tanto para el modelo como para el Text,
+      // garantizando que la etiqueta aparezca exactamente donde se hizo clic.
+      Text text = new Text(poi.getCode());
+      text.setX(x);
+      text.setY(y);
+      mapPane.getChildren().add(text);
 
-            // FIX 1: usamos (x, y) tanto para el modelo como para el Text,
-            // garantizando que la etiqueta aparezca exactamente donde se hizo clic.
-            Text text = new Text(poi.getCode());
-            text.setX(x);
-            text.setY(y);
-            mapPane.getChildren().add(text);
-            
-            GeoPoint oldGeo = proj.unproject(poi.getPosition().getX(), poi.getPosition().getY());
-        
-            Annotation anno = new Annotation(
-            AnnotationType.TEXT,
-            text.getText(),
-            "#FFFFFF",
-            2.0,
-            List.of(oldGeo));
-            indexList.add(mapPane.getChildren().size() - 1);
-            App.sportApp.addAnnotation(App.sportApp.getUserActivities().get(activityIndex), anno);
-        }
+      GeoPoint oldGeo = proj.unproject(poi.getPosition().getX(), poi.getPosition().getY());
+
+      Annotation anno = new Annotation(
+          AnnotationType.TEXT,
+          text.getText(),
+          "#FFFFFF",
+          2.0,
+          List.of(oldGeo));
+      indexList.add(mapPane.getChildren().size() - 1);
+      App.sportApp.addAnnotation(App.sportApp.getUserActivities().get(activityIndex), anno);
     }
-    
-    private Color colorPlease()
-    {
-        Dialog<Color> poiDialog = new Dialog<>();
-        poiDialog.setTitle("Nueva anotación");
-        poiDialog.setHeaderText("Introduce el color de la anotación");
+  }
 
-        // Personalizamos el icono de la ventana del diálogo
-        Stage dialogStage = (Stage) poiDialog.getDialogPane().getScene().getWindow();
-        dialogStage.getIcons().add(
-            new Image(getClass().getResourceAsStream("/resources/logo.png"))
-        );
+  private Color colorPlease() {
+    Dialog<Color> poiDialog = new Dialog<>();
+    poiDialog.setTitle("Nueva anotación");
+    poiDialog.setHeaderText("Introduce el color de la anotación");
 
-        // Botones del diálogo: Aceptar y Cancelar
-        ButtonType okButton = new ButtonType("Aceptar", ButtonBar.ButtonData.OK_DONE);
-        poiDialog.getDialogPane().getButtonTypes().addAll(okButton, ButtonType.CANCEL);
+    // Personalizamos el icono de la ventana del diálogo
+    Stage dialogStage = (Stage) poiDialog.getDialogPane().getScene().getWindow();
+    dialogStage.getIcons().add(
+        new Image(getClass().getResourceAsStream("/resources/logo.png")));
 
-        // Campo de texto para el nombre del POI
-        ColorPicker nameField = new ColorPicker();
-        nameField.setPromptText("Nombre del POI");
+    // Botones del diálogo: Aceptar y Cancelar
+    ButtonType okButton = new ButtonType("Aceptar", ButtonBar.ButtonData.OK_DONE);
+    poiDialog.getDialogPane().getButtonTypes().addAll(okButton, ButtonType.CANCEL);
 
-        // Layout del contenido del diálogo (VBox con espaciado de 10 px)
-        VBox vbox = new VBox(10, new Label("Nombre:"), nameField);
-        poiDialog.getDialogPane().setContent(vbox);
+    // Campo de texto para el nombre del POI
+    ColorPicker nameField = new ColorPicker();
+    nameField.setPromptText("Nombre del POI");
 
-        // ResultConverter: transforma la selección del botón en un objeto Poi.
-        // FIX 1: ya no usamos coordenadas provisionales (0,0); pasamos (x,y)
-        // directamente al constructor para que el modelo sea coherente desde el inicio.
-        poiDialog.setResultConverter(dialogButton -> {
-            if (dialogButton == okButton) {
-                return nameField.getValue();
-            }
-            return null;
-        });
+    // Layout del contenido del diálogo (VBox con espaciado de 10 px)
+    VBox vbox = new VBox(10, new Label("Nombre:"), nameField);
+    poiDialog.getDialogPane().setContent(vbox);
 
-        // Mostramos el diálogo y esperamos la respuesta del usuario
-        Optional<Color> result = poiDialog.showAndWait();
-        return result.get();
-    }
-    
-    private String namePlease()
-    {
-        Dialog<String> poiDialog = new Dialog<>();
-        poiDialog.setTitle("Nueva anotación");
-        poiDialog.setHeaderText("Introduce el nombre de la anotación");
+    // ResultConverter: transforma la selección del botón en un objeto Poi.
+    // FIX 1: ya no usamos coordenadas provisionales (0,0); pasamos (x,y)
+    // directamente al constructor para que el modelo sea coherente desde el inicio.
+    poiDialog.setResultConverter(dialogButton -> {
+      if (dialogButton == okButton) {
+        return nameField.getValue();
+      }
+      return null;
+    });
 
-        // Personalizamos el icono de la ventana del diálogo
-        Stage dialogStage = (Stage) poiDialog.getDialogPane().getScene().getWindow();
-        dialogStage.getIcons().add(
-            new Image(getClass().getResourceAsStream("/resources/logo.png"))
-        );
+    // Mostramos el diálogo y esperamos la respuesta del usuario
+    Optional<Color> result = poiDialog.showAndWait();
+    return result.get();
+  }
 
-        // Botones del diálogo: Aceptar y Cancelar
-        ButtonType okButton = new ButtonType("Aceptar", ButtonBar.ButtonData.OK_DONE);
-        poiDialog.getDialogPane().getButtonTypes().addAll(okButton, ButtonType.CANCEL);
+  private String namePlease() {
+    Dialog<String> poiDialog = new Dialog<>();
+    poiDialog.setTitle("Nueva anotación");
+    poiDialog.setHeaderText("Introduce el nombre de la anotación");
 
-        // Campo de texto para el nombre del POI
-        TextField nameField = new TextField();
-        nameField.setPromptText("Nombre del POI");
+    // Personalizamos el icono de la ventana del diálogo
+    Stage dialogStage = (Stage) poiDialog.getDialogPane().getScene().getWindow();
+    dialogStage.getIcons().add(
+        new Image(getClass().getResourceAsStream("/resources/logo.png")));
 
-        // Layout del contenido del diálogo (VBox con espaciado de 10 px)
-        VBox vbox = new VBox(10, new Label("Nombre:"), nameField);
-        poiDialog.getDialogPane().setContent(vbox);
+    // Botones del diálogo: Aceptar y Cancelar
+    ButtonType okButton = new ButtonType("Aceptar", ButtonBar.ButtonData.OK_DONE);
+    poiDialog.getDialogPane().getButtonTypes().addAll(okButton, ButtonType.CANCEL);
 
-        // ResultConverter: transforma la selección del botón en un objeto Poi.
-        // FIX 1: ya no usamos coordenadas provisionales (0,0); pasamos (x,y)
-        // directamente al constructor para que el modelo sea coherente desde el inicio.
-        poiDialog.setResultConverter(dialogButton -> {
-            if (dialogButton == okButton) {
-                return nameField.getText().trim();
-            }
-            return null;
-        });
+    // Campo de texto para el nombre del POI
+    TextField nameField = new TextField();
+    nameField.setPromptText("Nombre del POI");
 
-        
-        return poiDialog.showAndWait().get();
-    }
-    
-    private void fillPoi(String namer, double x, double y)
-    {
-        Poi poiii = new Poi(namer, x, y);
-        mapPOI.getItems().add(poiii);
-    }
+    // Layout del contenido del diálogo (VBox con espaciado de 10 px)
+    VBox vbox = new VBox(10, new Label("Nombre:"), nameField);
+    poiDialog.getDialogPane().setContent(vbox);
 
-    // =========================================================
-    //  CAMBIAR EL MAPA (selector de fichero)
-    // =========================================================
+    // ResultConverter: transforma la selección del botón en un objeto Poi.
+    // FIX 1: ya no usamos coordenadas provisionales (0,0); pasamos (x,y)
+    // directamente al constructor para que el modelo sea coherente desde el inicio.
+    poiDialog.setResultConverter(dialogButton -> {
+      if (dialogButton == okButton) {
+        return nameField.getText().trim();
+      }
+      return null;
+    });
 
-    /**
-     * Abre un selector de fichero para que el usuario elija una imagen
-     * diferente como mapa y reconstruye toda la vista.
-     *
-     * FIX 3: se comprueba que imgFile no sea null antes de usarlo,
-     * evitando NullPointerException cuando el usuario cierra el FileChooser
-     * sin seleccionar ningún fichero.
-     *
-     * @param event evento de acción del menú
-     * @throws IOException si hay un problema al obtener la ruta canónica
+    return poiDialog.showAndWait().get();
+  }
+
+  private void fillPoi(String namer, double x, double y) {
+    Poi poiii = new Poi(namer, x, y);
+    mapPOI.getItems().add(poiii);
+  }
+
+  // =========================================================
+  // CAMBIAR EL MAPA (selector de fichero)
+  // =========================================================
+
+  /**
+   * Abre un selector de fichero para que el usuario elija una imagen
+   * diferente como mapa y reconstruye toda la vista.
+   *
+   * FIX 3: se comprueba que imgFile no sea null antes de usarlo,
+   * evitando NullPointerException cuando el usuario cierra el FileChooser
+   * sin seleccionar ningún fichero.
+   *
+   * @param event evento de acción del menú
+   * @throws IOException si hay un problema al obtener la ruta canónica
+   */
+  @FXML
+  private void cambiarMapa(ActionEvent event) throws IOException {
+
+    App.setRoot("MapAddition");
+
+    /*
+     * FileChooser fc = new FileChooser();
+     * fc.setInitialDirectory(new File(".")); // Empezamos en el directorio del
+     * proyecto
+     * 
+     * File imgFile = fc.showOpenDialog(zoom_slider.getScene().getWindow());
+     * 
+     * // FIX 3: showOpenDialog() devuelve null si el usuario cancela la selección
+     * if (imgFile != null) {
+     * 
+     * System.out.println("Mapa seleccionado: " + imgFile.getCanonicalPath());
+     * App.mapPath = imgFile.getCanonicalPath();
+     * buildMap(imgFile); // Reconstruimos la vista con la nueva imagen
+     * map_listview.getItems().clear(); // Borramos los datos del mapa anterior
+     * 
+     * 
+     * 
+     * }
      */
-    @FXML
-    private void cambiarMapa(ActionEvent event) throws IOException {
-        
-        App.setRoot("MapAddition");
-        
-        /*FileChooser fc = new FileChooser();
-        fc.setInitialDirectory(new File(".")); // Empezamos en el directorio del proyecto
+  }
 
-        File imgFile = fc.showOpenDialog(zoom_slider.getScene().getWindow());
+  private void annotationFill(List<Annotation> anno) {
+    Point2D punto;
+    indexList = new Vector<Integer>();
 
-        // FIX 3: showOpenDialog() devuelve null si el usuario cancela la selección
-        if (imgFile != null) {
-            
-            System.out.println("Mapa seleccionado: " + imgFile.getCanonicalPath());
-            App.mapPath = imgFile.getCanonicalPath();
-            buildMap(imgFile); // Reconstruimos la vista con la nueva imagen
-            map_listview.getItems().clear(); // Borramos los datos del mapa anterior
-            
-            
-            
-        }
-        */
+    for (Annotation ann : anno) {
+      switch (ann.getType()) {
+        case LINE:
+          punto = proj.project(ann.getGeoPoints().get(0));
+          Point2D puntos = proj.project(ann.getGeoPoints().get(1));
+          drawLine(punto.getX(), punto.getY(), puntos.getX(), puntos.getY(), Color.web(ann.getColor()), ann.getText());
+          indexList.add(mapPane.getChildren().size() - 1);
+          break;
+
+        case CIRCLE:
+          punto = proj.project(ann.getGeoPoints().get(0));
+          drawCircle(punto.getX(), punto.getY(), Color.web(ann.getColor()), ann.getText());
+          indexList.add(mapPane.getChildren().size() - 1);
+          break;
+
+        case POINT:
+          punto = proj.project(ann.getGeoPoints().get(0));
+          drawPoint(punto.getX(), punto.getY(), Color.web(ann.getColor()), ann.getText());
+          indexList.add(mapPane.getChildren().size() - 1);
+          break;
+
+        case TEXT:
+          punto = proj.project(ann.getGeoPoints().get(0));
+          Text text = new Text(ann.getText());
+          text.setX(punto.getX());
+          text.setY(punto.getY());
+          mapPane.getChildren().add(text);
+          fillPoi(ann.getText(), punto.getX(), punto.getY());
+          indexList.add(mapPane.getChildren().size() - 1);
+          break;
+      }
     }
 
-    private void annotationFill(List<Annotation> anno)
-    {
-        Point2D punto;
-        indexList = new Vector<Integer>();
-        
-        for (Annotation ann : anno)
-        {
-            switch (ann.getType())
-            {
-                case LINE:
-                    punto = proj.project(ann.getGeoPoints().get(0));
-                    Point2D puntos = proj.project(ann.getGeoPoints().get(1));
-                    drawLine(punto.getX(), punto.getY(), puntos.getX(), puntos.getY(), Color.web(ann.getColor()), ann.getText());
-                    indexList.add(mapPane.getChildren().size() - 1);
-                    break;
-                    
-                case CIRCLE:
-                    punto = proj.project(ann.getGeoPoints().get(0));
-                    drawCircle(punto.getX(), punto.getY(), Color.web(ann.getColor()), ann.getText());
-                    indexList.add(mapPane.getChildren().size() - 1);
-                    break;
-                    
-                case POINT:
-                    punto = proj.project(ann.getGeoPoints().get(0));
-                    drawPoint(punto.getX(), punto.getY(), Color.web(ann.getColor()), ann.getText());
-                    indexList.add(mapPane.getChildren().size() - 1);
-                    break;
-                    
-                case TEXT:
-                    punto = proj.project(ann.getGeoPoints().get(0));
-                    Text text = new Text(ann.getText());
-                    text.setX(punto.getX());
-                    text.setY(punto.getY());
-                    mapPane.getChildren().add(text);
-                    fillPoi(ann.getText(), punto.getX(), punto.getY());
-                    indexList.add(mapPane.getChildren().size() - 1);
-                    break;
-            }
-        }
-        
-    }
-    
-    // =========================================================
-    //  AÑADIR UN CÍRCULO AL MAPA
-    // =========================================================
+  }
 
-    /**
-     * Dibuja un círculo rojo de radio 10 px en la posición indicada.
-     *
-     * Ejemplo sencillo de cómo añadir formas vectoriales (Shape) sobre el mapa.
-     * Los alumnos pueden extenderlo para:
-     *  - Elegir color dinámicamente.
-     *  - Asociar información al círculo (tooltip, popup, etc.).
-     *  - Permitir moverlo con arrastrar y soltar (drag and drop).
-     *
-     * @param x coordenada X en el sistema local del mapPane
-     * @param y coordenada Y en el sistema local del mapPane
-     */
-    private void addCircle(double x, double y) {
-       
-        String names = namePlease();
-        Color colorr = colorPlease();
-        
-        drawCircle(x, y, colorr, names);
-        
-        System.out.println(toHex(colorr));
-        if (!App.loggedIn) return;
-        GeoPoint oldGeo = proj.unproject(x, y);
-        GeoPoint nuGeo = proj.unproject(x + 10, y + 10);
-       
+  // =========================================================
+  // AÑADIR UN CÍRCULO AL MAPA
+  // =========================================================
+
+  /**
+   * Dibuja un círculo rojo de radio 10 px en la posición indicada.
+   *
+   * Ejemplo sencillo de cómo añadir formas vectoriales (Shape) sobre el mapa.
+   * Los alumnos pueden extenderlo para:
+   * - Elegir color dinámicamente.
+   * - Asociar información al círculo (tooltip, popup, etc.).
+   * - Permitir moverlo con arrastrar y soltar (drag and drop).
+   *
+   * @param x coordenada X en el sistema local del mapPane
+   * @param y coordenada Y en el sistema local del mapPane
+   */
+  private void addCircle(double x, double y) {
+
+    String names = namePlease();
+    Color colorr = colorPlease();
+
+    drawCircle(x, y, colorr, names);
+
+    System.out.println(toHex(colorr));
+    if (!App.loggedIn)
+      return;
+    GeoPoint oldGeo = proj.unproject(x, y);
+    GeoPoint nuGeo = proj.unproject(x + 10, y + 10);
+
     Annotation anno = new Annotation(
         AnnotationType.CIRCLE,
         names,
         toHex(colorr),
         2.0,
-        List.of(oldGeo, nuGeo));                
-        
-        indexList.add(mapPane.getChildren().size() - 1);
-        
-        App.sportApp.addAnnotation(App.sportApp.getUserActivities().get(activityIndex), anno);
-    }
-    
-    private void drawCircle(double x, double y, Color colorr, String names)
-    {
-        Circle circle = new Circle(10, colorr);
-        circle.setCenterX(x);
-        circle.setCenterY(y);
-        lineProgress = false;
-        fillPoi(names, x, y);
-        mapPane.getChildren().add(circle); // Se añade sobre el mapa como cualquier nodo
-    }
-    
-    private void addPoint(double x, double y)
-    {
-        String names = namePlease();
-        Color colorr = colorPlease();
-        
-        drawPoint(x, y, colorr, names);
-        if (!App.loggedIn) return;
-        GeoPoint oldGeo = proj.unproject(x, y);
-        
-        Annotation anno = new Annotation(
+        List.of(oldGeo, nuGeo));
+
+    indexList.add(mapPane.getChildren().size() - 1);
+
+    App.sportApp.addAnnotation(App.sportApp.getUserActivities().get(activityIndex), anno);
+  }
+
+  private void drawCircle(double x, double y, Color colorr, String names) {
+    Circle circle = new Circle(10, colorr);
+    circle.setCenterX(x);
+    circle.setCenterY(y);
+    lineProgress = false;
+    fillPoi(names, x, y);
+    mapPane.getChildren().add(circle); // Se añade sobre el mapa como cualquier nodo
+  }
+
+  private void addPoint(double x, double y) {
+    String names = namePlease();
+    Color colorr = colorPlease();
+
+    drawPoint(x, y, colorr, names);
+    if (!App.loggedIn)
+      return;
+    GeoPoint oldGeo = proj.unproject(x, y);
+
+    Annotation anno = new Annotation(
         AnnotationType.POINT,
         names,
         toHex(colorr),
         2.0,
         List.of(oldGeo));
-        indexList.add(mapPane.getChildren().size() - 1);
-        App.sportApp.addAnnotation(App.sportApp.getUserActivities().get(activityIndex), anno);
-    }
-    
-    private void drawPoint(double x, double y, Color colorr, String names)
-    {
-        Circle point = new Circle(3, colorr);
-        point.setCenterX(x);
-        point.setCenterY(y);
-        lineProgress = false;
-        mapPane.getChildren().add(point);
-        fillPoi(names, x, y);
-    }
-    
-    private void addLine(double nuX, double nuY)
-    {
-        String names = namePlease();
-        Color colorr = colorPlease();
-        
-        drawLine(oldX, oldY, nuX, nuY, colorr, names);
-        if (!App.loggedIn) return;
-        
-        GeoPoint oldGeo = proj.unproject(oldX, oldY);
-        GeoPoint nuGeo = proj.unproject(nuX, nuY);
-        
-        Annotation anno = new Annotation(
+    indexList.add(mapPane.getChildren().size() - 1);
+    App.sportApp.addAnnotation(App.sportApp.getUserActivities().get(activityIndex), anno);
+  }
+
+  private void drawPoint(double x, double y, Color colorr, String names) {
+    Circle point = new Circle(3, colorr);
+    point.setCenterX(x);
+    point.setCenterY(y);
+    lineProgress = false;
+    mapPane.getChildren().add(point);
+    fillPoi(names, x, y);
+  }
+
+  private void addLine(double nuX, double nuY) {
+    String names = namePlease();
+    Color colorr = colorPlease();
+
+    drawLine(oldX, oldY, nuX, nuY, colorr, names);
+    if (!App.loggedIn)
+      return;
+
+    GeoPoint oldGeo = proj.unproject(oldX, oldY);
+    GeoPoint nuGeo = proj.unproject(nuX, nuY);
+
+    Annotation anno = new Annotation(
         AnnotationType.LINE,
         names,
         toHex(colorr),
         2.0,
         List.of(oldGeo, nuGeo));
-        indexList.add(mapPane.getChildren().size() - 1);
-        App.sportApp.addAnnotation(App.sportApp.getUserActivities().get(activityIndex), anno);
-    }
-    
-    private void drawLine(double oldyX, double oldyY, double nuX, double nuY, Color colorr, String names)
-    {
-        Line lined = new Line();
-        lined.setStartX(oldyX);
-        lined.setStartY(oldyY);
-        lined.setEndX(nuX);
-        lined.setEndY(nuY);
-        lined.setStroke(colorr);
-        lineProgress = false;
-        mapPane.getChildren().add(lined);
-        fillPoi(names, oldyX, oldyY);
-    }
-    
-    private void saveOldXY(double oldex, double oldey) {
-        oldX = oldex; oldY = oldey; lineProgress = true;
-    }
-  
+    indexList.add(mapPane.getChildren().size() - 1);
+    App.sportApp.addAnnotation(App.sportApp.getUserActivities().get(activityIndex), anno);
+  }
+
+  private void drawLine(double oldyX, double oldyY, double nuX, double nuY, Color colorr, String names) {
+    Line lined = new Line();
+    lined.setStartX(oldyX);
+    lined.setStartY(oldyY);
+    lined.setEndX(nuX);
+    lined.setEndY(nuY);
+    lined.setStroke(colorr);
+    lineProgress = false;
+    mapPane.getChildren().add(lined);
+    fillPoi(names, oldyX, oldyY);
+  }
+
+  private void saveOldXY(double oldex, double oldey) {
+    oldX = oldex;
+    oldY = oldey;
+    lineProgress = true;
+  }
 
   @FXML
   private void loginAction(ActionEvent event) throws IOException {
@@ -1078,28 +1063,32 @@ public class FXMLDocumentController implements Initializable {
   private void stats() throws IOException {
     App.setRoot("ActivityManagement");
   }
-    
-    @FXML
-    private void removeAnno()
-    {
-        int marked = mapPOI.getSelectionModel().getSelectedIndex();
-        if (marked == -1) return;
-        
-        mapPane.getChildren().remove(mapPane.getChildren().get(indexList.get(marked)));
-        App.sportApp.removeAnnotation(App.sportApp.getUserActivities().get(activityIndex).getAnnotations().get(marked));
-        mapPOI.getItems().remove(marked);
-        indexList.remove(marked);
+
+  @FXML
+  private void removeAnno() {
+    int marked = mapPOI.getSelectionModel().getSelectedIndex();
+    if (marked == -1)
+      return;
+
+    mapPane.getChildren().remove(mapPane.getChildren().get(indexList.get(marked)));
+    App.sportApp.removeAnnotation(App.sportApp.getUserActivities().get(activityIndex).getAnnotations().get(marked));
+    mapPOI.getItems().remove(marked);
+    indexList.remove(marked);
+  }
+
+  @FXML
+  private void removeAct() {
+    int reuse = mapActivities.getSelectionModel().getSelectedIndex();
+    if (reuse == -1)
+      return;
+
+    App.sportApp.removeActivity(App.sportApp.getUserActivities().get(reuse));
+    try {
+      App.setRoot("FXMLDocument");
+    } catch (IOException e) {
+      System.out.println("Bizzarre!");
     }
-    
-    @FXML
-    private void removeAct()
-    {
-        int reuse = mapActivities.getSelectionModel().getSelectedIndex();
-        if (reuse == -1) return;
-            
-        App.sportApp.removeActivity(App.sportApp.getUserActivities().get(reuse));
-        try {App.setRoot("FXMLDocument");} catch (IOException e) {System.out.println("Bizzarre!");}
-    }
+  }
 
   @FXML
   private void registerAction(ActionEvent event) throws IOException {
@@ -1120,7 +1109,7 @@ public class FXMLDocumentController implements Initializable {
   private void logout() {
     App.sportApp.logout();
     try {
-        App.loggedIn = false;
+      App.loggedIn = false;
       App.setRoot("UserLogin");
     } catch (IOException e) {
       System.out.println("Error logging out!");
@@ -1249,7 +1238,7 @@ public class FXMLDocumentController implements Initializable {
       dato = new XYChart.Data<>(dist, qT.getElevation());
       diff.getData().add(dato);
     }
-  
+
     Circle point = new Circle(10, Color.BLUE);
     point.setCenterX(proj.project(pointed.get(0)).getX());
     point.setCenterY(proj.project(pointed.get(0)).getY());
@@ -1257,18 +1246,18 @@ public class FXMLDocumentController implements Initializable {
     desnivelChart.getData().add(diff);
     // mystery = new Circle(10, Color.BLACK);
   }
-  
-  public static String toHex( Color color ) {
-        int r = (int)( color.getRed() * 255);
-        int g = (int)( color.getGreen() * 255);
-        int b = (int)( color.getBlue() * 255);
-        
-        String rr = Integer.toHexString(r).toUpperCase();
-        String gg = Integer.toHexString(g).toUpperCase();
-        String bb = Integer.toHexString(b).toUpperCase();
-        
-        return "#" + rr + gg + bb;
-    }
+
+  public static String toHex(Color color) {
+    int r = (int) (color.getRed() * 255);
+    int g = (int) (color.getGreen() * 255);
+    int b = (int) (color.getBlue() * 255);
+
+    String rr = Integer.toHexString(r).toUpperCase();
+    String gg = Integer.toHexString(g).toUpperCase();
+    String bb = Integer.toHexString(b).toUpperCase();
+
+    return "#" + rr + gg + bb;
+  }
 
   @FXML
   private void graphCheck(MouseEvent e) {
