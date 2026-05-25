@@ -36,7 +36,7 @@
                     <MenuItem fx:id="loginButton" mnemonicParsing="false" onAction="#loginAction" text="Iniciar sesión" />
                     <MenuItem fx:id="registerButton" mnemonicParsing="false" onAction="#registerAction" text="Registrarse" />
                     <MenuItem fx:id="editAccountButton" mnemonicParsing="false" onAction="#gotoSettings" text="Editar cuenta" />
-                    <MenuItem fx:id="logoutButton" mnemonicParsing="false" text="Cerrar sesión" />
+                    <MenuItem fx:id="logoutButton" mnemonicParsing="false" onAction="#salir" text="Cerrar sesión" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Mapa">
@@ -46,7 +46,7 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Actividades">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Acerca de..." />
+                    <MenuItem mnemonicParsing="false" onAction="#about" text="Acerca de..." />
                   </items>
                 </Menu>
               </menus>
@@ -54,10 +54,10 @@
             <ToolBar prefHeight="40.0" prefWidth="200.0">
               <items>
                 <Button mnemonicParsing="false" onAction="#importarActividad" style="-fx-background-color: #00E676; -fx-text-fill: #000000;" styleClass="btn-secondary" text="Importar GPX" />
-                <Button mnemonicParsing="false" styleClass="btn-secondary" text="Añadir Anotación" />
+                <Button mnemonicParsing="false" onAction="#stats" styleClass="btn-secondary" text="Acumulado Mensual" />
                 <Button mnemonicParsing="false" onAction="#removeAnno" styleClass="btn-secondary" text="Eliminar Anotación" />
                 <Pane HBox.hgrow="ALWAYS" />
-                <Label text="Hola, Usuario">
+                <Label fx:id="greeting" text="Hola, Usuario">
                    <font>
                       <Font name="System Bold" size="12.0" />
                    </font>
