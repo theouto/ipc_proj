@@ -164,12 +164,7 @@ public class FXMLDocumentController implements Initializable {
     // FIX 5 — Eliminadas las variables sin uso:
     //   · 'mousePosistion' (errata + duplicado de mousePosition)
     //   · 'pin_info'       (inyectada pero nunca actualizada)
-    
-    @FXML
-    private Menu menuACT;
-    
-    @FXML
-    private Menu menuMAP;
+ 
     
     @FXML
     private MenuItem loginButton;
@@ -193,8 +188,6 @@ public class FXMLDocumentController implements Initializable {
     private ListView<Activity> mapActivities;
     @FXML
     private Label stats;
-    @FXML
-    private Label greeting;
     
     private MapProjection proj;
     
@@ -216,18 +209,6 @@ public class FXMLDocumentController implements Initializable {
 
   @FXML
   private Menu menuMAP;
-
-  @FXML
-  private MenuItem loginButton;
-
-  @FXML
-  private MenuItem registerButton;
-
-  @FXML
-  private MenuItem editAccountButton;
-
-  @FXML
-  private MenuItem logoutButton;
 
   @FXML
   private Label lblActDist;
@@ -256,24 +237,6 @@ public class FXMLDocumentController implements Initializable {
   @FXML
   private Label userGreeting;
 
-  /** Etiqueta en la barra de estado que muestra las coordenadas del ratón. */
-  @FXML
-  private Label mousePosition;
-  @FXML
-  private ListView<Activity> mapActivities;
-  @FXML
-  private Label stats;
-
-  private MapProjection proj;
-
-  @FXML
-  private int activityIndex = -1;
-
-  @FXML
-  private Circle mystery;
-
-  private double oldX, oldY; // Serán usados para dibujar las líneas
-  private boolean lineProgress = false; // será usado para comprobar el progreso de una línea
 
   // =========================================================
   // MANEJADORES DE ZOOM
@@ -537,12 +500,12 @@ public class FXMLDocumentController implements Initializable {
             registerButton.setVisible(false);
             editAccountButton.setVisible(true);
             logoutButton.setVisible(true);
-            greeting.setText("Hola, " + App.sportApp.getCurrentUser().getNickName());
+            userGreeting.setText("Hola, " + App.sportApp.getCurrentUser().getNickName());
             App.activities = App.sportApp.getUserActivities();
             mapActivities.getItems().clear();
             mapActivities.getItems().addAll(App.activities);
         } else {
-            greeting.setText("Hola, invitado");
+            userGreeting.setText("Hola, invitado");
             editAccountButton.setVisible(false);
             logoutButton.setVisible(false);
     }
@@ -1175,8 +1138,8 @@ public class FXMLDocumentController implements Initializable {
     proj = new MapProjection(mapR, throwaway.getWidth(), throwaway.getHeight());
     buildMap(new File(App.mapPath)); // Reconstruimos la vista con la nueva imagen
     mapPOI.getItems().clear(); // Borramos los datos del mapa anterior
-    loadPath(App.activities.get(i));
-    annotationFill(App.activities.get(i).getAnnotations());
+    loadPath(App.activities.get(activityIndex));
+    annotationFill(App.activities.get(activityIndex).getAnnotations());
 
     /*
      * stats.setText("Distancia: " + App.activities.get(i).getTotalDistance() +
@@ -1188,7 +1151,7 @@ public class FXMLDocumentController implements Initializable {
      * "m/km");
      */
 
-    Point2D itemSelected = proj.project(App.activities.get(i).getStartPoint());
+    Point2D itemSelected = proj.project(App.activities.get(activityIndex).getStartPoint());
 
     // ── Dimensiones del mapa con el zoom actual aplicado ──────────
     double mapWidth = mapPane.getWidth() * zoomGroup.getScaleX();
