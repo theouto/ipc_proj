@@ -1174,7 +1174,7 @@ public class FXMLDocumentController implements Initializable {
     double scrollH = (poiX - viewW / 2) / (mapWidth - viewW);
     double scrollV = (poiY - viewH / 2) / (mapHeight - viewH);
 
-    // Garantizamos que el valor esté dentro del rango válido [0, 1]
+    // Garantizamos que el valor esté dentro del rango válactivityIndexido [0, 1]
     scrollH = Math.max(0, Math.min(1, scrollH));
     scrollV = Math.max(0, Math.min(1, scrollV));
 

@@ -41,7 +41,7 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Mapa">
                   <items>
-                    <MenuItem mnemonicParsing="false" onAction="#cambiarMapa" text="Añadir mapa al sistema" />
+                    <MenuItem mnemonicParsing="false" text="Añadir mapa al sistema" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Actividades">
@@ -54,8 +54,9 @@
             <ToolBar prefHeight="40.0" prefWidth="200.0">
               <items>
                 <Button mnemonicParsing="false" onAction="#importarActividad" style="-fx-background-color: #00E676; -fx-text-fill: #000000;" styleClass="btn-secondary" text="Importar GPX" />
-                
-                <Button mnemonicParsing="false" onAction="#stats" styleClass="btn-secondary" text="Acumulado Mensual" />
+                  <Button mnemonicParsing="false" onAction="#removeAnno" styleClass="btn-secondary" text="Eliminar Actividad" />
+                  <Pane prefHeight="31.0" prefWidth="9.0" />
+                <Button mnemonicParsing="false" styleClass="btn-secondary" text="Añadir Anotación" />
                 <Button mnemonicParsing="false" onAction="#removeAnno" styleClass="btn-secondary" text="Eliminar Anotación" />
                 <Pane HBox.hgrow="ALWAYS" />
                 <Label fx:id="userGreeting" text="Hola, Invitado">
@@ -190,7 +191,7 @@
                         </Label>
                         <ListView fx:id="mapActivities" onMouseClicked="#setAction" VBox.vgrow="ALWAYS" />
                         
-                        <Label text="Anotaciones">
+                        <Label text="Puntos de Interés">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>

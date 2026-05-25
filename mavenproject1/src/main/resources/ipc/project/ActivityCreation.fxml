@@ -5,44 +5,49 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipc.project.ActivityCreationController">
+<VBox alignment="CENTER" prefHeight="450.0" prefWidth="550.0" spacing="25.0" styleClass="main-background" stylesheets="@resources/history.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipc.project.ActivityCreationController">
    <children>
-      <Label text="Importar actividad" />
-      <VBox prefHeight="6.0" prefWidth="200.0">
+      <Label styleClass="title-label" text="Importar Actividad" />
+      
+      <VBox alignment="CENTER_LEFT" maxWidth="400.0" spacing="20.0" styleClass="form-container">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Text>
-            <TextField fx:id="ActivityName" promptText="Nombre" />
+            
+            <VBox spacing="5.0">
+               <children>
+                  <Label styleClass="field-label" text="Nombre de la ruta" />
+                  <TextField fx:id="ActivityName" promptText="Ej: Trail por la Calderona" styleClass="input-field" />
+               </children>
+            </VBox>
+            
+            <VBox spacing="5.0">
+               <children>
+                  <Label styleClass="field-label" text="Archivo GPX" />
+                  <HBox alignment="CENTER_LEFT" spacing="10.0">
+                     <children>
+                        <Label fx:id="filePath" maxWidth="Infinity" styleClass="text-secondary" text="Ningún archivo seleccionado..." HBox.hgrow="ALWAYS" />
+                        <Button mnemonicParsing="false" onAction="#gpxImport" styleClass="btn-secondary" text="Examinar..." />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            
          </children>
       </VBox>
-      <HBox alignment="CENTER" prefHeight="0.0" prefWidth="200.0">
+      
+      <HBox alignment="CENTER" maxWidth="400.0" spacing="20.0">
          <children>
-            <Label fx:id="filePath" contentDisplay="RIGHT" prefHeight="26.0" prefWidth="141.0" text="Seleccionar..." />
-            <Button mnemonicParsing="false" onAction="#gpxImport" prefHeight="26.0" prefWidth="73.0" text="Archivo" />
+            <Button mnemonicParsing="false" onAction="#back" styleClass="btn-secondary" text="Cancelar" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Button fx:id="primaryButton" mnemonicParsing="false" onAction="#ImportActivity" styleClass="btn-primary" text="Importar Ruta" />
          </children>
       </HBox>
-      <HBox alignment="CENTER" prefHeight="0.0" prefWidth="200.0">
-         <children>
-            <Button mnemonicParsing="false" onAction="#back" text="Volver" />
-            <HBox prefHeight="26.0" prefWidth="40.0" />
-            <Button fx:id="primaryButton" onAction="#ImportActivity" text="Importar" />
-         </children>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-         <VBox.margin>
-            <Insets />
-         </VBox.margin>
-      </HBox>
+      
    </children>
+   
    <padding>
-      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+      <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
    </padding>
 </VBox>

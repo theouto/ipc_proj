@@ -4,82 +4,99 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" spacing="25.0" styleClass="main-background" stylesheets="@resources/history.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipc.project.MapAdditionController">
-  <children>
-
-    <Label styleClass="title-label" text="Añadir mapa al sistema" />
-      <HBox alignment="CENTER" prefHeight="48.0" prefWidth="740.0">
-         <children>
-            <Label prefHeight="40.0" prefWidth="159.0" style="-fx-font-weight: bold; -fx-font-size: 24px;" styleClass="text-primary" text="Nombre: " />
-            <TextField fx:id="Named" />
-         </children>
-      </HBox>
-      <HBox alignment="CENTER" prefHeight="35.0" prefWidth="740.0">
-         <children>
-            <Label fx:id="filePathing" style="-fx-font-size: 12px; -fx-font-weight: bold;" styleClass="text-secondary" text="filePath">
-               <HBox.margin>
-                  <Insets right="10.0" />
-               </HBox.margin>
-            </Label>
-            <Button mnemonicParsing="false" onAction="#elegir" text="Archivos..." />
-         </children>
-      </HBox>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-         <children>
-            <VBox>
-               <children>
-                  <Label styleClass="title-label" text="Longitud" />
+<VBox alignment="CENTER" prefHeight="650.0" prefWidth="800.0" spacing="25.0" styleClass="main-background" stylesheets="@resources/history.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipc.project.MapAdditionController">
+   <children>
       
-              <VBox alignment="CENTER" styleClass="summary-card">
-                <children>
-                  <Label style="-fx-font-size: 12px; -fx-font-weight: bold;" styleClass="text-secondary" text="Mínima" />
-                        <TextField fx:id="minLong" />
-                </children>
-              </VBox>
+      <Label styleClass="title-label" text="Añadir mapa al sistema" />
       
-              <VBox alignment="CENTER" styleClass="summary-card">
-                <children>
-                  <Label style="-fx-font-size: 12px; -fx-font-weight: bold;" styleClass="text-secondary" text="Máxima" />
-                        <TextField fx:id="maxLong" />
-                </children>
-              </VBox>
-               </children>
-               <HBox.margin>
-                  <Insets right="50.0" />
-               </HBox.margin>
-            </VBox>
-            <VBox>
+      <VBox alignment="CENTER_LEFT" maxWidth="500.0" spacing="20.0" styleClass="form-container">
+         <children>
+            
+            <VBox spacing="5.0">
                <children>
-                  <Label styleClass="title-label" text="Latitud" />
-                  <VBox alignment="CENTER" styleClass="summary-card">
-                     <children>
-                        <Label style="-fx-font-size: 12px; -fx-font-weight: bold;" styleClass="text-secondary" text="Mínima" />
-                        <TextField fx:id="minLat" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" styleClass="summary-card">
-                     <children>
-                        <Label style="-fx-font-size: 12px; -fx-font-weight: bold;" styleClass="text-secondary" text="Máxima" />
-                        <TextField fx:id="maxLat" />
-                     </children>
-                  </VBox>
+                  <Label styleClass="field-label" text="Nombre del mapa" />
+                  <TextField fx:id="Named" promptText="Ej: Sierra Calderona" styleClass="input-field" />
                </children>
             </VBox>
+            
+            <VBox spacing="5.0">
+               <children>
+                  <Label styleClass="field-label" text="Archivo de imagen (JPG)" />
+                  <HBox alignment="CENTER_LEFT" spacing="10.0">
+                     <children>
+                        <Label fx:id="filePathing" maxWidth="Infinity" styleClass="text-secondary" text="Ningún archivo seleccionado..." HBox.hgrow="ALWAYS" />
+                        <Button mnemonicParsing="false" onAction="#elegir" styleClass="btn-secondary" text="Examinar..." />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            
+            <GridPane hgap="20.0" vgap="15.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  
+                  <VBox spacing="5.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                     <children>
+                        <Label styleClass="field-label" text="Longitud Mínima" />
+                        <TextField fx:id="minLong" promptText="Ej: -0.571289" styleClass="input-field" />
+                     </children>
+                  </VBox>
+                  
+                  <VBox spacing="5.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                     <children>
+                        <Label styleClass="field-label" text="Longitud Máxima" />
+                        <TextField fx:id="maxLong" promptText="Ej: -0.285645" styleClass="input-field" />
+                     </children>
+                  </VBox>
+                  
+                  <VBox spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                     <children>
+                        <Label styleClass="field-label" text="Latitud Mínima" />
+                        <TextField fx:id="minLat" promptText="Ej: 39.588757" styleClass="input-field" />
+                     </children>
+                  </VBox>
+                  
+                  <VBox spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <children>
+                        <Label styleClass="field-label" text="Latitud Máxima" />
+                        <TextField fx:id="maxLat" promptText="Ej: 39.757880" styleClass="input-field" />
+                     </children>
+                  </VBox>
+                  
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </GridPane>
+            
          </children>
-      </HBox>
-      <HBox alignment="CENTER" prefHeight="29.0" prefWidth="740.0">
+      </VBox>
+      
+      <HBox alignment="CENTER" maxWidth="500.0" spacing="20.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#back" text="Volver">
-               <HBox.margin>
-                  <Insets right="30.0" />
-               </HBox.margin>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#addMap" text="Añadir" />
+            <Button mnemonicParsing="false" onAction="#back" styleClass="btn-secondary" text="Cancelar" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Button mnemonicParsing="false" onAction="#addMap" styleClass="btn-primary" text="Añadir Mapa" />
          </children>
       </HBox>
-
-  </children>
+      
+   </children>
+   
+   <padding>
+      <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+   </padding>
 </VBox>
