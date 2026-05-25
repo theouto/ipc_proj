@@ -6,76 +6,72 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="293.0" prefWidth="358.0" spacing="10.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipc.project.UserLoginController">
+<VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="800.0" spacing="20.0" styleClass="main-background" stylesheets="@resources/estilosLogin.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ipc.project.UserLoginController">
     <children>
-        <Label text="Inicio de sesión">
-         <font>
-            <Font size="27.0" />
-         </font></Label>
-      <VBox maxHeight="90.0" maxWidth="500.0" prefHeight="16.0" prefWidth="318.0">
-         <children>
-            <Label text="Usuario">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <TextField fx:id="Usuario" promptText="Usuario">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </TextField>
-            <Label fx:id="nERR" opacity="0.0" prefHeight="18.0" prefWidth="301.0" text="Nombre o contraseña incorrecto(s)" textFill="RED" />
-         </children>
-      </VBox>
-      <VBox maxHeight="90.0" maxWidth="500.0" prefHeight="16.0" prefWidth="318.0">
-         <children>
-            <Label text="Contraseña">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <PasswordField fx:id="Password" onAction="#login" promptText="Contraseña">
-               <font>
-                  <Font size="16.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="10.0" />
-               </VBox.margin>
-            </PasswordField>
-         </children>
-      </VBox>
-      <HBox alignment="TOP_CENTER" prefHeight="0.0" prefWidth="200.0">
-         <children>
-            <Button mnemonicParsing="false" onAction="#login" text="Iniciar sesión">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Button>
-         </children>
-      </HBox>
-      <HBox alignment="CENTER" prefHeight="25.0" prefWidth="357.0" spacing="10.0" style="fx-padding: 10px;">
-         <children>
-            <Label text="¿No tienes una cuenta?" />
-            <Hyperlink onMouseClicked="#gotoRegisterFunction" text="Haz clic aquí para registrarte" />
-         </children>
-      </HBox>
-      <HBox maxHeight="90.0" maxWidth="500.0" prefHeight="20.0" prefWidth="441.0">
-         <children>
-              <Button fx:id="secondaryButton" alignment="BASELINE_RIGHT" onAction="#switchToSecondary" text="Atrás">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Button>
-            <Region prefHeight="12.0" prefWidth="200.0" />
-         </children>
-      </HBox>
+        
+        <HBox alignment="CENTER_LEFT" maxWidth="500.0" spacing="15.0">
+            <children>
+                <Button fx:id="secondaryButton" mnemonicParsing="false" onAction="#switchToMainScreen" styleClass="btn-back">
+                    <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@resources/back.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Label styleClass="title-label" text="Inicio de sesión" />
+            </children>
+            <VBox.margin>
+                <Insets bottom="10.0" />
+            </VBox.margin>
+        </HBox>
+
+        <VBox maxWidth="500.0" spacing="15.0" styleClass="form-container">
+            <children>
+                
+                <VBox spacing="5.0">
+                    <children>
+                        <Label styleClass="field-label" text="USUARIO" />
+                        <TextField fx:id="userTextField" promptText="jpgarcia" styleClass="input-field" />
+                        <Label fx:id="nERR" opacity="0.0" styleClass="text-error" text="Nombre o contraseña incorrecto(s)" />
+                    </children>
+                </VBox>
+
+                <VBox spacing="5.0">
+                    <children>
+                        <Label styleClass="field-label" text="CONTRASEÑA" />
+                        <PasswordField fx:id="passTextField" onAction="#login" promptText="●●●●●●●●●●" styleClass="input-field" />
+                  <Label fx:id="pERR" opacity="0.0" styleClass="text-error" text="Nombre o contraseña incorrecto(s)" />
+                    </children>
+                </VBox>
+                
+            </children>
+        </VBox>
+
+        <VBox alignment="CENTER" spacing="5.0">
+            <children>
+                <Button mnemonicParsing="false" onAction="#login" styleClass="btn-primary" text="Iniciar sesión" />
+            </children>
+            <VBox.margin>
+                <Insets top="10.0" />
+            </VBox.margin>
+        </VBox>
+
+        <HBox alignment="CENTER" spacing="5.0">
+            <children>
+                <Label styleClass="text-secondary" text="¿No tienes una cuenta?" />
+                <Hyperlink onMouseClicked="#gotoRegisterFunction" styleClass="link" text="Haz clic aquí para registrarte" />
+            </children>
+        </HBox>
+
     </children>
     <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+        <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
     </padding>
 </VBox>

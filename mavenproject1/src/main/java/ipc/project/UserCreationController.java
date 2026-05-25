@@ -249,7 +249,7 @@ public class UserCreationController {
         } else { 
             App.sportApp.login(username, pass);
             App.loggedIn = true;
-            App.setRoot("FXMLDocument");
+            App.setRoot("UserLogin");
             System.out.println("Registrado correctamente");
         }
     }

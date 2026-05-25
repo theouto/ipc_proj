@@ -1,0 +1,112 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : May 25, 2026, 5:07:06 PM
+    Author     : danimania
+*/
+
+.root {
+    -fx-background-color: #121212;
+    -fx-font-family: "System";
+}
+
+.main-background {
+    -fx-background-color: #121212;
+    -fx-padding: 30;
+}
+
+.title-label {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #FFFFFF;
+}
+
+.text-secondary {
+    -fx-fill: #9E9E9E;
+    -fx-text-fill: #9E9E9E;
+}
+
+.text-error {
+    -fx-text-fill: #FF5252;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+
+.field-label {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #8A8A8A;
+}
+
+.btn-primary {
+    -fx-background-color: #00E676;
+    -fx-text-fill: #000000;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 12px 40px;
+    -fx-background-radius: 25px;
+    -fx-cursor: hand;
+}
+.btn-primary:hover {
+    -fx-background-color: #00C853;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 230, 118, 0.4), 15, 0, 0, 0);
+}
+
+.btn-back {
+    -fx-background-color: #1A1A1A;
+    -fx-background-radius: 50%;
+    -fx-border-radius: 50%;
+    -fx-border-color: #2C2C2C;
+    -fx-border-width: 1px;
+    -fx-min-width: 40px;
+    -fx-min-height: 40px;
+    -fx-max-width: 40px;
+    -fx-max-height: 40px;
+    -fx-padding: 0;
+    -fx-cursor: hand;
+}
+.btn-back:hover {
+    -fx-background-color: #252525;
+    -fx-border-color: #00E676;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 230, 118, 0.3), 10, 0, 0, 0);
+}
+.btn-back:pressed {
+    -fx-background-color: #121212;
+    -fx-scale-x: 0.95;
+    -fx-scale-y: 0.95;
+}
+
+.form-container {
+    -fx-background-color: #141414;
+    -fx-padding: 25px;
+    -fx-background-radius: 12px;
+    -fx-border-color: #222222;
+    -fx-border-width: 1px;
+    -fx-border-radius: 12px;
+}
+
+.input-field {
+    -fx-background-color: #1A1A1A;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-radius: 6px;
+    -fx-border-color: #333333;
+    -fx-border-radius: 6px;
+    -fx-padding: 10px;
+    -fx-font-size: 14px;
+}
+.input-field:focus {
+    -fx-border-color: #00E676;
+    -fx-background-color: #1F1F1F;
+}
+
+.link {
+    -fx-text-fill: #00E676;
+    -fx-border-color: transparent;
+    -fx-underline: false;
+}
+.link:hover {
+    -fx-text-fill: #00C853;
+    -fx-underline: true;
+}

@@ -11,52 +11,50 @@ import upv.ipc.sportlib.*;
 public class UserLoginController {
     
     @FXML
-    private TextField Usuario;
+    private TextField userTextField;
     
     @FXML
-    private TextField Password;
+    private TextField passTextField;
     
     @FXML
     private Label nERR;
+    
+    @FXML
+    private Label pERR;
     
     @FXML
     private void gotoRegisterFunction() throws IOException {
         App.setRoot("UserCreation");
     }
     
-    //Esta función ahora es inutil, por lo que la voy a hacer una herramienta para acelerar el debugging
     @FXML
-    private void switchToSecondary() throws IOException {
-        //Usuario.setText("aaaaaaa");
-        //Password.setText("aaaAAA!!!111");
-        //login();
-        App.setRoot("FXMLDocument"); //para que siga sirviendo la vista de guest
+    private void switchToMainScreen() throws IOException {
+        App.setRoot("FXMLDocument");
     }
-  
+    
     @FXML
-    private void login()
-    {
-         if (!User.checkNickName(Usuario.getCharacters().toString()))
-        {
-            System.out.println("Incorrect nickname or password"); //Es el mismo texto por razones de seguridad
-            nERR.setOpacity(1);
-            return;
-        }
-         
-        if (!User.checkPassword(Password.getCharacters().toString()))
-        {
-            System.out.println("Incorrect nickname or password"); //Es el mismo texto por razones de seguridad
+    private void login() {
+        nERR.setOpacity(0);
+        pERR.setOpacity(0);
+        
+        String username = userTextField.getText();
+        if (!User.checkNickName(username)) {
+            nERR.setText("Este usuario es inválido");
             nERR.setOpacity(1);
             return;
         }
         
-        if (App.sportApp.login(Usuario.getCharacters().toString(), Password.getCharacters().toString()))
-        {
+        String pass = passTextField.getText();
+        
+        if (App.sportApp.login(username, pass)) {
             App.loggedIn = true;
             try { App.setRoot("FXMLDocument");
             } catch (IOException e) {System.out.println("Something went wrong! " + e);}
+        } else {
+            pERR.setText("Nombre de usuario y/o contraseña incorrectos");
+            pERR.setOpacity(1);
+            return;
         }
-        else System.out.println("another thing");
     }
     
     @FXML
