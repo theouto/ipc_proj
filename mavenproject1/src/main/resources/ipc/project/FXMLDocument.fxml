@@ -41,7 +41,7 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Mapa">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Añadir mapa al sistema" />
+                    <MenuItem mnemonicParsing="false" onAction="#cambiarMapa" text="Añadir mapa al sistema" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Actividades">
@@ -53,9 +53,9 @@
             </MenuBar>
             <ToolBar prefHeight="40.0" prefWidth="200.0">
               <items>
-                <Button mnemonicParsing="false" style="-fx-background-color: #00E676; -fx-text-fill: #000000;" styleClass="btn-secondary" text="Importar GPX" />
+                <Button mnemonicParsing="false" onAction="#importarActividad" style="-fx-background-color: #00E676; -fx-text-fill: #000000;" styleClass="btn-secondary" text="Importar GPX" />
                 <Button mnemonicParsing="false" styleClass="btn-secondary" text="Añadir Anotación" />
-                <Button mnemonicParsing="false" styleClass="btn-secondary" text="Eliminar" />
+                <Button mnemonicParsing="false" onAction="#removeAnno" styleClass="btn-secondary" text="Eliminar Anotación" />
                 <Pane HBox.hgrow="ALWAYS" />
                 <Label text="Hola, Usuario">
                    <font>

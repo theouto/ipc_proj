@@ -27,6 +27,7 @@
  */
 package ipc.project;
 
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -76,6 +77,8 @@ import javafx.util.Duration;
 import javafx.scene.shape.Polyline;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.NumberAxis;
+import java.util.Vector;
+import javafx.scene.control.ColorPicker;
 
 import upv.ipc.sportlib.*;
 
@@ -185,6 +188,8 @@ public class FXMLDocumentController implements Initializable {
     
     @FXML
     private MenuItem logoutButton;
+    
+    private Vector<Integer> indexList;
     
    
     /** Etiqueta en la barra de estado que muestra las coordenadas del ratón. */
@@ -682,9 +687,86 @@ public class FXMLDocumentController implements Initializable {
             "#FFFFFF",
             2.0,
             List.of(oldGeo));
-                
+            indexList.add(mapPane.getChildren().size() - 1);
             App.sportApp.addAnnotation(App.sportApp.getUserActivities().get(activityIndex), anno);
         }
+    }
+    
+    private Color colorPlease()
+    {
+        Dialog<Color> poiDialog = new Dialog<>();
+        poiDialog.setTitle("Nuevo POI");
+        poiDialog.setHeaderText("Introduce el color del POI");
+
+        // Personalizamos el icono de la ventana del diálogo
+        Stage dialogStage = (Stage) poiDialog.getDialogPane().getScene().getWindow();
+        dialogStage.getIcons().add(
+            new Image(getClass().getResourceAsStream("/resources/logo.png"))
+        );
+
+        // Botones del diálogo: Aceptar y Cancelar
+        ButtonType okButton = new ButtonType("Aceptar", ButtonBar.ButtonData.OK_DONE);
+        poiDialog.getDialogPane().getButtonTypes().addAll(okButton, ButtonType.CANCEL);
+
+        // Campo de texto para el nombre del POI
+        ColorPicker nameField = new ColorPicker();
+        nameField.setPromptText("Nombre del POI");
+
+        // Layout del contenido del diálogo (VBox con espaciado de 10 px)
+        VBox vbox = new VBox(10, new Label("Nombre:"), nameField);
+        poiDialog.getDialogPane().setContent(vbox);
+
+        // ResultConverter: transforma la selección del botón en un objeto Poi.
+        // FIX 1: ya no usamos coordenadas provisionales (0,0); pasamos (x,y)
+        // directamente al constructor para que el modelo sea coherente desde el inicio.
+        poiDialog.setResultConverter(dialogButton -> {
+            if (dialogButton == okButton) {
+                return nameField.getValue();
+            }
+            return null;
+        });
+
+        // Mostramos el diálogo y esperamos la respuesta del usuario
+        Optional<Color> result = poiDialog.showAndWait();
+        return result.get();
+    }
+    
+    private String namePlease()
+    {
+        Dialog<String> poiDialog = new Dialog<>();
+        poiDialog.setTitle("Nuevo POI");
+        poiDialog.setHeaderText("Introduce un nuevo POI");
+
+        // Personalizamos el icono de la ventana del diálogo
+        Stage dialogStage = (Stage) poiDialog.getDialogPane().getScene().getWindow();
+        dialogStage.getIcons().add(
+            new Image(getClass().getResourceAsStream("/resources/logo.png"))
+        );
+
+        // Botones del diálogo: Aceptar y Cancelar
+        ButtonType okButton = new ButtonType("Aceptar", ButtonBar.ButtonData.OK_DONE);
+        poiDialog.getDialogPane().getButtonTypes().addAll(okButton, ButtonType.CANCEL);
+
+        // Campo de texto para el nombre del POI
+        TextField nameField = new TextField();
+        nameField.setPromptText("Nombre del POI");
+
+        // Layout del contenido del diálogo (VBox con espaciado de 10 px)
+        VBox vbox = new VBox(10, new Label("Nombre:"), nameField);
+        poiDialog.getDialogPane().setContent(vbox);
+
+        // ResultConverter: transforma la selección del botón en un objeto Poi.
+        // FIX 1: ya no usamos coordenadas provisionales (0,0); pasamos (x,y)
+        // directamente al constructor para que el modelo sea coherente desde el inicio.
+        poiDialog.setResultConverter(dialogButton -> {
+            if (dialogButton == okButton) {
+                return nameField.getText().trim();
+            }
+            return null;
+        });
+
+        
+        return poiDialog.showAndWait().get();
     }
     
     private void fillPoi(String namer, double x, double y)
@@ -735,6 +817,7 @@ public class FXMLDocumentController implements Initializable {
     private void annotationFill(List<Annotation> anno)
     {
         Point2D punto;
+        indexList = new Vector<Integer>();
         
         for (Annotation ann : anno)
         {
@@ -743,17 +826,20 @@ public class FXMLDocumentController implements Initializable {
                 case LINE:
                     punto = proj.project(ann.getGeoPoints().get(0));
                     Point2D puntos = proj.project(ann.getGeoPoints().get(1));
-                    drawLine(punto.getX(), punto.getY(), puntos.getX(), puntos.getY());
+                    drawLine(punto.getX(), punto.getY(), puntos.getX(), puntos.getY(), Color.web(ann.getColor()), ann.getText());
+                    indexList.add(mapPane.getChildren().size() - 1);
                     break;
                     
                 case CIRCLE:
                     punto = proj.project(ann.getGeoPoints().get(0));
-                    drawCircle(punto.getX(), punto.getY());
+                    drawCircle(punto.getX(), punto.getY(), Color.web(ann.getColor()), ann.getText());
+                    indexList.add(mapPane.getChildren().size() - 1);
                     break;
                     
                 case POINT:
                     punto = proj.project(ann.getGeoPoints().get(0));
-                    drawPoint(punto.getX(), punto.getY());
+                    drawPoint(punto.getX(), punto.getY(), Color.web(ann.getColor()), ann.getText());
+                    indexList.add(mapPane.getChildren().size() - 1);
                     break;
                     
                 case TEXT:
@@ -763,6 +849,7 @@ public class FXMLDocumentController implements Initializable {
                     text.setY(punto.getY());
                     mapPane.getChildren().add(text);
                     fillPoi(ann.getText(), punto.getX(), punto.getY());
+                    indexList.add(mapPane.getChildren().size() - 1);
                     break;
             }
         }
@@ -787,59 +874,75 @@ public class FXMLDocumentController implements Initializable {
      */
     private void addCircle(double x, double y) {
        
-        drawCircle(x, y);
+        String names = namePlease();
+        Color colorr = colorPlease();
+        
+        drawCircle(x, y, colorr, names);
+        
+        System.out.println(toHex(colorr));
         if (!App.loggedIn) return;
         GeoPoint oldGeo = proj.unproject(x, y);
         GeoPoint nuGeo = proj.unproject(x + 10, y + 10);
         
         Annotation anno = new Annotation(
         AnnotationType.CIRCLE,
-        "placeholder",
-        "#FFFFFF",
+        names,
+        toHex(colorr),
         2.0,
         List.of(oldGeo, nuGeo));
                 
+        
+        
+        indexList.add(mapPane.getChildren().size() - 1);
+        
         App.sportApp.addAnnotation(App.sportApp.getUserActivities().get(activityIndex), anno);
     }
     
-    private void drawCircle(double x, double y)
+    private void drawCircle(double x, double y, Color colorr, String names)
     {
-        Circle circle = new Circle(10, Color.RED); // radio = 10 px, color = rojo
+        Circle circle = new Circle(10, colorr);
         circle.setCenterX(x);
         circle.setCenterY(y);
         lineProgress = false;
-        fillPoi("Circle", x, y);
+        fillPoi(names, x, y);
         mapPane.getChildren().add(circle); // Se añade sobre el mapa como cualquier nodo
     }
     
     private void addPoint(double x, double y)
     {
-        drawPoint(x, y);
+        String names = namePlease();
+        Color colorr = colorPlease();
+        
+        drawPoint(x, y, colorr, names);
         if (!App.loggedIn) return;
         GeoPoint oldGeo = proj.unproject(x, y);
         
         Annotation anno = new Annotation(
         AnnotationType.POINT,
-        "placeholder",
-        "#FFFFFF",
+        names,
+        toHex(colorr),
         2.0,
         List.of(oldGeo));
+        indexList.add(mapPane.getChildren().size() - 1);
         App.sportApp.addAnnotation(App.sportApp.getUserActivities().get(activityIndex), anno);
     }
     
-    private void drawPoint(double x, double y)
+    private void drawPoint(double x, double y, Color colorr, String names)
     {
-        Circle point = new Circle(1, Color.BLACK);
+        Circle point = new Circle(3, colorr);
         point.setCenterX(x);
         point.setCenterY(y);
         lineProgress = false;
         mapPane.getChildren().add(point);
-        fillPoi("Punto", x, y);
+        fillPoi(names, x, y);
     }
     
     private void addLine(double nuX, double nuY)
     {
-        drawLine(oldX, oldY, nuX, nuY);
+        String names = namePlease();
+        Color colorr = colorPlease();
+        
+        drawLine(oldX, oldY, nuX, nuY, colorr, names);
         if (!App.loggedIn) return;
         
         GeoPoint oldGeo = proj.unproject(oldX, oldY);
@@ -847,24 +950,25 @@ public class FXMLDocumentController implements Initializable {
         
         Annotation anno = new Annotation(
         AnnotationType.LINE,
-        "placeholder",
-        "#FFFFFF",
+        names,
+        toHex(colorr),
         2.0,
         List.of(oldGeo, nuGeo));
-        
+        indexList.add(mapPane.getChildren().size() - 1);
         App.sportApp.addAnnotation(App.sportApp.getUserActivities().get(activityIndex), anno);
     }
     
-    private void drawLine(double oldyX, double oldyY, double nuX, double nuY)
+    private void drawLine(double oldyX, double oldyY, double nuX, double nuY, Color colorr, String names)
     {
         Line lined = new Line();
         lined.setStartX(oldyX);
         lined.setStartY(oldyY);
         lined.setEndX(nuX);
         lined.setEndY(nuY);
+        lined.setStroke(colorr);
         lineProgress = false;
         mapPane.getChildren().add(lined);
-        fillPoi("Linea", oldyX, oldyY);
+        fillPoi(names, oldyX, oldyY);
     }
     
     private void saveOldXY(double oldex, double oldey) {
@@ -905,6 +1009,18 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void gotoHistory(ActionEvent event) throws IOException {
          App.setRoot("SessionHistory");
+    }
+    
+    @FXML
+    private void removeAnno()
+    {
+        int marked = mapPOI.getSelectionModel().getSelectedIndex();
+        if (marked == -1) return;
+        
+        mapPane.getChildren().remove(mapPane.getChildren().get(indexList.get(marked)));
+        App.sportApp.removeAnnotation(App.sportApp.getUserActivities().get(activityIndex).getAnnotations().get(marked));
+        mapPOI.getItems().remove(marked);
+        indexList.remove(marked);
     }
 
     /*@FXML   
@@ -1075,5 +1191,19 @@ public class FXMLDocumentController implements Initializable {
     private void graphOut()
     {
         //mystery.setVisible(false);
+    }
+    
+    
+    public static String toHex( Color color )
+    {
+        int r = (int)( color.getRed() * 255);
+        int g = (int)( color.getGreen() * 255);
+        int b = (int)( color.getBlue() * 255);
+        
+        String rr = Integer.toHexString(r).toUpperCase();
+        String gg = Integer.toHexString(g).toUpperCase();
+        String bb = Integer.toHexString(b).toUpperCase();
+        
+        return "#" + rr + gg + bb;
     }
 }
